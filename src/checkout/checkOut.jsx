@@ -1,21 +1,11 @@
-import React, { useState } from 'react';
-import './checkOut.scss'; 
+import React, { useState, useEffect } from 'react';
+import './checkOut.scss';
+import { useNavigate } from 'react-router-dom';
+import api from '../ApiService/apiService'
 
 const CheckOut = () => {
-  const [checkItems, setCheckItems] = useState([
-    {
-      id: 1,
-      productName: 'Dingo Dog Bones',
-      productPrice: 12.99,
-      quantity: 2,
-    },
-    {
-      id: 2,
-      productName: 'Nutro™ Adult Lamb and Rice Dog Food',
-      productPrice: 45.99,
-      quantity: 1,
-    }
-  ]);
+  const navigate = useNavigate();
+  const [checkItems, setCheckItems] = useState([]);
 
   // Form state
   const [formData, setFormData] = useState({
@@ -37,29 +27,28 @@ const CheckOut = () => {
     });
   };
 
+  // Calculate the total amount
+  const calculateTotal = () => {
+    return checkItems.reduce((acc, item) => acc + (item.productPrice * item.quantity), 0);
+  };
+
   // Handle payment with Razorpay
   const payWithRazorpay = async () => {
-    const amount = calculateTotal() * 100;
+    const amount = calculateTotal() * 100; // amount in paise
     const currency = 'INR';
 
     try {
-      const order = {
-        id: 'order_id_from_api',
-        amount: amount,
-        currency: currency
-      };
-
       const options = {
-        key: 'rzp_test_g2qodp1PYS6P26', 
-        amount: checkItems.productPrice,
-        currency: order.currency,
-        name: 'Your Company Name',
+        key: 'rzp_test_g2qodp1PYS6P26', // Use your actual Razorpay test key
+        amount: amount, // Amount from the order
+        currency: currency,
+        name: 'My Company',
         description: 'Test Transaction',
         image: '/your_logo.png',
-        order_id: order.id,
+        // order_id: order_id, // Use the actual order ID from the response
         handler: (response) => {
           console.log('Razorpay Payment Successful', response);
-          verifyPayment(response);
+          navigate('/home');
         },
         prefill: {
           name: formData.name,
@@ -67,24 +56,19 @@ const CheckOut = () => {
           contact: formData.phone,
         },
         notes: {
-          address: 'Corporate Office',
+          address: formData.address,
         },
         theme: {
           color: '#3399cc',
         },
       };
 
-      const razorpay = new (window).Razorpay(options);
+      const razorpay = new window.Razorpay(options);
       razorpay.open();
     } catch (error) {
       console.error('Order creation failed', error);
+      alert('Payment process failed. Please try again.');
     }
-  };
-
-  // Verify payment
-  const verifyPayment = (response) => {
-    console.log('Verifying payment', response);
-    // Implement payment verification logic here
   };
 
   // Handle form submission
@@ -94,9 +78,30 @@ const CheckOut = () => {
     payWithRazorpay();
   };
 
-  const calculateTotal = () => {
-    return checkItems.reduce((acc, item) => acc + (item.productPrice * item.quantity), 0);
+
+  const getMyCart = async () => {
+    const post = {
+      userId: localStorage.getItem('userId')
+    };
+
+    try {
+      const response = await api.getCart(post); // Make sure this returns the cart items
+      if (response && response.data) {
+        setCheckItems(response.data); // Adjust based on your API response structure
+        console.log('Cart Items:', response.data);
+      } else {
+        console.log('No cart items found.');
+      }
+    } catch (error) {
+      console.error('Failed to fetch cart items:', error);
+    }
   };
+
+  // Fetch cart data on component mount
+  useEffect(() => {
+    getMyCart();
+  }, []);
+
 
   return (
     <main>
@@ -222,14 +227,14 @@ const CheckOut = () => {
             {checkItems.map(item => (
               <div className="checkoutcard" key={item.id}>
                 <div className="card-image">
-                  <img src="https://rvs-checkout-page.onrender.com/photo1.png" alt={item.productName} />
+                  <img src={item.productImage} alt={item.productName} />
                 </div>
                 <div className="card-details">
                   <div className="card-name">{item.productName}</div>
-                  <div className="card-price">₹{(item.productPrice * item.quantity).toFixed(2)}</div>
+                  <div className="card-price">₹ {(item.productCurrentRate * item.productQuantity).toFixed(2)}</div>
                   <div className="card-wheel">
                     <button>-</button>
-                    <span>{item.quantity}</span>
+                    <span>{item.productQuantity}</span>
                     <button>+</button>
                   </div>
                 </div>
@@ -238,11 +243,11 @@ const CheckOut = () => {
           </div>
           <div className="checkout-shipping">
             <h6>Shipping</h6>
-            <p>$19.00</p>
+            <p>{checkItems.length !== 0 ? '₹ 50.00' : '₹ 0.00'}</p>
           </div>
           <div className="checkout-total">
             <h6>Total</h6>
-            <p>₹{calculateTotal().toFixed(2)}</p>
+            <p>₹ {calculateTotal().toFixed(2)}</p>
           </div>
         </div>
       </section>
