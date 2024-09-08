@@ -27,6 +27,9 @@ const api = {
     },
     getAllProducts: () => {
         return apiInstance.get("/product/getAllProducts");
+    },
+    AddToCart: () => {
+        return apiInstance.post("/cart/addtoCart");
     }
 }
 

@@ -40,14 +40,19 @@ const HomePage = ({ setLoading }) => {
         }
     };
 
-    const addCart = async (e) => {
+    const addCart = async (e,data) => {
         e.preventDefault();
         console.log('Button clicked!');
+let post={
+    "productId": data.productId,
+    "quantity": 1,
+    "userId": "" 
 
+}
         const isLogged = localStorage.getItem('isLogged');
 
         if (isLogged === 'true') {
-            alert('Successfully Added in cart');
+            this.api.AddToCart()
         } else {
             navigate('login');
         }
@@ -75,7 +80,7 @@ const HomePage = ({ setLoading }) => {
                             <div className='prodButtons'>
                                 <button className='rate'>₹ {product.productCurrentRate || "N/A"}</button>
                                 {product.productDiscount ? <button className='Off'>{product.productDiscount}% off</button> : null}
-                                <button className='cart' type='button' onClick={addCart}><i className="bi bi-cart4"></i></button>
+                                <button className='cart' type='button' onClick={()=>addCart(product)}><i className="bi bi-cart4"></i></button>
                             </div>
                         </div>
                     ))
