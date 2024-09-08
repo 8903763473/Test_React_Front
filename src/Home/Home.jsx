@@ -6,9 +6,10 @@ import { useNavigate } from 'react-router-dom';
 const HomePage = ({ setLoading }) => {
     const [categories, setCategories] = useState([]);
     const [products, setProducts] = useState([]);
-    const [selectedCategory, setselectedCategory] = useState('Vegetables');
+    const [selectedCategory, setSelectedCategory] = useState('Vegetables');
     const navigate = useNavigate();
 
+    // Fetch categories and products when the component mounts or selectedCategory changes
     const fetchCategories = useCallback(async () => {
         console.log('fetchCategories called');
         setLoading(true);
@@ -31,7 +32,7 @@ const HomePage = ({ setLoading }) => {
     const fetchProductsByCategory = async (category) => {
         console.log('fetchProductsByCategory called');
         try {
-            setselectedCategory(category);
+            setSelectedCategory(category);
             const response = await api.getProductbyCategory(category);
             setProducts(response.data);
         } catch (error) {
@@ -40,19 +41,27 @@ const HomePage = ({ setLoading }) => {
         }
     };
 
-    const addCart = async (e,data) => {
+    const addCart = async (e, data) => {
+        console.log(data);
+        
         e.preventDefault();
         console.log('Button clicked!');
-let post={
-    "productId": data.productId,
-    "quantity": 1,
-    "userId": "" 
+        let post = {
+            "productId": data._id,
+            "quantity": data.productQuantity,
+            "userId": localStorage.getItem('userId')
+        };
+        console.log(post);
 
-}
         const isLogged = localStorage.getItem('isLogged');
 
         if (isLogged === 'true') {
-            this.api.AddToCart()
+            try {
+                await api.AddToCart(post); 
+                alert("Product Added")
+            } catch (error) {
+                console.error("Error adding to cart:", error);
+            }
         } else {
             navigate('login');
         }
@@ -79,8 +88,10 @@ let post={
                             <span>{product.productName || "Unnamed Product"}</span>
                             <div className='prodButtons'>
                                 <button className='rate'>₹ {product.productCurrentRate || "N/A"}</button>
-                                {product.productDiscount ? <button className='Off'>{product.productDiscount}% off</button> : null}
-                                <button className='cart' type='button' onClick={()=>addCart(product)}><i className="bi bi-cart4"></i></button>
+                                {product.productDiscount && <button className='Off'>{product.productDiscount}% off</button>}
+                                <button className='cart' type='button' onClick={(e) => addCart(e, product)}>
+                                    <i className="bi bi-cart4"></i>
+                                </button>
                             </div>
                         </div>
                     ))

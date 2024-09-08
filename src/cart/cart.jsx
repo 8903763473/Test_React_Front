@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import './cart.scss'; 
+import api from '../ApiService/apiService'
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([
@@ -20,7 +21,14 @@ const Cart = () => {
       quantity: 1,
     }
   ]);
-
+const GetCart=async ()=>{
+  let post={
+    "userId": localStorage.getItem('userId')
+}
+console.log(post);
+const response=await api.getcart(post)
+setCartItems(response.data)
+}
   const handleRemove = (id) => {
     const newCartItems = cartItems.filter(item => item.id !== id);
     setCartItems(newCartItems);
@@ -38,6 +46,10 @@ const Cart = () => {
   const tax = 5 / 100 * calculateTotal();
   const shipping = 15;
   const grandTotal = calculateTotal() + tax + shipping;
+
+  useEffect(() => {
+    GetCart();
+}, []);
 
   return (
     <div className="container">
