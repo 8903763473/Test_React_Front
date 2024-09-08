@@ -1,0 +1,202 @@
+#form {
+    background-color: #EEF7F1;
+}
+
+#Kategori {
+    height: 38px;
+    border: 1px solid #CED4D9;
+    border-radius: 3px;
+}
+
+#ekleButton:hover {
+    box-shadow: -1px 1px 17px 0px rgba(0, 0, 0, 0.75);
+}
+
+.form-label {
+    text-align: left;
+    width: 100%;
+}
+
+
+li {
+    margin-right: 3.5em;
+
+}
+
+li:hover {
+    box-shadow: -1px 1px 17px 0px rgba(0, 0, 0, 0.75);
+
+}
+
+input:hover {
+    border-color: rgb(106, 161, 143);
+}
+
+#loginform {
+    border: 10px solid gray;
+    background-color: rgb(199, 194, 194);
+    opacity: 0.8;
+}
+
+#adminbody {
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(89, 44, 111, 1) 46%, rgba(98, 29, 93, 1) 98%);
+}
+
+#invalidlogin {
+    display: none;
+}
+
+#loginbutton {
+    position: absolute;
+    left: 44.5%;
+    top: 430px;
+}
+
+/* .navbar {
+    background-color: rgb(197, 216, 175);
+    height: 85px;
+} */
+
+/* ul {
+    list-style: none;
+}
+
+li {
+    margin-top: 12px;
+    display: inline-block;
+    padding-left: 2em;
+    text-align: center;
+}
+li a {
+    font-size: larger;
+    color: black;
+    text-decoration: none;
+    border: 1px solid grey;
+    border-radius: 0.5em;
+    padding: 8px;
+}
+
+li a:hover {
+    font-size: x-large;
+}
+.position {
+    margin-left: 10em;
+} */
+
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-dialog {
+    max-width: 100%;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.modal-content {
+    width: 50%;
+    background: #fff;
+    border-radius: 8px;
+    position: relative;
+}
+
+.close {
+    border: none;
+    background: transparent;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: transparent;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.addBtn {
+    gap: 15px;
+}
+
+.title {
+    font-size: 20px;
+}
+
+.prodImg {
+    width: 70px;
+    height: 70px;
+    max-height: 70px;
+
+    img {
+        width: 70px;
+        height: 70px;
+        object-fit: contain;
+    }
+}
+
+
+.categoriesBox {
+    width: 150px;
+    height: 180px;
+    border: 1px solid rgb(193, 193, 193);
+    border-radius: 3px;
+    min-width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+
+    img {
+        max-height: 100px;
+    }
+}
+
+.AllCat {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: scroll;
+    gap: 10px;
+}

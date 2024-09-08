@@ -1,0 +1,117 @@
+.tittle {
+    font-size: 20px;
+    width: 90%;
+    text-align: start;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.AllCategory {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 90px;
+    overflow-x: scroll;
+    padding: 20px;
+
+    .Category {
+        width: auto;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+
+        min-width: 140px;
+
+        img {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 1px solid #d7d7d7;
+            cursor: pointer;
+        }
+    }
+}
+
+
+.AllProd {
+    width: 98%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 10px;
+
+    .Prod {
+        width: 200px;
+        height: auto;
+        min-height: 230px;
+        border: 1px solid rgb(203, 203, 203);
+        border-radius: 6px;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+
+        img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+        }
+
+        .prodButtons {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+
+            button {
+                font-size: 10px;
+                padding: 4px;
+                outline: none;
+                border: none;
+                border-radius: 3px;
+                min-height: 28px;
+            }
+
+            .rate {
+                width: 40%;
+                background: #d5f4c2;
+            }
+
+            .Off {
+                width: 40%;
+            }
+
+            .cart {
+                width: 20%;
+                background: #ffa500;
+                cursor: pointer;
+
+                i {
+                    color: white;
+                    font-size: 17px;
+                }
+            }
+        }
+    }
+}
+
+.notFound {
+    img {
+        width: 160px;
+    }
+
+    .no-products {
+        font-size: 25px !important;
+        font-family: inherit !important;
+    }
+}
