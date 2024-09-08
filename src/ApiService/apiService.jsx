@@ -28,8 +28,11 @@ const api = {
     getAllProducts: () => {
         return apiInstance.get("/product/getAllProducts");
     },
-    AddToCart: () => {
-        return apiInstance.post("/cart/addtoCart");
+    AddToCart: (data) => {
+        return apiInstance.post("/cart/addtoCart",data);
+    },
+    getcart: (data) => {
+        return apiInstance.get("/cart/getmyCart",data);
     }
 }
 

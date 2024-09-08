@@ -42,6 +42,8 @@ const Login = () => {
         try {
             const response = await api.Login(post);
             console.log('Login Response:', response);
+            const LoginData = JSON.parse(response.data.user)
+            localStorage.setItem('userId', LoginData._id)
             localStorage.setItem('isLogged', 'true');
             navigate('home')
         } catch (error) {
