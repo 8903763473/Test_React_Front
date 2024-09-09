@@ -29,7 +29,7 @@ const CheckOut = () => {
 
   // Calculate the total amount
   const calculateTotal = () => {
-    return checkItems.reduce((acc, item) => acc + (item.productPrice * item.quantity), 0);
+    return checkItems.reduce((acc, item) => acc + (item.productCurrentRate * item.productQuantity), 0);
   };
 
   // Handle payment with Razorpay
@@ -83,12 +83,13 @@ const CheckOut = () => {
     const post = {
       userId: localStorage.getItem('userId')
     };
+    console.log(post);
 
     try {
-      const response = await api.getCart(post); // Make sure this returns the cart items
-      if (response && response.data) {
-        setCheckItems(response.data); // Adjust based on your API response structure
-        console.log('Cart Items:', response.data);
+      const response = await api.getcart(post); // Make sure this returns the cart items
+      if (response && response.data && response.data.items) {
+        setCheckItems(response.data.items); // Set checkItems to the items array from the response
+        console.log('Cart Items:', response.data.items);
       } else {
         console.log('No cart items found.');
       }
@@ -96,6 +97,7 @@ const CheckOut = () => {
       console.error('Failed to fetch cart items:', error);
     }
   };
+
 
   // Fetch cart data on component mount
   useEffect(() => {
@@ -243,7 +245,7 @@ const CheckOut = () => {
           </div>
           <div className="checkout-shipping">
             <h6>Shipping</h6>
-            <p>{checkItems.length !== 0 ? '₹ 50.00' : '₹ 0.00'}</p>
+            <p>Free</p>
           </div>
           <div className="checkout-total">
             <h6>Total</h6>

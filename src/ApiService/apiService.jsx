@@ -29,10 +29,10 @@ const api = {
         return apiInstance.get("/product/getAllProducts");
     },
     AddToCart: (data) => {
-        return apiInstance.post("/cart/addtoCart",data);
+        return apiInstance.post("/cart/addtoCart", data);
     },
     getcart: (data) => {
-        return apiInstance.get("/cart/getmyCart",data);
+        return apiInstance.post("/cart/getmyCart", data);
     }
 }
 
