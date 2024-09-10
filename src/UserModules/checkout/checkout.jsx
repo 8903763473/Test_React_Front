@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import './checkout.scss';
 
 
-
-
 const Checkout = ({ setLoading }) => {
-return(
-<div>
-<div className="rts-header-one-area-one">
+    return (
+        <div>
+            <div className="rts-header-one-area-one">
                 <div className="search-header-area-main">
                     <div className="container">
                         <div className="row">
@@ -797,14 +795,14 @@ return(
 
             </div>
 
-         
 
-    
+
+
             <div class="checkout-area rts-section-gap">
-        <div class="container">
-            <div class="row">
-          <div class="col-lg-8 pr--40 pr_md--5 pr_sm--5 order-2 order-xl-1 order-lg-2 order-md-2 order-sm-2 mt_md--30 mt_sm--30">
-                    {/* <div class="coupon-input-area-1 login-form">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 pr--40 pr_md--5 pr_sm--5 order-2 order-xl-1 order-lg-2 order-md-2 order-sm-2 mt_md--30 mt_sm--30">
+                            {/* <div class="coupon-input-area-1 login-form">
                         <div class="coupon-area">
                             <div class="coupon-ask">
                                 <span>Returning customers?</span>
@@ -840,136 +838,136 @@ return(
                         </div>
                     </div> */}
 
-                    <div class="rts-billing-details-area">
-                        <h3 class="title">Billing Details</h3>
-                        <form action="#">
-                        <div class="half-input-wrapper">
-                            <div class="single-input">
-                                <label for="phone">Phone*</label>
-                                <input id="phone" type="text"/>
+                            <div class="rts-billing-details-area">
+                                <h3 class="title">Billing Details</h3>
+                                <form action="#">
+                                    <div class="half-input-wrapper">
+                                        <div class="single-input">
+                                            <label for="phone">Phone*</label>
+                                            <input id="phone" type="text" />
+                                        </div>
+                                        <div class="single-input">
+                                            <label for="email">Email Address*</label>
+                                            <input id="email" type="text" required />
+                                        </div>
+                                    </div>
+                                    <div class="half-input-wrapper">
+                                        <div class="single-input">
+                                            <label for="f-name">First Name*</label>
+                                            <input id="f-name" type="text" required />
+                                        </div>
+                                        <div class="single-input">
+                                            <label for="l-name">Last Name*</label>
+                                            <input id="l-name" type="text" />
+                                        </div>
+                                    </div>
+                                    <div class="half-input-wrapper">
+                                        <div class="single-input">
+                                            <label for="comp">Company Name (Optional)*</label>
+                                            <input id="comp" type="text" />
+                                        </div>
+                                        <div class="single-input">
+                                            <label for="country">Country / Region*</label>
+                                            <input id="country" type="text" />
+                                        </div>
+                                    </div>
+                                    <div class="half-input-wrapper">
+                                        <div class="single-input">
+                                            <label for="street">Street Address*</label>
+                                            <input id="street" type="text" required />
+                                        </div>
+                                        <div class="single-input">
+                                            <label for="city">Town / City*</label>
+                                            <input id="city" type="text" />
+                                        </div>
+                                    </div>
+                                    <div class="half-input-wrapper">
+                                        <div class="single-input">
+                                            <label for="state">State*</label>
+                                            <input id="state" type="text" />
+                                        </div>
+                                        <div class="single-input">
+                                            <label for="zip">Zip Code*</label>
+                                            <input id="zip" type="text" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="single-input">
+                                        <label for="ordernotes">Order Notes*</label>
+                                        <textarea id="ordernotes"></textarea>
+                                    </div>
+                                    <button class="rts-btn btn-primary">Update Cart</button>
+                                </form>
                             </div>
-                            <div class="single-input">
-                                <label for="email">Email Address*</label>
-                                <input id="email" type="text" required/>
-                            </div>
-                            </div>
-                            <div class="half-input-wrapper">
-                                <div class="single-input">
-                                    <label for="f-name">First Name*</label>
-                                    <input id="f-name" type="text" required/>
+                        </div>
+
+                        <div className="col-lg-4 order-1 order-xl-2 order-lg-1 order-md-1 order-sm-1">
+                            <h3 className="title-checkout">Your Order</h3>
+                            <div className="right-card-sidebar-checkout">
+                                <div className="top-wrapper">
+                                    <div className="product">Products</div>
+                                    <div className="price">Price</div>
                                 </div>
-                                <div class="single-input">
-                                    <label for="l-name">Last Name*</label>
-                                    <input id="l-name" type="text"/>
+                                <div className="single-shop-list">
+                                    <div className="left-area">
+                                        <a href="#" className="thumbnail">
+                                            <img src="/images/shop/04.png" alt="Product" />
+                                        </a>
+                                        <a href="#" className="title">Foster Farms Breast Nuggets Shaped Chicken</a>
+                                    </div>
+                                    <span className="price">$500.00</span>
+                                </div>
+                                {/* Add more products as needed */}
+                                <div className="single-shop-list">
+                                    <div className="left-area">
+                                        <span>Subtotal</span>
+                                    </div>
+                                    <span className="price">$500.00</span>
+                                </div>
+                                <div className="single-shop-list">
+                                    <div className="left-area">
+                                        <span>Shipping</span>
+                                    </div>
+                                    <span className="price">Flat rate: $50.00</span>
+                                </div>
+                                <div className="single-shop-list">
+                                    <div className="left-area">
+                                        <span style={{ fontWeight: 600, color: '#2C3C28' }}>Total Price:</span>
+                                    </div>
+                                    <span className="price" style={{ color: '#629D23' }}>$550.00</span>
+                                </div>
+                                <div className="cottom-cart-right-area">
+                                    <ul>
+                                        <li>
+                                            <input type="radio" id="f-options" name="selector" />
+                                            <label htmlFor="f-options">Direct Bank Transfer</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="s-options" name="selector" />
+                                            <label htmlFor="s-options">Cash On Delivery</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="t-options" name="selector" />
+                                            <label htmlFor="t-options">Paypal</label>
+                                        </li>
+                                    </ul>
+                                    <p className="mb--20">
+                                        Your personal data will be used to process your order, support your experience, and for other purposes described in our privacy policy.
+                                    </p>
+                                    <div className="single-category mb--30">
+                                        <input id="cat14" type="checkbox" />
+                                        <label htmlFor="cat14">I have read and agree to the terms and conditions *</label>
+                                    </div>
+                                    <a href="#" className="rts-btn btn-primary">Place Order</a>
                                 </div>
                             </div>
-                            <div class="half-input-wrapper">
-                            <div class="single-input">
-                                <label for="comp">Company Name (Optional)*</label>
-                                <input id="comp" type="text"/>
-                            </div>
-                            <div class="single-input">
-                                <label for="country">Country / Region*</label>
-                                <input id="country" type="text"/>
-                            </div>
-                            </div>
-                            <div class="half-input-wrapper">
-                            <div class="single-input">
-                                <label for="street">Street Address*</label>
-                                <input id="street" type="text" required/>
-                            </div>
-                            <div class="single-input">
-                                <label for="city">Town / City*</label>
-                                <input id="city" type="text"/>
-                            </div>
-                            </div>
-                            <div class="half-input-wrapper">
-                            <div class="single-input">
-                                <label for="state">State*</label>
-                                <input id="state" type="text"/>
-                            </div>
-                            <div class="single-input">
-                                <label for="zip">Zip Code*</label>
-                                <input id="zip" type="text" required/>
-                            </div>
-                            </div>
-                           
-                            <div class="single-input">
-                                <label for="ordernotes">Order Notes*</label>
-                                <textarea id="ordernotes"></textarea>
-                            </div>
-                            <button class="rts-btn btn-primary">Update Cart</button>
-                        </form>
+                        </div>
                     </div>
                 </div>
-
-            <div className="col-lg-4 order-1 order-xl-2 order-lg-1 order-md-1 order-sm-1">
-              <h3 className="title-checkout">Your Order</h3>
-              <div className="right-card-sidebar-checkout">
-                <div className="top-wrapper">
-                  <div className="product">Products</div>
-                  <div className="price">Price</div>
-                </div>
-                <div className="single-shop-list">
-                  <div className="left-area">
-                    <a href="#" className="thumbnail">
-                      <img src="/images/shop/04.png" alt="Product" />
-                    </a>
-                    <a href="#" className="title">Foster Farms Breast Nuggets Shaped Chicken</a>
-                  </div>
-                  <span className="price">$500.00</span>
-                </div>
-                {/* Add more products as needed */}
-                <div className="single-shop-list">
-                  <div className="left-area">
-                    <span>Subtotal</span>
-                  </div>
-                  <span className="price">$500.00</span>
-                </div>
-                <div className="single-shop-list">
-                  <div className="left-area">
-                    <span>Shipping</span>
-                  </div>
-                  <span className="price">Flat rate: $50.00</span>
-                </div>
-                <div className="single-shop-list">
-                  <div className="left-area">
-                    <span style={{ fontWeight: 600, color: '#2C3C28' }}>Total Price:</span>
-                  </div>
-                  <span className="price" style={{ color: '#629D23' }}>$550.00</span>
-                </div>
-                <div className="cottom-cart-right-area">
-                  <ul>
-                    <li>
-                      <input type="radio" id="f-options" name="selector" />
-                      <label htmlFor="f-options">Direct Bank Transfer</label>
-                    </li>
-                    <li>
-                      <input type="radio" id="s-options" name="selector" />
-                      <label htmlFor="s-options">Cash On Delivery</label>
-                    </li>
-                    <li>
-                      <input type="radio" id="t-options" name="selector" />
-                      <label htmlFor="t-options">Paypal</label>
-                    </li>
-                  </ul>
-                  <p className="mb--20">
-                    Your personal data will be used to process your order, support your experience, and for other purposes described in our privacy policy.
-                  </p>
-                  <div className="single-category mb--30">
-                    <input id="cat14" type="checkbox" />
-                    <label htmlFor="cat14">I have read and agree to the terms and conditions *</label>
-                  </div>
-                  <a href="#" className="rts-btn btn-primary">Place Order</a>
-                </div>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
 
 
-          <div className="rts-footer-area pt--80 bg_light-1">
+            <div className="rts-footer-area pt--80 bg_light-1">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
@@ -1085,10 +1083,10 @@ return(
                         </div>
                     </div>
                 </div>
-            </div>    
-</div>
-);
-    
+            </div>
+        </div>
+    );
+
 }
 
 export default Checkout;
