@@ -6,6 +6,7 @@ import Cartpage from './UserModules/cart/cart';
 import Checkout from './UserModules/checkout/checkout';
 import Login from './CommonModule/Login/Login';
 import { Register } from './CommonModule/Register/Register';
+import Contact from './UserModules/contact/contact';
 function App() {
   const [loading, setLoading] = useState(false);
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/home" element={<HomePage setLoading={setLoading} />} />
           <Route path="/cart" element={<Cartpage setLoading={setLoading} />} />
           <Route path="/checkout" element={<Checkout setLoading={setLoading} />} />
+          <Route path="/contact" element={<Contact setLoading={setLoading} />} />
         </Routes>
       </div>
     </Router>

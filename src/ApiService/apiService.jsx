@@ -14,10 +14,10 @@ const api = {
         return apiInstance.get("/product/getProductsByCategory/" + category);
     },
     Login: (data) => {
-        return apiInstance.post("/user/login", data);
+        return apiInstance.post("/grocery/user/login", data);
     },
     Register: (data) => {
-        return apiInstance.post("/user/register", data);
+        return apiInstance.post("/grocery/user/register", data);
     },
     createProducts: (data) => {
         return apiInstance.post("/product/CreateProducts", data);
