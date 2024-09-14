@@ -36,7 +36,14 @@ const api = {
     },
     contactUs: (data) => {
         return apiInstance.post("/contact/send", data);
+    },
+    highOfferProducts: () => {
+        return apiInstance.get("/product/getHighOfferProducts");
+    },
+    trendingProducts: () => {
+        return apiInstance.get("/product/trendingProducts");
     }
+
 }
 
 export default api;

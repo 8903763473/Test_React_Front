@@ -126,3 +126,16 @@
     height: 95vh;
     overflow: scroll;
 }
+
+.highOfferImg {
+    min-width: 150px;
+    max-width: 150px;
+}
+
+.min-width-100 {
+    min-width: 100px !important;
+}
+
+.min-height-100 {
+    min-height: 100px !important;
+}

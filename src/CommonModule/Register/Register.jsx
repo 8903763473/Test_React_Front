@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import api from '../../ApiService/apiService';
+import { useNavigate } from 'react-router-dom';
+
+
 export const Register = () => {
     const [firstName, setFirstName] = useState('');
     const [email, setEmail] = useState('');
@@ -7,6 +10,7 @@ export const Register = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [showAlert, SetShowAlert] = useState(false);
+    const navigate = useNavigate();
 
     const doRegister = async (event) => {
         event.preventDefault();
@@ -23,9 +27,9 @@ export const Register = () => {
             mobile: phone,
             password: password,
         };
-            const response = await api.Register(post);
-            console.log(response);
-       
+        const response = await api.Register(post);
+        console.log(response);
+
     };
 
 
@@ -49,59 +53,59 @@ export const Register = () => {
                                 <form className="registration-form" onSubmit={doRegister}>
                                     <div className="input-wrapper">
                                         <label htmlFor="name">Name*</label>
-                                        <input 
-                                            type="text" 
-                                            id="name" 
-                                            value={firstName} 
-                                            onChange={(e) => setFirstName(e.target.value)} 
-                                            required 
+                                        <input
+                                            type="text"
+                                            id="name"
+                                            value={firstName}
+                                            onChange={(e) => setFirstName(e.target.value)}
+                                            required
                                         />
                                     </div>
                                     <div className="input-wrapper">
                                         <label htmlFor="email">Email*</label>
-                                        <input 
-                                            type="email" 
-                                            id="email" 
+                                        <input
+                                            type="email"
+                                            id="email"
                                             value={email}
-                                            onChange={(e) => setEmail(e.target.value)} 
-                                            required 
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            required
                                         />
                                     </div>
                                     <div className="input-wrapper">
                                         <label htmlFor="mobile">Mobile*</label>
-                                        <input 
-                                            type="number" 
-                                            id="mobile" 
-                                            value={phone} 
-                                            onChange={(e) => setPhone(e.target.value)} 
-                                            required 
+                                        <input
+                                            type="number"
+                                            id="mobile"
+                                            value={phone}
+                                            onChange={(e) => setPhone(e.target.value)}
+                                            required
                                         />
                                     </div>
                                     <div className="input-wrapper">
                                         <label htmlFor="password">Password*</label>
-                                        <input 
-                                            type="password" 
-                                            id="password" 
+                                        <input
+                                            type="password"
+                                            id="password"
                                             value={password}
-                                            onChange={(e) => setPassword(e.target.value)} 
-                                            required 
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            required
                                         />
                                     </div>
                                     <div className="input-wrapper">
                                         <label htmlFor="confirmPassword">Confirm Password*</label>
-                                        <input 
-                                            type="password" 
-                                            id="confirmPassword" 
+                                        <input
+                                            type="password"
+                                            id="confirmPassword"
                                             value={confirmPassword}
-                                            onChange={(e) => setConfirmPassword(e.target.value)} 
-                                            required 
+                                            onChange={(e) => setConfirmPassword(e.target.value)}
+                                            required
                                         />
                                     </div>
                                     <button className="rts-btn btn-primary" type="submit">
                                         Register Account
                                     </button>
                                     <div className="another-way-to-registration">
-                                        <p>Already Have Account? <a href="#">Login</a></p>
+                                        <p>Already Have Account? <a onClick={() => navigate('/login')} className='pointer'>Login</a></p>
                                     </div>
                                 </form>
                             </div>

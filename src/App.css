@@ -127,3 +127,22 @@
  ::-webkit-scrollbar{
   width: 0 !important;
  }
+
+ .pointer{
+  cursor: pointer !important;
+ }
+
+ .text-align-start{
+  text-align: start !important;
+ }
+
+ .prodDetailText{
+  font-weight: 400;
+  margin-right: 10px;
+ }
+
+ @media only screen and (min-width: 1200px) and (max-width: 1599px) {
+  .footer-main-content-wrapper {
+      gap: 15px !important;
+  }
+}

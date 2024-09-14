@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import './Dashboard.scss';
+// import './Dashboard.scss';
 import api from '../../ApiService/apiService';
 
 const Dashboard = ({ setLoading }) => {

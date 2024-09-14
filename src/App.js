@@ -7,6 +7,11 @@ import Checkout from './UserModules/checkout/checkout';
 import Login from './CommonModule/Login/Login';
 import { Register } from './CommonModule/Register/Register';
 import Contact from './UserModules/contact/contact';
+import Dashboard from './AdminModules/dashboard/Dashboard'
+import { ProductDetail } from './UserModules/productDetail/ProductDetail';
+import { About } from './UserModules/about/About';
+
+
 function App() {
   const [loading, setLoading] = useState(false);
 
@@ -20,17 +25,25 @@ function App() {
         )}
 
         <Routes>
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<HomePage />} />
           <Route path="/" element={<HomePage />} />
+          <Route path="/home" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<HomePage setLoading={setLoading} />} />
           <Route path="/cart" element={<Cartpage setLoading={setLoading} />} />
+          <Route path="/about" element={<About setLoading={setLoading} />} />
           <Route path="/checkout" element={<Checkout setLoading={setLoading} />} />
           <Route path="/contact" element={<Contact setLoading={setLoading} />} />
+          <Route path="/productDetail" element={<ProductDetail setLoading={setLoading} />} />
+
+
+          <Route path="/dashboard" element={<Dashboard setLoading={setLoading} />} />
+
         </Routes>
       </div>
     </Router>
+
   );
 }
 
