@@ -89,9 +89,9 @@ const HomePage = ({ setLoading }) => {
         <div className='Fullpage'>
 
 
-            <NotificationCenter ref={notificationRef} />
+            {/* <NotificationCenter ref={notificationRef} />
 
-            <Header />
+            <Header /> */}
             {/* <section className="shop-main-h"> */}
 
             <div id="side-bar" className="side-bar header-two">
@@ -314,8 +314,9 @@ const HomePage = ({ setLoading }) => {
                 </div>
 
             </div>
-
+           
             <div className="background-light-gray-color rts-section-gap bg_light-1 pt_sm--20">
+          
                 <div className="rts-banner-area-one mb--30">
                     <div className="container">
                         <div className="row">
@@ -409,11 +410,14 @@ const HomePage = ({ setLoading }) => {
                         </div>
                     </div>
                 </div>
+             
                 <div className="rts-caregory-area-one ">
                     <div className="container">
                         <div className="row">
+                       
                             <div className="col-lg-12">
                                 <div className="category-area-main-wrapper-one">
+                             
                                     <div className="swiper mySwiper-category-1 swiper-data" data-swiper='{
                             "spaceBetween":12,
                             "slidesPerView":10,
@@ -439,12 +443,12 @@ const HomePage = ({ setLoading }) => {
                                 "slidesPerView":10,
                                 "spaceBetween":12}
                             }
-                        }'>
+                        }'>     
                                         <div className="swiper-wrapper">
                                             <div className="swiper-slide">
                                                 <a href="shop-grid-sidebar.html" className="single-category-one">
                                                     <img src="images/category/01.png" alt="category" />
-                                                    <p>Organic Vegetable</p>
+                                                    <p></p>
                                                 </a>
                                             </div>
                                             <div className="swiper-slide">
@@ -510,13 +514,16 @@ const HomePage = ({ setLoading }) => {
                                                 </a>
                                             </div>
                                         </div>
+                        
                                     </div>
                                 </div>
                             </div>
+                    
                         </div>
                     </div>
                 </div>
             </div>
+            
 
             <div className="rts-feature-area rts-section-gap">
                 <div className="container">

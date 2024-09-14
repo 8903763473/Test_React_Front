@@ -34,6 +34,14 @@ const api = {
     getcart: (data) => {
         return apiInstance.post("/cart/getmyCart", data);
     },
+    removecart: (data) => {
+        // return apiInstance.post("/grocery/cart/removeCart/:productId?userId=" + data);
+        return apiInstance.delete("/cart/removeCart/"+data.productId +"?userId=" +data.userId);
+    },
+    clearallcart: (data) => {
+        return apiInstance.delete("/cart/clearMyCart?userId=" +data.userId);
+    },
+
     contactUs: (data) => {
         return apiInstance.post("/contact/send", data);
     },
