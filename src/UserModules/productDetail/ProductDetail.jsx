@@ -67,7 +67,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                     <span class="product-price mb--15 d-block" style={{ color: '#DC2626', fontWeight: 600 }}> $36.25<span class="old-price ml--15">$69.35</span></span>
                                                     <div class="product-bottom-action">
                                                         <div class="cart-edits">
-                                                            <div class="quantity-edit action-item">
+                                                            <div class="quantity-edit action-item" style={{width:'auto'}}>
                                                                 <button class="button"><i class="fal fa-minus minus"></i></button>
                                                                 <input type="text" class="input" value="01" />
                                                                 <button class="button plus">+<i class="fal fa-plus plus"></i></button>
@@ -86,8 +86,8 @@ export const ProductDetail = ({ setLoading }) => {
                                                         </a>
                                                         <a href="javascript:void(0);" class="rts-btn btn-primary ml--20"><i class="fa-light fa-heart"></i></a>
                                                     </div>
-                                                    <div class="product-uniques">
-                                                        <span class="sku product-unipue mb--10"><span className='prodDetailText'>SKU: </span> BO1D0MX8SJ</span>
+                                                    <div className="product-uniques" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'center', flexDirection: 'column' }}>
+                                                    <span class="sku product-unipue mb--10"><span className='prodDetailText'>SKU: </span> BO1D0MX8SJ</span>
                                                         <span class="catagorys product-unipue mb--10"><span className='prodDetailText'>Categories: </span> T-Shirts, Tops, Mens</span>
                                                         <span class="tags product-unipue mb--10"><span className='prodDetailText'>Tags: </span> fashion, t-shirts, Men</span>
                                                         <span class="tags product-unipue mb--10"><span className='prodDetailText'>LIFE: </span> 6 Months</span>

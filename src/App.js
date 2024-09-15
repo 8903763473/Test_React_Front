@@ -10,6 +10,7 @@ import Contact from './UserModules/contact/contact';
 import Dashboard from './AdminModules/dashboard/Dashboard'
 import { ProductDetail } from './UserModules/productDetail/ProductDetail';
 import { About } from './UserModules/about/About';
+import UserDashboard from './UserModules/MyOrders/UserDashboard';
 
 
 function App() {
@@ -36,7 +37,7 @@ function App() {
           <Route path="/checkout" element={<Checkout setLoading={setLoading} />} />
           <Route path="/contact" element={<Contact setLoading={setLoading} />} />
           <Route path="/productDetail" element={<ProductDetail setLoading={setLoading} />} />
-
+          <Route path="/MyOrder" element={<UserDashboard setLoading={setLoading} />} />
 
           <Route path="/dashboard" element={<Dashboard setLoading={setLoading} />} />
 

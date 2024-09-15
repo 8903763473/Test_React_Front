@@ -89,10 +89,10 @@ const HomePage = ({ setLoading }) => {
         <div className='Fullpage'>
 
 
-            {/* <NotificationCenter ref={notificationRef} />
+             <NotificationCenter ref={notificationRef} />
 
-            <Header /> */}
-            {/* <section className="shop-main-h"> */}
+            <Header /> 
+             {/* <section className="shop-main-h">  */}
 
             <div id="side-bar" className="side-bar header-two">
                 <button className="close-icon-menu"><i className="far fa-times"></i></button>
@@ -416,8 +416,9 @@ const HomePage = ({ setLoading }) => {
                         <div className="row">
                        
                             <div className="col-lg-12">
-                                <div className="category-area-main-wrapper-one">
-                             
+                            <div className="category-area-main-wrapper-one" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '20px' }}>
+
+                                {allCategories.map((cart) => (
                                     <div className="swiper mySwiper-category-1 swiper-data" data-swiper='{
                             "spaceBetween":12,
                             "slidesPerView":10,
@@ -443,82 +444,24 @@ const HomePage = ({ setLoading }) => {
                                 "slidesPerView":10,
                                 "spaceBetween":12}
                             }
-                        }'>     
+                        }' style={{ width: '20%'}}>     
                                         <div className="swiper-wrapper">
                                             <div className="swiper-slide">
                                                 <a href="shop-grid-sidebar.html" className="single-category-one">
-                                                    <img src="images/category/01.png" alt="category" />
-                                                    <p></p>
+                                                    <img src={cart.image} alt="category" />
+                                                    <p>{cart.name}</p>
                                                 </a>
                                             </div>
-                                            <div className="swiper-slide">
-                                                <a href="shop-grid-sidebar.html" className="single-category-one">
-                                                    <img src="images/category/02.png" alt="category" />
-                                                    <p>Organic Vegetable</p>
-                                                </a>
-                                            </div>
-
-                                            <div className="swiper-slide">
-                                                <a href="shop-grid-sidebar.html" className="single-category-one">
-                                                    <img src="images/category/03.png" alt="category" />
-                                                    <p>Organic Vegetable</p>
-                                                </a>
-                                            </div>
-
-                                            <div className="swiper-slide">
-                                                <a href="shop-grid-sidebar.html" className="single-category-one">
-                                                    <img src="images/category/04.png" alt="category" />
-                                                    <p>Organic Vegetable</p>
-                                                </a>
-                                            </div>
-
-                                            <div className="swiper-slide">
-                                                <a href="shop-grid-sidebar.html" className="single-category-one">
-                                                    <img src="images/category/05.png" alt="category" />
-                                                    <p>Organic Vegetable</p>
-                                                </a>
-                                            </div>
-
-                                            <div className="swiper-slide">
-                                                <a href="shop-grid-sidebar.html" className="single-category-one">
-                                                    <img src="images/category/06.png" alt="category" />
-                                                    <p>Organic Vegetable</p>
-                                                </a>
-                                            </div>
-
-                                            <div className="swiper-slide">
-                                                <a href="shop-grid-sidebar.html" className="single-category-one">
-                                                    <img src="images/category/07.png" alt="category" />
-                                                    <p>Organic Vegetable</p>
-                                                </a>
-                                            </div>
-
-                                            <div className="swiper-slide">
-                                                <a href="shop-grid-sidebar.html" className="single-category-one">
-                                                    <img src="images/category/08.png" alt="category" />
-                                                    <p>Organic Vegetable</p>
-                                                </a>
-                                            </div>
-
-                                            <div className="swiper-slide">
-                                                <a href="shop-grid-sidebar.html" className="single-category-one">
-                                                    <img src="images/category/09.png" alt="category" />
-                                                    <p>Organic Vegetable</p>
-                                                </a>
-                                            </div>
-
-                                            <div className="swiper-slide">
-                                                <a href="shop-grid-sidebar.html" className="single-category-one">
-                                                    <img src="images/category/10.png" alt="category" />
-                                                    <p>Organic Vegetable</p>
-                                                </a>
-                                            </div>
+                                            
                                         </div>
+                                        
                         
                                     </div>
+                                   
+                                       ))}
                                 </div>
                             </div>
-                    
+                     
                         </div>
                     </div>
                 </div>
