@@ -69,7 +69,7 @@ const Cartpage = ({ setLoading }) => {
     return (
         <div>
 
-            <Header />
+        <Header/>
 
             <div className="rts-cart-area rts-section-gap bg_light-1">
                 <div className="container">
@@ -187,6 +187,7 @@ const Cartpage = ({ setLoading }) => {
 
             <Footer />
 
+            <Footer/>
         </div>
     );
 };
