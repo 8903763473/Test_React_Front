@@ -186,8 +186,6 @@ const Cartpage = ({ setLoading }) => {
             </div>
 
             <Footer />
-
-            <Footer/>
         </div>
     );
 };

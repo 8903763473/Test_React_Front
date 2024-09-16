@@ -7,11 +7,22 @@ import api from '../../ApiService/apiService';
 export const Header = () => {
     const [cartData, setmyCart] = useState([]);
     const [cartDataLength, cartlength] = useState([]);
+    const [loading, setLoading] = useState(false);
+
     const navigate = useNavigate();
 
     const RouteTo = (data) => {
         navigate('/' + data);
     };
+
+
+    const handleClick = () => {
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+        }, 3000); 
+      };
+
 
 const routeCart=(data)=>{
     if(data==1){
@@ -58,10 +69,24 @@ const RemoveCart = (productId) => {
 
     useEffect(() => {
         getcartdata();
+        handleClick()
     }, []);
 
     return (
         <div>
+             {loading && (
+<div className='LoaderView'  style={{position:'fixed',width:'100%',height:'100%',background:'white',zIndex:'111'}}>
+<div class="container">
+  <section>
+    <div class="loader loader-20" style={{fontsize:'40px'}}>
+      {/* <div class="css-diamond"></div> */}
+    </div>
+  </section>
+ 
+</div>
+</div>
+             )}
+
 
             <div className="rts-header-one-area-one">
                 {/* <div className="header-top-area">
@@ -319,7 +344,6 @@ const RemoveCart = (productId) => {
             </div>
         </div>
         ))}
-                                                {/* <div className="cart-item-1">
         <div className="sub-total-cart-balance">
             <div className="bottom-content-deals mt--10">
                 <div className="top">
