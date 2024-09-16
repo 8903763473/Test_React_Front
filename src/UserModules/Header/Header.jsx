@@ -11,6 +11,7 @@ export const Header = () => {
         navigate('/' + data);
     };
 
+
     return (
         <div>
 
@@ -249,6 +250,7 @@ export const Header = () => {
                                             <span className="number">2</span>
                                             <div className="category-sub-menu card-number-show">
                                                 <h5 className="shopping-cart-number">Shopping Cart (03)</h5>
+                                                
                                                 <div className="cart-item-1 border-top">
                                                     <div className="img-name">
                                                         <div className="thumbanil">
@@ -268,7 +270,8 @@ export const Header = () => {
                                                         <i className="fa-regular fa-x"></i>
                                                     </div>
                                                 </div>
-                                                <div className="cart-item-1">
+
+                                                {/* <div className="cart-item-1">
                                                     <div className="img-name">
                                                         <div className="thumbanil">
                                                             <img src="images/shop/05.png" alt="" />
@@ -305,7 +308,7 @@ export const Header = () => {
                                                     <div className="close-c1">
                                                         <i className="fa-regular fa-x"></i>
                                                     </div>
-                                                </div>
+                                                </div> */}
                                                 <div className="sub-total-cart-balance">
                                                     <div className="bottom-content-deals mt--10">
                                                         <div className="top">
@@ -320,12 +323,12 @@ export const Header = () => {
                                                         <p>Spend More <span>$125.00</span> to reach <span>Free Shipping</span></p>
                                                     </div>
                                                     <div className="button-wrapper d-flex align-items-center justify-content-between">
-                                                        <a href="cart.html" className="rts-btn btn-primary ">View Cart</a>
-                                                        <a href="checkout.html" className="rts-btn btn-primary border-only">CheckOut</a>
+                                                        <a className="rts-btn btn-primary poitner" onClick={() => RouteTo('cart')}>View Cart</a>
+                                                        <a className="rts-btn btn-primary border-only pointer" onClick={() => RouteTo('checkout')}>CheckOut</a>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <a href="cart.html" className="over_link"></a>
+                                            <a href="cart.html" className="over_link pointer"></a>
                                         </div>
                                     </div>
                                 </div>

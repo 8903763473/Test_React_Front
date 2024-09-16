@@ -5,12 +5,19 @@ import api from "../../ApiService/apiService";
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import NotificationCenter from '../../CommonModule/Notification/Notification';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = ({ setLoading }) => {
 
     const [allCategories, setallCategories] = useState([])
     const [highOfferProducts, sethighOfferProducts] = useState([])
     const [trendingProducts, setTrendingProducts] = useState([])
+
+    const navigate = useNavigate();
+
+    const RouteTo = (data) => {
+        navigate('/' + data);
+    };
 
     const getAllCategories = () => {
         api.getAllCategory()
@@ -89,9 +96,9 @@ const HomePage = ({ setLoading }) => {
         <div className='Fullpage'>
 
 
-            {/* <NotificationCenter ref={notificationRef} />
+            <NotificationCenter ref={notificationRef} />
 
-            <Header /> */}
+            <Header />
             {/* <section className="shop-main-h"> */}
 
             <div id="side-bar" className="side-bar header-two">
@@ -314,9 +321,8 @@ const HomePage = ({ setLoading }) => {
                 </div>
 
             </div>
-           
+
             <div className="background-light-gray-color rts-section-gap bg_light-1 pt_sm--20">
-          
                 <div className="rts-banner-area-one mb--30">
                     <div className="container">
                         <div className="row">
@@ -410,14 +416,14 @@ const HomePage = ({ setLoading }) => {
                         </div>
                     </div>
                 </div>
-             
+
                 <div className="rts-caregory-area-one ">
                     <div className="container">
                         <div className="row">
-                       
+
                             <div className="col-lg-12">
                                 <div className="category-area-main-wrapper-one">
-                             
+
                                     <div className="swiper mySwiper-category-1 swiper-data" data-swiper='{
                             "spaceBetween":12,
                             "slidesPerView":10,
@@ -443,12 +449,12 @@ const HomePage = ({ setLoading }) => {
                                 "slidesPerView":10,
                                 "spaceBetween":12}
                             }
-                        }'>     
+                        }'>
                                         <div className="swiper-wrapper">
                                             <div className="swiper-slide">
                                                 <a href="shop-grid-sidebar.html" className="single-category-one">
                                                     <img src="images/category/01.png" alt="category" />
-                                                    <p></p>
+                                                    <p>Organic Vegetable</p>
                                                 </a>
                                             </div>
                                             <div className="swiper-slide">
@@ -514,16 +520,16 @@ const HomePage = ({ setLoading }) => {
                                                 </a>
                                             </div>
                                         </div>
-                        
+
                                     </div>
                                 </div>
                             </div>
-                    
+
                         </div>
                     </div>
                 </div>
             </div>
-            
+
 
             <div className="rts-feature-area rts-section-gap">
                 <div className="container">
@@ -1154,7 +1160,7 @@ const HomePage = ({ setLoading }) => {
                                             {highOfferProducts.map((product) => (
                                                 <div className="col-lg-6" key={product._id}>
                                                     <div className="single-shopping-card-one discount-offer">
-                                                        <a className="thumbnail-preview highOfferImg">
+                                                        <a className="thumbnail-preview highOfferImg" onClick={() => RouteTo('productDetail')}>
                                                             <div className="badge">
                                                                 <span>{product.productDiscount}% <br /> Off</span>
                                                                 <i className="fa-solid fa-bookmark"></i>
@@ -4198,7 +4204,7 @@ const HomePage = ({ setLoading }) => {
                                     {trendingProducts.map((product, index) => (
                                         <div className="col-xl-3 col-md-6 col-sm-12 col-12" key={index}>
                                             <div className="single-shopping-card-one tranding-product h-100">
-                                                <a href="shop-details.html" className="thumbnail-preview min-width-100 min-height-100">
+                                                <a className="thumbnail-preview min-width-100 min-height-100" onClick={() => RouteTo('productDetail')}>
                                                     <div className="badge">
                                                         <span>{product.productDiscount}% <br /> Off</span>
                                                         <i className="fa-solid fa-bookmark"></i>

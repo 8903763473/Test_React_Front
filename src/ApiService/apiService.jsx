@@ -35,13 +35,11 @@ const api = {
         return apiInstance.post("/cart/getmyCart", data);
     },
     removecart: (data) => {
-        // return apiInstance.post("/grocery/cart/removeCart/:productId?userId=" + data);
-        return apiInstance.delete("/cart/removeCart/"+data.productId +"?userId=" +data.userId);
+        return apiInstance.delete("/cart/removeCart/" + data.productId + "?userId=" + data.userId);
     },
     clearallcart: (data) => {
-        return apiInstance.delete("/cart/clearMyCart?userId=" +data.userId);
+        return apiInstance.delete("/cart/clearMyCart?userId=" + data.userId);
     },
-
     contactUs: (data) => {
         return apiInstance.post("/contact/send", data);
     },
@@ -50,6 +48,15 @@ const api = {
     },
     trendingProducts: () => {
         return apiInstance.get("/product/trendingProducts");
+    },
+    createOrder: (data) => {
+        return apiInstance.post("/payment/create-order", data);
+    },
+    verifyPayment: (data) => {
+        return apiInstance.post("/payment/verify-payment", data);
+    },
+    checkoutProducts: (data) => {
+        return apiInstance.post("/checkout/checkoutProducts", data);
     }
 
 }
