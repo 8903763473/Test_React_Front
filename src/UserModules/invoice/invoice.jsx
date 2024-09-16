@@ -107,7 +107,7 @@ const InVoice = ({ setLoading }) => {
                     <div class="buttons-area-invoice no-print mb--30">
                         <a href="javascript:window.print()" class="rts-btn btn-primary radious-sm with-icon">
                             <div class="btn-text">
-                                Print Now
+                                Print Now  
                             </div>
                             <div class="arrow-icon">
                                 <i class="fa-regular fa-print"></i>
