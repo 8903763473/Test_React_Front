@@ -15,8 +15,9 @@ const HomePage = ({ setLoading }) => {
 
     const navigate = useNavigate();
 
-    const RouteTo = (data) => {
-        navigate('/' + data);
+    const ProductDetail = (data) => {
+        console.log(data);
+        navigate('/productDetail/' + data);
     };
 
     const getAllCategories = () => {
@@ -1103,7 +1104,7 @@ const HomePage = ({ setLoading }) => {
                                             {highOfferProducts.map((product) => (
                                                 <div className="col-lg-6" key={product._id}>
                                                     <div className="single-shopping-card-one discount-offer">
-                                                        <a className="thumbnail-preview highOfferImg" onClick={() => RouteTo('productDetail')}>
+                                                        <a className="thumbnail-preview highOfferImg" onClick={() => ProductDetail(product._id)}>
                                                             <div className="badge">
                                                                 <span>{product.productDiscount}% <br /> Off</span>
                                                                 <i className="fa-solid fa-bookmark"></i>
@@ -1111,7 +1112,7 @@ const HomePage = ({ setLoading }) => {
                                                             <img src={product.productImage} alt={product.productName} />
                                                         </a>
                                                         <div className="body-content">
-                                                            <a href="shop-details.html">
+                                                            <a>
                                                                 <h4 className="title d-flex">{product.productName}</h4>
                                                             </a>
                                                             <span className="availability d-flex">{product.productQuantity} {product.productUnit} Pack</span>
@@ -4147,7 +4148,7 @@ const HomePage = ({ setLoading }) => {
                                     {trendingProducts.map((product, index) => (
                                         <div className="col-xl-3 col-md-6 col-sm-12 col-12" key={index}>
                                             <div className="single-shopping-card-one tranding-product h-100">
-                                                <a className="thumbnail-preview min-width-100 min-height-100" onClick={() => RouteTo('productDetail')}>
+                                                <a className="thumbnail-preview min-width-100 min-height-100" onClick={() => ProductDetail(product._id)}>
                                                     <div className="badge">
                                                         <span>{product.productDiscount}% <br /> Off</span>
                                                         <i className="fa-solid fa-bookmark"></i>
