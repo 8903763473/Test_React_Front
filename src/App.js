@@ -10,8 +10,9 @@ import Contact from './UserModules/contact/contact';
 import Dashboard from './AdminModules/dashboard/Dashboard'
 import { ProductDetail } from './UserModules/productDetail/ProductDetail';
 import { About } from './UserModules/about/About';
-import UserDashboard from './UserModules/MyOrders/UserDashboard';
+import UserDashboard from './UserModules/userDashboard/UserDashboard';
 import InVoice from './UserModules/invoice/invoice';
+import { TrackMyOrder } from './UserModules/TrackMyOrder/TrackMyOrder';
 
 
 function App() {
@@ -42,6 +43,9 @@ function App() {
 
           <Route path="/dashboard" element={<Dashboard setLoading={setLoading} />} />
           <Route path="/invoice" element={<InVoice setLoading={setLoading} />} />
+          <Route path="/TrackMyOrder/:id" element={<TrackMyOrder setLoading={setLoading} />} />
+
+
         </Routes>
       </div>
     </Router>

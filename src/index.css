@@ -15,3 +15,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.copyIcon{
+  font-size: 13px;
+  margin-left: 4px;
+}

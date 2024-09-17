@@ -57,6 +57,9 @@ const api = {
     },
     checkoutProducts: (data) => {
         return apiInstance.post("/checkout/checkoutProducts", data);
+    },
+    myOrdersByUserId: (userId) => {
+        return apiInstance.get("/checkout/getMyOrdersByuserId/" + userId);
     }
 
 }
