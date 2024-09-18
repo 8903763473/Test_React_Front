@@ -21,3 +21,8 @@ code {
   font-size: 13px;
   margin-left: 4px;
 }
+
+.product-uniques .inSpan{
+  font-weight: 400; 
+  margin-right: 10px;
+}
