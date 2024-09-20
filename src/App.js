@@ -38,7 +38,7 @@ function App() {
           <Route path="/about" element={<About setLoading={setLoading} />} />
           <Route path="/checkout" element={<Checkout setLoading={setLoading} />} />
           <Route path="/contact" element={<Contact setLoading={setLoading} />} />
-          <Route path="/productDetail/:data" element={<ProductDetail setLoading={setLoading} />} />
+          <Route path="/productDetail" element={<ProductDetail setLoading={setLoading} />} />
           <Route path="/MyOrder" element={<UserDashboard setLoading={setLoading} />} />
 
           <Route path="/dashboard" element={<Dashboard setLoading={setLoading} />} />

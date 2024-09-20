@@ -1109,7 +1109,7 @@ const HomePage = ({ setLoading }) => {
                                             {highOfferProducts.map((product) => (
                                                 <div className="col-lg-6" key={product._id}>
                                                     <div className="single-shopping-card-one discount-offer">
-                                                        <a className="thumbnail-preview highOfferImg" onClick={() => RouteTo('productDetail')}>
+                                                        <a className="thumbnail-preview highOfferImg" onClick={() => ProductId(product._id)}>
                                                             <div className="badge">
                                                                 <span>{product.productDiscount}% <br /> Off</span>
                                                                 <i className="fa-solid fa-bookmark"></i>
