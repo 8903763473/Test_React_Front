@@ -61,7 +61,7 @@ const api = {
     myOrdersByUserId: (userId) => {
         return apiInstance.get("/checkout/getMyOrdersByuserId/" + userId);
     },
-    Productdetail: (productId) => {
+    getProductsById: (productId) => {
         return apiInstance.get("/product/getProductsById/" + productId);
     }
 

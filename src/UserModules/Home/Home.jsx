@@ -19,6 +19,11 @@ const HomePage = ({ setLoading }) => {
         navigate('/' + data);
     };
 
+    const ProductId = (data) => {
+        sessionStorage.setItem('SelectedProdId', data)
+        navigate('/productDetail');
+    };
+
     const getAllCategories = () => {
         api.getAllCategory()
             .then(response => {
@@ -96,10 +101,10 @@ const HomePage = ({ setLoading }) => {
         <div className='Fullpage'>
 
 
-             <NotificationCenter ref={notificationRef} />
+            <NotificationCenter ref={notificationRef} />
 
-            <Header /> 
-             {/* <section className="shop-main-h">  */}
+            <Header />
+            {/* <section className="shop-main-h">  */}
 
             <div id="side-bar" className="side-bar header-two">
                 <button className="close-icon-menu"><i className="far fa-times"></i></button>
@@ -422,10 +427,10 @@ const HomePage = ({ setLoading }) => {
                         <div className="row">
 
                             <div className="col-lg-12">
-                            <div className="category-area-main-wrapper-one" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '20px' }}>
+                                <div className="category-area-main-wrapper-one" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '20px' }}>
 
-                                {allCategories.map((cart) => (
-                                    <div className="swiper mySwiper-category-1 swiper-data" data-swiper='{
+                                    {allCategories.map((cart) => (
+                                        <div className="swiper mySwiper-category-1 swiper-data" data-swiper='{
                             "spaceBetween":12,
                             "slidesPerView":10,
                             "loop": true,
@@ -450,24 +455,24 @@ const HomePage = ({ setLoading }) => {
                                 "slidesPerView":10,
                                 "spaceBetween":12}
                             }
-                        }' style={{ width: '20%'}}>     
-                                        <div className="swiper-wrapper">
-                                            <div className="swiper-slide">
-                                                <a href="shop-grid-sidebar.html" className="single-category-one">
-                                                    <img src={cart.image} alt="category" />
-                                                    <p>{cart.name}</p>
-                                                </a>
+                        }' style={{ width: '20%' }}>
+                                            <div className="swiper-wrapper">
+                                                <div className="swiper-slide">
+                                                    <a href="shop-grid-sidebar.html" className="single-category-one">
+                                                        <img src={cart.image} alt="category" />
+                                                        <p>{cart.name}</p>
+                                                    </a>
+                                                </div>
+
                                             </div>
-                                            
+
+
                                         </div>
-                                        
-                        
-                                    </div>
-                                   
-                                       ))}
+
+                                    ))}
                                 </div>
                             </div>
-                     
+
                         </div>
                     </div>
                 </div>
@@ -1103,7 +1108,7 @@ const HomePage = ({ setLoading }) => {
                                             {highOfferProducts.map((product) => (
                                                 <div className="col-lg-6" key={product._id}>
                                                     <div className="single-shopping-card-one discount-offer">
-                                                        <a className="thumbnail-preview highOfferImg" onClick={() => RouteTo('productDetail')}>
+                                                        <a className="thumbnail-preview highOfferImg" onClick={() => ProductId(product._id)}>
                                                             <div className="badge">
                                                                 <span>{product.productDiscount}% <br /> Off</span>
                                                                 <i className="fa-solid fa-bookmark"></i>
