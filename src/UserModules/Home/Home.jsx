@@ -22,7 +22,12 @@ const HomePage = ({ setLoading }) => {
 
     const ProductId = (data) => {
         sessionStorage.setItem('SelectedProdId', data)
-        navigate('/productDetail');
+        navigate('/productDetail?productId='+data);
+    };
+    const ProductCategory = (category) => {
+        console.log('Selected Category:', category);
+        sessionStorage.setItem('ProductByCategory', category)
+        navigate('/ProductCategory?category=' +category);
     };
 
     const getAllCategories = () => {
@@ -37,8 +42,12 @@ const HomePage = ({ setLoading }) => {
             });
     }
 
+  
+
     useEffect(() => {
         getAllCategories();
+       
+        
     }, []);
 
     const notificationRef = useRef();
@@ -165,10 +174,10 @@ const HomePage = ({ setLoading }) => {
                                                 <li className="has-droupdown third-lvl">
                                                     <a className="main" href="http://google.com">Shop Layout</a>
                                                     <ul className="submenu-third-lvl mm-collapse">
-                                                        <li><a href="shop-grid-sidebar.html">SHOP GRID SLIDEBAR</a>Shop Grid Sidebar</li>
-                                                        <li><a href="shop-list-sidebar.html">SHOP LIST SILDEBAR</a>Shop List Sidebar</li>
-                                                        <li><a href="shop-grid-top-filter.html">SHOP GRID TOP FILTER</a>Shop Grid Top Filter</li>
-                                                        <li><a href="shop-list-top-filter.html">SHOP LIST TOP FILTER</a>Shop List Top Filter</li>
+                                                        <li><a>SHOP GRID SLIDEBAR</a>Shop Grid Sidebar</li>
+                                                        <li><a>SHOP LIST SILDEBAR</a>Shop List Sidebar</li>
+                                                        <li><a >SHOP GRID TOP FILTER</a>Shop Grid Top Filter</li>
+                                                        <li><a >SHOP LIST TOP FILTER</a>Shop List Top Filter</li>
                                                     </ul>
                                                 </li>
                                                 <li className="has-droupdown third-lvl">
@@ -376,7 +385,7 @@ const HomePage = ({ setLoading }) => {
                                                             Do not miss our amazing   <br />
                                                             grocery deals
                                                         </h1>
-                                                        <a href="shop-grid-sidebar.html" className="rts-btn btn-primary radious-sm with-icon">
+                                                        <a  className="rts-btn btn-primary radious-sm with-icon">
                                                             <div className="btn-text">
                                                                 Shop Now
                                                             </div>
@@ -398,7 +407,7 @@ const HomePage = ({ setLoading }) => {
                                                             Do not miss our amazing   <br />
                                                             grocery deals
                                                         </h1>
-                                                        <a href="shop-grid-sidebar.html" className="rts-btn btn-primary radious-sm with-icon">
+                                                        <a  className="rts-btn btn-primary radious-sm with-icon">
                                                             <div className="btn-text">
                                                                 Shop Now
                                                             </div>
@@ -457,9 +466,9 @@ const HomePage = ({ setLoading }) => {
                                 "spaceBetween":12}
                             }
                         }' style={{ width: '20%' }}>
-                                            <div className="swiper-wrapper">
-                                                <div className="swiper-slide">
-                                                    <a href="shop-grid-sidebar.html" className="single-category-one">
+                                            <div className="swiper-wrapper"  >
+                                                <div className="swiper-slide"  onClick={() => ProductCategory(cart.name)}>
+                                                    <a className="single-category-one">
                                                         <img src={cart.image} alt="category" />
                                                         <p>{cart.name}</p>
                                                     </a>
@@ -4055,12 +4064,12 @@ const HomePage = ({ setLoading }) => {
                         <div className="col-lg-3 col-md-6 col-sm-12 col-12">
                             <div className="single-feature-card bg_image one">
                                 <div className="content-area">
-                                    <a href="shop-grid-sidebar.html" className="rts-btn btn-primary">Weekend Discount</a>
+                                    <a className="rts-btn btn-primary">Weekend Discount</a>
                                     <h3 className="title">
                                         Drink Fresh Corn Juice   <br />
                                         <span>Good Taste</span>
                                     </h3>
-                                    <a href="shop-grid-sidebar.html" className="shop-now-goshop-btn">
+                                    <a  className="shop-now-goshop-btn">
                                         <span className="text">Shop Now</span>
                                         <div className="plus-icon">
                                             <i className="fa-sharp fa-regular fa-plus"></i>
@@ -4075,12 +4084,12 @@ const HomePage = ({ setLoading }) => {
                         <div className="col-lg-3 col-md-6 col-sm-12 col-12">
                             <div className="single-feature-card bg_image two">
                                 <div className="content-area">
-                                    <a href="shop-grid-sidebar.html" className="rts-btn btn-primary">Weekend Discount</a>
+                                    <a  className="rts-btn btn-primary">Weekend Discount</a>
                                     <h3 className="title">
                                         Organic Lemon Flavored
                                         <span>Banana Chips</span>
                                     </h3>
-                                    <a href="shop-grid-sidebar.html" className="shop-now-goshop-btn">
+                                    <a  className="shop-now-goshop-btn">
                                         <span className="text">Shop Now</span>
                                         <div className="plus-icon">
                                             <i className="fa-sharp fa-regular fa-plus"></i>
@@ -4095,12 +4104,12 @@ const HomePage = ({ setLoading }) => {
                         <div className="col-lg-3 col-md-6 col-sm-12 col-12">
                             <div className="single-feature-card bg_image three">
                                 <div className="content-area">
-                                    <a href="shop-grid-sidebar.html" className="rts-btn btn-primary">Weekend Discount</a>
+                                    <a  className="rts-btn btn-primary">Weekend Discount</a>
                                     <h3 className="title">
                                         Nozes Pecanera Brasil
                                         <span>Chocolate Snacks</span>
                                     </h3>
-                                    <a href="shop-grid-sidebar.html" className="shop-now-goshop-btn">
+                                    <a  className="shop-now-goshop-btn">
                                         <span className="text">Shop Now</span>
                                         <div className="plus-icon">
                                             <i className="fa-sharp fa-regular fa-plus"></i>
@@ -4115,12 +4124,12 @@ const HomePage = ({ setLoading }) => {
                         <div className="col-lg-3 col-md-6 col-sm-12 col-12">
                             <div className="single-feature-card bg_image four">
                                 <div className="content-area">
-                                    <a href="shop-grid-sidebar.html" className="rts-btn btn-primary">Weekend Discount</a>
+                                    <a  className="rts-btn btn-primary">Weekend Discount</a>
                                     <h3 className="title">
                                         Strawberry Water Drinks
                                         <span>Flavors Awesome</span>
                                     </h3>
-                                    <a href="shop-grid-sidebar.html" className="shop-now-goshop-btn">
+                                    <a  className="shop-now-goshop-btn">
                                         <span className="text">Shop Now</span>
                                         <div className="plus-icon">
                                             <i className="fa-sharp fa-regular fa-plus"></i>
@@ -4151,7 +4160,7 @@ const HomePage = ({ setLoading }) => {
                             <div className="cover-card-main-over">
                                 <div className="row g-4">
                                     {trendingProducts.map((product, index) => (
-                                        <div className="col-xl-3 col-md-6 col-sm-12 col-12" key={index}>
+                                        <div className="col-xl-3 col-md-6 col-sm-12 col-12" key={index} >
                                             <div className="single-shopping-card-one tranding-product h-100">
                                                 <a className="thumbnail-preview min-width-100 min-height-100" onClick={() => ProductDetail(product._id)}>
                                                     <div className="badge">
@@ -4161,7 +4170,7 @@ const HomePage = ({ setLoading }) => {
                                                     <img src={product.productImage} alt={product.productName} className='min-width-100 min-height-100' />
                                                 </a>
                                                 <div className="body-content">
-                                                    <a href="shop-details.html">
+                                                    <a >
                                                         <h4 className="title d-flex">{product.productName}</h4>
                                                     </a>
                                                     <span className="availability d-flex">{product.productQuantity} {product.productUnit} Pack</span>
