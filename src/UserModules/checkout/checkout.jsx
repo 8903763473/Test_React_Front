@@ -148,9 +148,6 @@ const Checkout = ({ setLoading }) => {
         };
 
         console.log(post);
-
-        // triggerNotification('success', 'Success', 'Order Placed Successfully', 'x', null)
-
         try {
             const response = await api.checkoutProducts(post);
             console.log('Payment verification successful', response.data);

@@ -149,7 +149,7 @@ const Cartpage = ({ setLoading }) => {
                                             </div>
                                         </div>
                                         <div className="price">
-                                            <p>₹{cart.productCurrentRate}</p>
+                                            <p>₹ {cart.productCurrentRate}</p>
                                         </div>
                                         <div className="quantity">
                                             <div className="quantity-edit">

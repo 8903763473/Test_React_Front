@@ -8,14 +8,14 @@ export const ProductDetail = ({ setLoading }) => {
     // const [selectedId, setselectedId] = useState('');
     const [prodDetail, setprodDetail] = useState([]);
 
-    const [ProductCategories, setProductCategory] = useState([]);
-  
+    const [RelatedProduct, setRelatedProduct] = useState([]);
+
 
     const GetProductByCategory = (category) => {
         api.getProductbyCategory(category)
             .then(res => {
                 console.log(res.data);
-                setProductCategory(res.data);
+                setRelatedProduct(res.data);
             })
             .catch(err => {
                 console.error(err); // Handle errors here if needed
@@ -27,6 +27,7 @@ export const ProductDetail = ({ setLoading }) => {
             .then(res => {
                 setprodDetail(res.data)
                 console.log(res);
+                GetProductByCategory(res.data.productCategory)
             })
             .catch(err => {
                 console.log(err);
@@ -35,8 +36,8 @@ export const ProductDetail = ({ setLoading }) => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const productId = searchParams.get('productId');
-    console.log("profuct Id",productId);
-    
+    console.log("profuct Id", productId);
+
 
 
     useEffect(() => {
@@ -91,7 +92,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                 </div>
                                                 <div className="contents">
                                                     <div className="product-status">
-                                                        <span className="product-catagory">Dress</span>
+                                                        <span className="product-catagory">{prodDetail.productDiscount} % Off</span>
                                                         <div className="rating-stars-group">
                                                             <div className="rating-star"><i className="fas fa-star"></i></div>
                                                             <div className="rating-star"><i className="fas fa-star"></i></div>
@@ -99,20 +100,20 @@ export const ProductDetail = ({ setLoading }) => {
                                                             <span>10 Reviews</span>
                                                         </div>
                                                     </div>
-                                                    <h2 className="product-title">{prodDetail.productName}</h2>
-                                                    <p className="mt--20 mb--20">
+                                                    <h2 className="product-title d-flex">{prodDetail.productName}</h2>
+                                                    <p className="mt--20 mb--20 d-flex text-justify">
                                                         {prodDetail.productDescription}
                                                     </p>
-                                                    <span className="product-price mb--15 d-block" style={{ color: '#DC2626', fontWeight: 600 }}> ₹ {prodDetail.productCurrentRate}<span className="old-price ml--15">₹ {prodDetail.productOriginalRate}</span></span>
+                                                    <span className="product-price mb--15 d-block text-justify" style={{ color: '#DC2626', fontWeight: 600 }}> ₹ {prodDetail.productCurrentRate}<span className="old-price ml--15">₹ {prodDetail.productOriginalRate}</span></span>
                                                     <div className="product-bottom-action">
                                                         <div className="cart-edits">
                                                             <div className="quantity-edit action-item" style={{ width: 'auto' }}>
                                                                 <button className="button"><i className="fal fa-minus minus"></i></button>
-                                                                <input type="text" className="input" value="01" />
+                                                                <input type="text" className="input" value="1" />
                                                                 <button className="button plus">+<i className="fal fa-plus plus"></i></button>
                                                             </div>
                                                         </div>
-                                                        <a href="#" className="rts-btn btn-primary radious-sm with-icon">
+                                                        <a className="rts-btn btn-primary radious-sm with-icon">
                                                             <div className="btn-text">
                                                                 Add To Cart
                                                             </div>
@@ -129,7 +130,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                         <span className="sku product-unipue mb--10"><span className='prodDetailText'>Status: </span> {prodDetail.productStatus}</span>
                                                         {/* <span className="catagorys product-unipue mb--10"><span className='prodDetailText'>Categories: </span> {prodDetail.productCategory}</span> */}
                                                         <span className="tags product-unipue mb--10"><span className='prodDetailText'>Tags: </span> fashion, t-shirts, Men</span>
-                                                        <span className="tags product-unipue mb--10"><span className='prodDetailText'>Unit: </span> {prodDetail.productUnit}</span>
+                                                        <span className="tags product-unipue mb--10"><span className='prodDetailText'>Unit: </span> {prodDetail.productQuantity} {prodDetail.productUnit}</span>
                                                         <span className="tags product-unipue mb--10"><span className='prodDetailText'>Type: </span> original</span>
                                                         <span className="tags product-unipue mb--10"><span className='prodDetailText'>Category: </span> {prodDetail.productCategory}</span>
                                                     </div>
@@ -464,72 +465,73 @@ export const ProductDetail = ({ setLoading }) => {
                             }
                         }'>
                                     <div className="swiper-wrapper">
-                                        <div className="swiper-slide">
-                                            <div className="single-shopping-card-one">
-                                                <div className="image-and-action-area-wrapper">
-                                                    <a href="#" className="thumbnail-preview">
-                                                        <div className="badge">
-                                                            <span>25% <br />
-                                                                Off
-                                                            </span>
-                                                            <i className="fa-solid fa-bookmark"></i>
-                                                        </div>
-                                                        <img src="images/grocery/01.jpg" alt="grocery" />
-                                                    </a>
-                                                    <div className="action-share-option">
-                                                        <div className="single-action openuptip message-show-action" data-flow="up" title="Add To Wishlist">
-                                                            <i className="fa-light fa-heart"></i>
-                                                        </div>
-                                                        <div className="single-action openuptip" data-flow="up" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                            <i className="fa-solid fa-arrows-retweet"></i>
-                                                        </div>
-                                                        <div className="single-action openuptip cta-quickview product-details-popup-btn" data-flow="up" title="Quick View">
-                                                            <i className="fa-regular fa-eye"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
 
-                                                <div className="body-content">
-                                                    <div className="time-tag">
-                                                        <i className="fa-light fa-clock"></i>
-                                                        9 MINS
-                                                    </div>
-                                                    <a href="#">
-                                                        <h4 className="title">Nestle Cerelac Mixed Fruits &
-                                                            Wheat with Milk</h4>
-                                                    </a>
-                                                    <span className="availability">500g Pack</span>
-                                                    <div className="price-area">
-                                                        <span className="current">$36.00</span>
-                                                        <div className="previous">$36.00</div>
-                                                    </div>
-                                                    <div className="cart-counter-action">
-                                                        <div className="quantity-edit">
-                                                            <input type="text" className="input" value="1" />
-                                                            <div className="button-wrapper-action">
-                                                                <button className="button"><i className="fa-regular fa-chevron-down"></i></button>
-                                                                <button className="button plus">+<i className="fa-regular fa-chevron-up"></i></button>
+                                        {
+                                            RelatedProduct.map(res => (
+                                                <div className="swiper-slide" key={res.id}>
+                                                    <div className="single-shopping-card-one">
+                                                        <div className="image-and-action-area-wrapper" style={{ minHeight: '200px', maxHeight: '200px' }}>
+                                                            <a className="thumbnail-preview" style={{ height: '200px' }}>
+                                                                <div className="badge">
+                                                                    <span>25% <br /> Off</span>
+                                                                    <i className="fa-solid fa-bookmark"></i>
+                                                                </div>
+                                                                <img src={res.productImage} alt={res.productName} />
+                                                            </a>
+                                                            <div className="action-share-option">
+                                                                <div className="single-action openuptip message-show-action" data-flow="up" title="Add To Wishlist">
+                                                                    <i className="fa-light fa-heart"></i>
+                                                                </div>
+                                                                <div className="single-action openuptip" data-flow="up" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                                    <i className="fa-solid fa-arrows-retweet"></i>
+                                                                </div>
+                                                                <div className="single-action openuptip cta-quickview product-details-popup-btn" data-flow="up" title="Quick View">
+                                                                    <i className="fa-regular fa-eye"></i>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <a href="#" className="rts-btn btn-primary radious-sm with-icon">
-                                                            <div className="btn-text">
-                                                                Add To Cart
+
+                                                        <div className="body-content">
+                                                            <div className="time-tag">
+                                                                <i className="fa-light fa-clock"></i>
+                                                                9 MINS
                                                             </div>
-                                                            <div className="arrow-icon">
-                                                                <i className="fa-regular fa-cart-shopping"></i>
+                                                            <a >
+                                                                <h4 className="title d-flex">{res.productName}</h4>
+                                                            </a>
+                                                            <span className="availability d-flex color-green">{res.productStatus}</span>
+                                                            <div className="price-area">
+                                                                <span className="current">₹ {res.productOriginalRate}</span>
+                                                                <div className="previous">₹ {res.productCurrentRate}</div>
                                                             </div>
-                                                            <div className="arrow-icon">
-                                                                <i className="fa-regular fa-cart-shopping"></i>
+                                                            <div className="cart-counter-action">
+                                                                <div className="quantity-edit">
+                                                                    <input type="text" className="input" value="1" />
+                                                                    <div className="button-wrapper-action">
+                                                                        <button className="button"><i className="fa-regular fa-chevron-down"></i></button>
+                                                                        <button className="button plus">+<i className="fa-regular fa-chevron-up"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                                <a className="rts-btn btn-primary radious-sm with-icon">
+                                                                    <div className="btn-text">
+                                                                        Add To Cart
+                                                                    </div>
+                                                                    <div className="arrow-icon">
+                                                                        <i className="fa-regular fa-cart-shopping"></i>
+                                                                    </div>
+                                                                </a>
                                                             </div>
-                                                        </a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div className="swiper-slide">
+                                            ))
+                                        }
+
+
+                                        {/* <div className="swiper-slide">
                                             <div className="single-shopping-card-one">
                                                 <div className="image-and-action-area-wrapper">
-                                                    <a href="#" className="thumbnail-preview">
+                                                    <a  className="thumbnail-preview">
                                                         <div className="badge">
                                                             <span>25% <br />
                                                                 Off
@@ -555,7 +557,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                         <i className="fa-light fa-clock"></i>
                                                         9 MINS
                                                     </div>
-                                                    <a href="#">
+                                                    <a >
                                                         <h4 className="title">Peysan Full Fat Fresh Cottage Cheese</h4>
                                                     </a>
                                                     <span className="availability">500g Pack</span>
@@ -571,7 +573,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                                 <button className="button plus">+<i className="fa-regular fa-chevron-up"></i></button>
                                                             </div>
                                                         </div>
-                                                        <a href="#" className="rts-btn btn-primary radious-sm with-icon">
+                                                        <a  className="rts-btn btn-primary radious-sm with-icon">
                                                             <div className="btn-text">
                                                                 Add To Cart
                                                             </div>
@@ -589,7 +591,7 @@ export const ProductDetail = ({ setLoading }) => {
                                         <div className="swiper-slide">
                                             <div className="single-shopping-card-one">
                                                 <div className="image-and-action-area-wrapper">
-                                                    <a href="#" className="thumbnail-preview">
+                                                    <a  className="thumbnail-preview">
                                                         <div className="badge">
                                                             <span>25% <br />
                                                                 Off
@@ -615,7 +617,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                         <i className="fa-light fa-clock"></i>
                                                         9 MINS
                                                     </div>
-                                                    <a href="#">
+                                                    <a >
                                                         <h4 className="title">Aptamil Gold+ ProNutra Biotik Stage 1 Infant Formula...</h4>
                                                     </a>
                                                     <span className="availability">500g Pack</span>
@@ -631,7 +633,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                                 <button className="button plus">+<i className="fa-regular fa-chevron-up"></i></button>
                                                             </div>
                                                         </div>
-                                                        <a href="#" className="rts-btn btn-primary radious-sm with-icon">
+                                                        <a  className="rts-btn btn-primary radious-sm with-icon">
                                                             <div className="btn-text">
                                                                 Add To Cart
                                                             </div>
@@ -649,7 +651,7 @@ export const ProductDetail = ({ setLoading }) => {
                                         <div className="swiper-slide">
                                             <div className="single-shopping-card-one">
                                                 <div className="image-and-action-area-wrapper">
-                                                    <a href="#" className="thumbnail-preview">
+                                                    <a  className="thumbnail-preview">
                                                         <div className="badge">
                                                             <span>25% <br />
                                                                 Off
@@ -675,7 +677,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                         <i className="fa-light fa-clock"></i>
                                                         9 MINS
                                                     </div>
-                                                    <a href="#">
+                                                    <a >
                                                         <h4 className="title">Abbott Pediasure Chocolate Refill Pack</h4>
                                                     </a>
                                                     <span className="availability">500g Pack</span>
@@ -691,7 +693,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                                 <button className="button plus">+<i className="fa-regular fa-chevron-up"></i></button>
                                                             </div>
                                                         </div>
-                                                        <a href="#" className="rts-btn btn-primary radious-sm with-icon">
+                                                        <a  className="rts-btn btn-primary radious-sm with-icon">
                                                             <div className="btn-text">
                                                                 Add To Cart
                                                             </div>
@@ -709,7 +711,7 @@ export const ProductDetail = ({ setLoading }) => {
                                         <div className="swiper-slide">
                                             <div className="single-shopping-card-one">
                                                 <div className="image-and-action-area-wrapper">
-                                                    <a href="#" className="thumbnail-preview">
+                                                    <a  className="thumbnail-preview">
                                                         <div className="badge">
                                                             <span>25% <br />
                                                                 Off
@@ -735,7 +737,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                         <i className="fa-light fa-clock"></i>
                                                         9 MINS
                                                     </div>
-                                                    <a href="#">
+                                                    <a >
                                                         <h4 className="title">Pastine Mellin Filid Angelo 100% Di Grano Tenero</h4>
                                                     </a>
                                                     <span className="availability">500g Pack</span>
@@ -751,7 +753,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                                 <button className="button plus">+<i className="fa-regular fa-chevron-up"></i></button>
                                                             </div>
                                                         </div>
-                                                        <a href="#" className="rts-btn btn-primary radious-sm with-icon">
+                                                        <a  className="rts-btn btn-primary radious-sm with-icon">
                                                             <div className="btn-text">
                                                                 Add To Cart
                                                             </div>
@@ -769,7 +771,7 @@ export const ProductDetail = ({ setLoading }) => {
                                         <div className="swiper-slide">
                                             <div className="single-shopping-card-one">
                                                 <div className="image-and-action-area-wrapper">
-                                                    <a href="#" className="thumbnail-preview">
+                                                    <a  className="thumbnail-preview">
                                                         <div className="badge">
                                                             <span>25% <br />
                                                                 Off
@@ -795,7 +797,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                         <i className="fa-light fa-clock"></i>
                                                         9 MINS
                                                     </div>
-                                                    <a href="#">
+                                                    <a >
                                                         <h4 className="title">Aussie Bubs Goat Milk Infant Formula Stage 1,</h4>
                                                     </a>
                                                     <span className="availability">500g Pack</span>
@@ -811,7 +813,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                                 <button className="button plus">+<i className="fa-regular fa-chevron-up"></i></button>
                                                             </div>
                                                         </div>
-                                                        <a href="#" className="rts-btn btn-primary radious-sm with-icon">
+                                                        <a  className="rts-btn btn-primary radious-sm with-icon">
                                                             <div className="btn-text">
                                                                 Add To Cart
                                                             </div>
@@ -829,7 +831,7 @@ export const ProductDetail = ({ setLoading }) => {
                                         <div className="swiper-slide">
                                             <div className="single-shopping-card-one">
                                                 <div className="image-and-action-area-wrapper">
-                                                    <a href="#" className="thumbnail-preview">
+                                                    <a  className="thumbnail-preview">
                                                         <div className="badge">
                                                             <span>25% <br />
                                                                 Off
@@ -855,7 +857,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                         <i className="fa-light fa-clock"></i>
                                                         9 MINS
                                                     </div>
-                                                    <a href="#">
+                                                    <a >
                                                         <h4 className="title">Nestle Cerelac Mixed Fruits &
                                                             Wheat with Milk</h4>
                                                     </a>
@@ -872,7 +874,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                                 <button className="button plus">+<i className="fa-regular fa-chevron-up"></i></button>
                                                             </div>
                                                         </div>
-                                                        <a href="#" className="rts-btn btn-primary radious-sm with-icon">
+                                                        <a  className="rts-btn btn-primary radious-sm with-icon">
                                                             <div className="btn-text">
                                                                 Add To Cart
                                                             </div>
@@ -886,7 +888,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>

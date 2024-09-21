@@ -146,3 +146,11 @@
       gap: 15px !important;
   }
 }
+
+.color-green{
+  color: #629D23 !important;
+}
+
+.text-justify{
+  text-align: justify !important;
+}
