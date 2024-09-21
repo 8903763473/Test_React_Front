@@ -102,6 +102,7 @@ const Cartpage = ({ setLoading }) => {
         api.clearallcart(post)
             .then(res => {
                 console.log(res);
+                setmyCart([])
                 getcartdata();
             }).catch(err => {
                 console.log(err);

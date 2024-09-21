@@ -4,9 +4,13 @@ import { Footer } from '../Footer/Footer';
 import { Header } from '../Header/Header';
 import api from '../../ApiService/apiService';
 import NotificationCenter from '../../CommonModule/Notification/Notification';
+import { useNavigate } from 'react-router-dom';
 
 const Checkout = ({ setLoading }) => {
+    const navigate = useNavigate()
     const [myCart, setMyCart] = useState([]);
+    const [Total, setTotal] = useState(0);
+
     const [formData, setFormData] = useState({
         firstName: '',
         email: '',
@@ -32,6 +36,13 @@ const Checkout = ({ setLoading }) => {
                 console.log(error);
             })
     }
+
+    useEffect(() => {
+        const totalAmount = myCart.reduce((total, item) => {
+            return total + (item.productCurrentRate * item.quantity);
+        }, 0);
+        setTotal(totalAmount);
+    }, [myCart]);
 
     useEffect(() => {
         getcartdata();
@@ -79,6 +90,7 @@ const Checkout = ({ setLoading }) => {
                 order_id: order.data.id,
                 handler: (response) => {
                     console.log('Razorpay Payment Successful', response);
+                    setLoading(true)
                     verifyPayment(response);
                 },
                 prefill: {
@@ -110,6 +122,7 @@ const Checkout = ({ setLoading }) => {
             doCheckout();
         } catch (error) {
             console.error('Error verifying payment:', error);
+            setLoading(false)
         }
     };
 
@@ -142,9 +155,11 @@ const Checkout = ({ setLoading }) => {
             const response = await api.checkoutProducts(post);
             console.log('Payment verification successful', response.data);
             triggerNotification('success', 'Success', 'Thanks for you order', 'x', null);
-
+            setLoading(false)
+            navigate('/invoice?orderId=' + response.data.checkout._id);
         } catch (error) {
             console.error('Error while checkout:', error);
+            setLoading(false)
         }
     }
 
@@ -252,7 +267,7 @@ const Checkout = ({ setLoading }) => {
                                         <label htmlFor="orderNotes">Order Notes</label>
                                         <textarea id="orderNotes" value={formData.orderNotes} onChange={handleInputChange}></textarea>
                                     </div>
-                                    <button className="rts-btn btn-primary" type="submit">Update Cart</button>
+                                    {/* <button className="rts-btn btn-primary" type="submit">Update Cart</button> */}
                                 </form>
                             </div>
                         </div>
@@ -273,7 +288,7 @@ const Checkout = ({ setLoading }) => {
                                                 </a>
                                                 <a className="title">{res.productName}</a>
                                             </div>
-                                            <span className="price">₹ {res.productCurrentRate}.00</span>
+                                            <span className="price">₹ {res.productCurrentRate * res.quantity}.00</span>
                                         </div>
                                     ))
                                 ) : (
@@ -284,7 +299,7 @@ const Checkout = ({ setLoading }) => {
                                     <div className="left-area">
                                         <span>Subtotal</span>
                                     </div>
-                                    <span className="price">₹ 500.00</span>
+                                    <span className="price">₹ {Total}.00</span>
                                 </div>
                                 <div className="single-shop-list">
                                     <div className="left-area">
@@ -296,7 +311,7 @@ const Checkout = ({ setLoading }) => {
                                     <div className="left-area">
                                         <span style={{ fontWeight: 600, color: '#2C3C28' }}>Total Price:</span>
                                     </div>
-                                    <span className="price" style={{ color: '#629D23' }}>₹ 550.00</span>
+                                    <span className="price" style={{ color: '#629D23' }}>₹ {Total + 50}.00</span>
                                 </div>
                                 <div className="cottom-cart-right-area">
                                     <ul>

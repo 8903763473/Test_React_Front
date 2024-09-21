@@ -16,13 +16,13 @@ const InVoice = ({ setLoading }) => {
 
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
-    const id = searchParams.get('id');
+    const id = searchParams.get('orderId');
 
     const getInvoiceData = (invoiceId) => {
         setLoading(true)
         api.getOrdersById(invoiceId)
             .then(res => {
-                console.log(res.data);
+                console.log("Invoice Responce",res.data);
                 setmyOrdersFullData(res.data);
                 setmyOrders(res.data.products);
                 const calculatedSubTotal = res.data.products.reduce((acc, prod) => acc + (prod.price * prod.quantity), 0);

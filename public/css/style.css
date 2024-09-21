@@ -25291,7 +25291,7 @@ body.modal-open {
 }
 
 .invoice-main-wrapper-1 {
-  margin-top: 120px;
+  margin-top: 0 !important;
   padding: 50px;
   border-radius: 6px;
   background: #f1f1f1;
