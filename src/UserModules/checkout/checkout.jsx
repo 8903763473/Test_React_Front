@@ -273,7 +273,7 @@ const Checkout = ({ setLoading }) => {
                                                 </a>
                                                 <a className="title">{res.productName}</a>
                                             </div>
-                                            <span className="price">$ {res.productCurrentRate}.00</span>
+                                            <span className="price">₹ {res.productCurrentRate}.00</span>
                                         </div>
                                     ))
                                 ) : (
@@ -284,19 +284,19 @@ const Checkout = ({ setLoading }) => {
                                     <div className="left-area">
                                         <span>Subtotal</span>
                                     </div>
-                                    <span className="price">$500.00</span>
+                                    <span className="price">₹ 500.00</span>
                                 </div>
                                 <div className="single-shop-list">
                                     <div className="left-area">
                                         <span>Shipping</span>
                                     </div>
-                                    <span className="price">Flat rate: $50.00</span>
+                                    <span className="price">Flat rate: ₹ 50.00</span>
                                 </div>
                                 <div className="single-shop-list">
                                     <div className="left-area">
                                         <span style={{ fontWeight: 600, color: '#2C3C28' }}>Total Price:</span>
                                     </div>
-                                    <span className="price" style={{ color: '#629D23' }}>$550.00</span>
+                                    <span className="price" style={{ color: '#629D23' }}>₹ 550.00</span>
                                 </div>
                                 <div className="cottom-cart-right-area">
                                     <ul>

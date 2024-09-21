@@ -20,37 +20,37 @@ export const Header = () => {
     const handleClick = () => {
         setLoading(true);
         setTimeout(() => {
-          setLoading(false);
-        }, 3000); 
-      };
+            setLoading(false);
+        }, 3000);
+    };
 
 
-const routeCart=(data)=>{
-    if(data==1){
-        navigate('/cart');
+    const routeCart = (data) => {
+        if (data == 1) {
+            navigate('/cart');
+        }
+        else if (data == 2) {
+            navigate('/checkout');
+        }
+        else if (data == 'account') {
+            navigate('/MyOrder');
+        }
     }
-    else if(data==2){
-        navigate('/checkout'); 
-    }
-    else if(data=='account'){
-        navigate('/MyOrder');  
-    }
-}
 
-const RemoveCart = (productId) => {
-    let post = {
-        "userId": localStorage.getItem("userId"),
-        "productId": productId
-    }
-    api.removecart(post)
-        .then(res => {
-            console.log(res);
-            getcartdata();
+    const RemoveCart = (productId) => {
+        let post = {
+            "userId": localStorage.getItem("userId"),
+            "productId": productId
+        }
+        api.removecart(post)
+            .then(res => {
+                console.log(res);
+                getcartdata();
 
-        }).catch(err => {
-            console.log(err);
-        })
-};
+            }).catch(err => {
+                console.log(err);
+            })
+    };
 
     const getcartdata = () => {
         let post = {
@@ -75,18 +75,18 @@ const RemoveCart = (productId) => {
 
     return (
         <div>
-             {loading && (
-<div className='LoaderView'  style={{position:'fixed',width:'100%',height:'100%',background:'white',zIndex:'111'}}>
-<div class="container">
-  <section>
-    <div class="loader loader-20" style={{fontsize:'40px'}}>
-      {/* <div class="css-diamond"></div> */}
-    </div>
-  </section>
- 
-</div>
-</div>
-             )}
+            {loading && (
+                <div className='LoaderView' style={{ position: 'fixed', width: '100%', height: '100%', background: 'white', zIndex: '111' }}>
+                    <div class="container">
+                        <section>
+                            <div class="loader loader-20" style={{ fontsize: '40px' }}>
+                                {/* <div class="css-diamond"></div> */}
+                            </div>
+                        </section>
+
+                    </div>
+                </div>
+            )}
 
 
             <div className="rts-header-one-area-one">
@@ -182,7 +182,7 @@ const RemoveCart = (productId) => {
                             <div className="col-lg-12">
                                 <div className="logo-search-category-wrapper">
                                     <a href="index-2.html" className="logo-area">
-                                        <img src="images/logo/logo-01.svg" alt="logo-main" className="logo" />
+                                        <img src="images/logo/logo-01.svg" alt="logo-main" className="logo" style={{ width: '260px', borderRadius: '10px' }} />
                                     </a>
                                     <div className="category-search-wrapper">
                                         <div className="category-btn category-hover-header">
@@ -309,7 +309,7 @@ const RemoveCart = (productId) => {
                                         </div>
                                     </div>
                                     <div className="accont-wishlist-cart-area-header">
-                                        <a  className="btn-border-only account"  onClick={() => routeCart('account')}>
+                                        <a className="btn-border-only account" onClick={() => routeCart('account')}>
                                             <i className="fa-light fa-user"></i>
                                             <span>Account</span>
                                         </a>
@@ -318,56 +318,56 @@ const RemoveCart = (productId) => {
                                             <span className="text">Wishlist</span>
                                             <span className="number">2</span>
                                         </a>
-                                        
+
                                         <div className="btn-border-only cart category-hover-header">
-    <i className="fa-sharp fa-regular fa-cart-shopping"></i>
-    <span className="text">My Cart</span>
-    <span className="number">{cartDataLength}</span>
-    <div className="category-sub-menu card-number-show">
-        <h5 className="shopping-cart-number">Shopping Cart ({cartDataLength})</h5>
-        {cartData.map((cart) => (
-        <div className="cart-item-1 border-top" key={cart.productName}>
-            <div className="img-name">
-                <div className="thumbanil">
-                    <img src={cart.productImage} alt="" />
-                </div>
-                <div className="details">
-                    <a href="shop-details.html">
-                        <h5 className="title">{cart.productName}</h5>
-                    </a>
-                    <div className="number">
-                        {cart.quantity}<i className="fa-regular fa-x"></i>
-                        <span>₹{cart.productCurrentRate}</span>
-                    </div>
-                </div>
-            </div>
-            <div className="close-c1" onClick={() => RemoveCart(cart.productId)}>
-                <i className="fa-regular fa-x"></i>
-            </div>
-        </div>
-        ))}
-        <div className="sub-total-cart-balance">
-            <div className="bottom-content-deals mt--10">
-                <div className="top">
-                    <span>Sub Total:</span>
-                    {/* Subtotal Calculation */}
-                    <span className="number-c">₹{cartData.reduce((total, cart) => total + (cart.productCurrentRate * cart.quantity), 0)}</span>
-                </div>
-                <div className="single-progress-area-incard">
-                    <div className="progress">
-                        <div className="progress-bar wow fadeInLeft" role="progressbar" style={{width:'80%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-                <p>Spend More <span>₹125.00</span> to reach <span>Free Shipping</span></p>
-            </div>
-            <div className="button-wrapper d-flex align-items-center justify-content-between">
-                <a className="rts-btn btn-primary " onClick={() => routeCart('1')}>View Cart</a>
-                <a  className="rts-btn btn-primary border-only" onClick={() => routeCart('2')}>CheckOut</a>
-            </div>
-        </div>
-    </div>
-    <a href="cart.html" className="over_link"></a>
-</div>
+                                            <i className="fa-sharp fa-regular fa-cart-shopping"></i>
+                                            <span className="text">My Cart</span>
+                                            <span className="number">{cartDataLength}</span>
+                                            <div className="category-sub-menu card-number-show">
+                                                <h5 className="shopping-cart-number">Shopping Cart ({cartDataLength})</h5>
+                                                {cartData.map((cart) => (
+                                                    <div className="cart-item-1 border-top" key={cart.productName}>
+                                                        <div className="img-name">
+                                                            <div className="thumbanil">
+                                                                <img src={cart.productImage} alt="" />
+                                                            </div>
+                                                            <div className="details">
+                                                                <a href="shop-details.html">
+                                                                    <h5 className="title">{cart.productName}</h5>
+                                                                </a>
+                                                                <div className="number">
+                                                                    {cart.quantity}<i className="fa-regular fa-x"></i>
+                                                                    <span>₹{cart.productCurrentRate}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="close-c1" onClick={() => RemoveCart(cart.productId)}>
+                                                            <i className="fa-regular fa-x"></i>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                                <div className="sub-total-cart-balance">
+                                                    <div className="bottom-content-deals mt--10">
+                                                        <div className="top">
+                                                            <span>Sub Total:</span>
+                                                            {/* Subtotal Calculation */}
+                                                            <span className="number-c">₹{cartData.reduce((total, cart) => total + (cart.productCurrentRate * cart.quantity), 0)}</span>
+                                                        </div>
+                                                        <div className="single-progress-area-incard">
+                                                            <div className="progress">
+                                                                <div className="progress-bar wow fadeInLeft" role="progressbar" style={{ width: '80%' }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            </div>
+                                                        </div>
+                                                        <p>Spend More <span>₹125.00</span> to reach <span>Free Shipping</span></p>
+                                                    </div>
+                                                    <div className="button-wrapper d-flex align-items-center justify-content-between">
+                                                        <a className="rts-btn btn-primary " onClick={() => routeCart('1')}>View Cart</a>
+                                                        <a className="rts-btn btn-primary border-only" onClick={() => routeCart('2')}>CheckOut</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a href="cart.html" className="over_link"></a>
+                                        </div>
 
                                     </div>
                                 </div>
@@ -504,7 +504,7 @@ const RemoveCart = (productId) => {
                             <div className="col-lg-12">
                                 <div className="logo-search-category-wrapper after-md-device-header">
                                     <a href="index-2.html" className="logo-area">
-                                        <img src="images/logo/logo-01.svg" alt="logo-main" className="logo" />
+                                        <img src="images/logo/logo-01.svg" alt="logo-main" className="logo" style={{ width: '260px', borderRadius: '10px' }} />
                                     </a>
                                     <div className="category-search-wrapper">
                                         <div className="category-btn category-hover-header">

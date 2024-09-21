@@ -7,17 +7,24 @@ import { Footer } from '../Footer/Footer';
 
 const Cartpage = ({ setLoading }) => {
     const [myCart, setmyCart] = useState([]);
-    const [hasQuantityChanged, setHasQuantityChanged] = useState(false); // Track if quantity has changed
+    const [hasQuantityChanged, setHasQuantityChanged] = useState(false);
+    const navigate = useNavigate();
 
     const getcartdata = () => {
         let post = {
             "userId": localStorage.getItem("userId")
         }
-
         api.getcart(post)
             .then(response => {
-                console.log("Categories:", response.data);
-                setmyCart(response.data.items)
+                const updatedCart = response.data.items.map(res => {
+                    if (res.quantity) {
+                        return { ...res, quantityCopy: res.quantity };
+                    }
+                    return res;
+                });
+                setmyCart(updatedCart);
+                console.log(updatedCart);
+
             })
             .catch(error => {
                 console.error("Error fetching categories:", error);
@@ -28,58 +35,50 @@ const Cartpage = ({ setLoading }) => {
         getcartdata();
     }, []);
 
-    const handleQuantityChange = (event, index) => {
-        const newQuantity = parseInt(event.target.value, 10);
-        const updatedCart = [...myCart];
-        updatedCart[index].quantity = newQuantity;
-        setmyCart(updatedCart);
-        setHasQuantityChanged(true);
-        updateCartOnBackend(updatedCart[index]);
-    };
-    
     const IncreaseQuantity = (index) => {
         const updatedCart = [...myCart];
         updatedCart[index].quantity += 1;
         setmyCart(updatedCart);
-        setHasQuantityChanged(true); 
+        checkForChanges();
     };
-    
+
     const DecreaseQuantity = (index) => {
         const updatedCart = [...myCart];
         if (updatedCart[index].quantity > 1) {
             updatedCart[index].quantity -= 1;
             setmyCart(updatedCart);
-            setHasQuantityChanged(true); 
+            checkForChanges();
         }
     };
-    
- 
 
-    const navigate = useNavigate();
+    const checkForChanges = () => {
+        const changesDetected = myCart.some((item) => item.quantity !== item.quantityCopy);
+        setHasQuantityChanged(changesDetected);
+    };
 
     const updateCartOnBackend = () => {
+        console.log("hasQuantityChanged", hasQuantityChanged);
 
-        // Prepare the data to send to the backend
-        let post = {
-            "userId": "66e1d301234549032c7de0db", items: [{"productId": "66b8bf3c7e6c10ee2693fa10", "quantity": 4}]
-            // "userId": localStorage.getItem('userId'),
-            // "items": myCart.map(item => ({
-            //     "productId": item.productId,
-            //     "quantity": item.quantity
-            // }))
-            
-        };
-console.log(post);
-
-        api.UpdateCart(post)
-            .then(res => {
-                console.log(res);
-                
-                console.log('Cart updated successfully:', res);
-            })
-            .catch(error => {
-                console.error('Error updating cart:', error);
-            });
+        if (hasQuantityChanged) {
+            let post = {
+                "userId": localStorage.getItem('userId'),
+                "items": myCart.map(item => ({
+                    "productId": item.productId,
+                    "quantity": item.quantity
+                }))
+            };
+            api.UpdateCart(post)
+                .then(res => {
+                    console.log(res);
+                    console.log('Cart updated successfully:', res);
+                    navigate('/checkout')
+                })
+                .catch(error => {
+                    console.error('Error updating cart:', error);
+                });
+        } else {
+            navigate('/checkout');
+        }
     };
 
     const RemoveCart = (productId) => {
@@ -111,7 +110,7 @@ console.log(post);
 
     return (
         <div>
-            <Header/>
+            <Header />
 
             <div className="rts-cart-area rts-section-gap bg_light-1">
                 <div className="container">
@@ -157,9 +156,8 @@ console.log(post);
                                                     type="number"
                                                     className="input"
                                                     value={cart.quantity}
-                                                    onChange={(e) => handleQuantityChange(e, index)} // Bind the change to the cart item
                                                     style={{ maxWidth: '100%' }}
-                                                />
+                                                    readOnly />
                                                 <div className="button-wrapper-action">
                                                     <button
                                                         className="button"
@@ -229,24 +227,23 @@ console.log(post);
                                         <h6 className="price">₹{myCart.reduce((total, item) => total + item.productCurrentRate * item.quantity, 0)}</h6>
                                     </div>
                                     <div className="button-area">
-                                        <button 
-                                            className="rts-btn btn-primary" 
-                                            onClick={updateCartOnBackend}
-                                            style={{ display: hasQuantityChanged ? 'block' : 'none' }}
-                                        >
-                                            Update & Checkout
-                                        </button>
+                                        {hasQuantityChanged ? (
+                                            <button
+                                                className="rts-btn btn-primary"
+                                                onClick={updateCartOnBackend}
+                                            >
+                                                Update & Checkout
+                                            </button>
+                                        ) : (
+                                            <button
+                                                className="rts-btn btn-primary"
+                                                onClick={updateCartOnBackend}
+                                            >
+                                                Proceed To Checkout
+                                            </button>
+                                        )}
                                     </div>
 
-                                    <div className="button-area">
-                                        <button 
-                                            className="rts-btn btn-primary" 
-                                            onClick={updateCartOnBackend}
-                                            style={{ display: !hasQuantityChanged ? 'block' : 'none' }}
-                                        >
-                                            Proceed To Checkout
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
                         </div>

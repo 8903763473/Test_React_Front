@@ -64,12 +64,13 @@ const api = {
     getProductsById: (productId) => {
         return apiInstance.get("/product/getProductsById/" + productId);
     },
- // In your ApiService (apiService.js or similar)
-UpdateCart: (data) => {
-    return apiInstance.put("/cart/updateMyCart", data); // Ensure data is sent as body
-}
+    UpdateCart: (data) => {
+        return apiInstance.put("/cart/updateMyCart", data); 
+    },
+    getOrdersById: (id) => {
+        return apiInstance.get("/checkout/getMyOrdersById/" + id);
+    }
 
-    
 
 }
 
