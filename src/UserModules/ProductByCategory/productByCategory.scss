@@ -1,0 +1,19 @@
+.product-area-wrapper-shopgrid-list.with-list .body-content {
+    background: #F3F4F6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.single-shopping-card-one .thumbnail-preview {
+    width: 100%;
+}
+.product-area-wrapper-shopgrid-list.with-list .body-content {
+    background: #F3F4F6;
+    display: flex;
+    align-items: unset;
+    justify-content: space-between;
+}
+.single-shopping-card-one.discount-offer .thumbnail-preview img {
+    height: 200px !important;  
+}

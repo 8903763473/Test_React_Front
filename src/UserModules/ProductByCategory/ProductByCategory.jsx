@@ -4,7 +4,6 @@ import { Footer } from '../Footer/Footer';
 import api from '../../ApiService/apiService';
 import { useLocation } from 'react-router-dom';
 
-
 const ProductCategory = ({ setLoading }) => {
     const [ProductCategories, setProductCategory] = useState([]);
 
@@ -250,8 +249,8 @@ return(
                             <div class="row g-4">
                             {ProductCategories.map((category) => (
                                 <div class="col-lg-20 col-lg-4 col-md-6 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one" style={{height:'460px'}}>
-                                        <div class="image-and-action-area-wrapper">
+                                    <div class="single-shopping-card-one" style={{height:'400px'}}>
+                                        <div class="image-and-action-area-wrapper" style={{width: '225px',height: '159px'}}>
                                             <a href="shop-details.html" class="thumbnail-preview">
                                                 <div class="badge">
                                                     <span>25% <br/> 
@@ -259,7 +258,7 @@ return(
                                                     </span>
                                                     <i class="fa-solid fa-bookmark"></i>
                                                 </div>
-                                                <img src={category.productImage} alt="grocery" style={{width:'83%'}}/>
+                                                <img src={category.productImage} alt="grocery" style={{width:'69%'}}/>
                                             </a>
                                             <div class="action-share-option">
                                                 <div class="single-action openuptip message-show-action" data-flow="up" title="Add To Wishlist">
@@ -284,7 +283,7 @@ return(
                                                 <div class="previous">₹{category.productOriginalRate}</div>
                                             </div>
                                             <div class="cart-counter-action">
-                                                <div class="quantity-edit" style={{width:'100%',display:'flex',alignItems:'space-around',justifyContent:'center'}}>
+                                                <div class="quantity-edit" style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-around'}}>
                                                     <input type="text" class="input" value={category.productQuantity}/>
                                                     <div class="button-wrapper-action">
                                                         <button class="button"><i class="fa-regular fa-chevron-down"></i></button>
@@ -312,7 +311,7 @@ return(
                         <div class="product-area-wrapper-shopgrid-list with-list mt--20 tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
                             <div class="row">
                             {ProductCategories.map((category) => (
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <div class="single-shopping-card-one discount-offer">
                                         <a href="shop-details.html" class="thumbnail-preview">
                                             <div class="badge">
@@ -321,7 +320,7 @@ return(
                                                 </span>
                                                 <i class="fa-solid fa-bookmark"></i>
                                             </div>
-                                            <img src={category.productImage} alt="grocery" style={{maxWidth: '241px'}}/>
+                                            <img src={category.productImage} alt="grocery" style={{width: '400px',objectFit: 'contain'}}/>
                                         </a>
                                         <div class="body-content">
                                             <div class="title-area-left">
