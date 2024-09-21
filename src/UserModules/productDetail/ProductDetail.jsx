@@ -2,10 +2,25 @@ import React, { useEffect, useState } from 'react'
 import { Header } from '../Header/Header'
 import { Footer } from '../Footer/Footer'
 import api from '../../ApiService/apiService';
+import { useLocation } from 'react-router-dom';
 
 export const ProductDetail = ({ setLoading }) => {
     // const [selectedId, setselectedId] = useState('');
     const [prodDetail, setprodDetail] = useState([]);
+
+    const [ProductCategories, setProductCategory] = useState([]);
+  
+
+    const GetProductByCategory = (category) => {
+        api.getProductbyCategory(category)
+            .then(res => {
+                console.log(res.data);
+                setProductCategory(res.data);
+            })
+            .catch(err => {
+                console.error(err); // Handle errors here if needed
+            });
+    };
 
     const getProdById = (selectedId) => {
         api.getProductsById(selectedId)
@@ -17,11 +32,16 @@ export const ProductDetail = ({ setLoading }) => {
                 console.log(err);
             })
     }
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const productId = searchParams.get('productId');
+    console.log("profuct Id",productId);
+    
 
 
     useEffect(() => {
         // setselectedId(localStorage.getItem('SelectedProdId'))
-        getProdById(sessionStorage.getItem('SelectedProdId'))
+        getProdById(productId)
     }, [])
 
 
@@ -61,13 +81,13 @@ export const ProductDetail = ({ setLoading }) => {
                                                         <div className="product-thumb zoom" onmousemove="zoom(event)" style={{ backgroundImage: `url(images/shop/05.jpg)` }}><img src="images/shop/05.jpg" alt="product-thumb" />
                                                         </div>
                                                     </div> */}
-                                                    <div className="product-thumb-filter-group">
+                                                    {/* <div className="product-thumb-filter-group">
                                                         <div className="thumb-filter filter-btn active" data-show=".one"><img src="images/shop/01.jpg" alt="product-thumb-filter" /></div>
                                                         <div className="thumb-filter filter-btn" data-show=".two"><img src="images/shop/02.jpg" alt="product-thumb-filter" /></div>
                                                         <div className="thumb-filter filter-btn" data-show=".three"><img src="images/shop/03.jpg" alt="product-thumb-filter" /></div>
                                                         <div className="thumb-filter filter-btn" data-show=".four"><img src="images/shop/04.jpg" alt="product-thumb-filter" /></div>
                                                         <div className="thumb-filter filter-btn" data-show=".five"><img src="images/shop/05.jpg" alt="product-thumb-filter" /></div>
-                                                    </div>
+                                                    </div> */}
                                                 </div>
                                                 <div className="contents">
                                                     <div className="product-status">
