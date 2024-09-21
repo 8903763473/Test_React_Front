@@ -84,13 +84,13 @@ const Checkout = ({ setLoading }) => {
                 key: 'rzp_test_8Hsb2JqvzddDdG',
                 amount: order.data.amount,
                 currency: order.data.currency,
-                name: 'VR Company',
+                name: 'Welcome Grocery',
                 description: 'Implemented by Ramya',
-                image: '/your_logo.png',
+                image: 'images/logo/logo-01.svg',
                 order_id: order.data.id,
                 handler: (response) => {
                     console.log('Razorpay Payment Successful', response);
-                    setLoading(true)
+                    // setLoading(true)
                     verifyPayment(response);
                 },
                 prefill: {
