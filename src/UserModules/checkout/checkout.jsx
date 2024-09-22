@@ -382,7 +382,7 @@ const Checkout = ({ setLoading }) => {
             {/* popup */}
             {showPopup && (
                 <div className="feedbackpopup">
-                    <div className="fullpage">
+                    <div className="popupfullpage">
 
                         <div className="content">
                             <h1 className='text'>Feedback</h1>

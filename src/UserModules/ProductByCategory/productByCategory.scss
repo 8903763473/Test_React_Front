@@ -17,3 +17,31 @@
 .single-shopping-card-one.discount-offer .thumbnail-preview img {
     height: 200px !important;  
 }
+
+.single-shopping-card-one .thumbnail-preview {
+    border-radius: 6px;
+    overflow: hidden;
+    display: block;
+    position: relative;
+    width: 63%;
+}
+.single-shopping-card-one.discount-offer .cart-counter-action {
+    display: flex;
+    align-items: center;
+    // justify-content: center;
+}
+.single-shopping-card-one .body-content .price-area {
+    justify-content: center;
+}
+.single-shopping-card-one .cart-counter-action .quantity-edit {
+    width: 64%;
+}
+.product-area-wrapper-shopgrid-list.with-list .body-content .title-area-left {
+    display: flex;
+    align-items: baseline !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+}
+.product-area-wrapper-shopgrid-list.with-list .single-shopping-card-one.discount-offer {
+    gap: 10%;
+}

@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Header } from '../Header/Header'
 import { Footer } from '../Footer/Footer'
 import api from '../../ApiService/apiService';
 import { useLocation } from 'react-router-dom';
-
+import NotificationCenter from '../../CommonModule/Notification/Notification';
+import './productDetail.scss';
 export const ProductDetail = ({ setLoading }) => {
     // const [selectedId, setselectedId] = useState('');
     const [prodDetail, setprodDetail] = useState([]);
-
+    const [loading, setLoad] = useState(false);
     const [RelatedProduct, setRelatedProduct] = useState([]);
 
 
@@ -40,6 +41,41 @@ export const ProductDetail = ({ setLoading }) => {
 
 
 
+    const notificationRef = useRef();
+    const triggerNotification = (type, title, subtitle, button, path) => {
+        if (notificationRef.current) {
+            notificationRef.current.spawnNotification(type, title, subtitle, button, path);
+        }
+    };
+    const addCart = (data) => {
+        console.log(data);
+        const isLogged = localStorage.getItem('login')
+        if (isLogged == 'success') {
+            console.log('Cart Added');
+
+            let post = {
+                "productId": data._id,
+                "quantity": data.productQuantity,
+                "userId": localStorage.getItem('userId')
+            }
+            api.AddToCart(post)
+                .then(response => {
+                    setLoad(true);
+                    setTimeout(() => {
+                        setLoad(false);
+                    }, 3000);
+                    console.log(response.data);
+                    triggerNotification('success', 'Success', 'Successfully Added in cart', 'x', null)
+                }).catch(error => {
+                    console.log(error.response.data.message);
+                    triggerNotification('error', 'Error', error.response.data.message, 'x', null)
+                })
+        } else {
+            console.log('Kindly Loggin');
+            triggerNotification('warning', 'Warning', 'Login to continue !', null, 'login')
+        }
+    }
+
     useEffect(() => {
         // setselectedId(localStorage.getItem('SelectedProdId'))
         getProdById(productId)
@@ -49,6 +85,10 @@ export const ProductDetail = ({ setLoading }) => {
 
     return (
         <div>
+             <NotificationCenter ref={notificationRef} />
+
+
+
             <Header />
 
             <div className="rts-chop-details-area rts-section-gap bg_light-1">
@@ -113,8 +153,8 @@ export const ProductDetail = ({ setLoading }) => {
                                                                 <button className="button plus">+<i className="fal fa-plus plus"></i></button>
                                                             </div>
                                                         </div>
-                                                        <a className="rts-btn btn-primary radious-sm with-icon">
-                                                            <div className="btn-text">
+                                                        <a className="rts-btn btn-primary radious-sm with-icon" onClick={() => addCart(prodDetail)} style={{cursor:'pointer'}}>
+                                                            <div className="btn-text" > 
                                                                 Add To Cart
                                                             </div>
                                                             <div className="arrow-icon">
@@ -476,7 +516,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                                     <span>25% <br /> Off</span>
                                                                     <i className="fa-solid fa-bookmark"></i>
                                                                 </div>
-                                                                <img src={res.productImage} alt={res.productName} />
+                                                                <img src={res.productImage} alt={res.productName}  style={{width: '50%'}}/>
                                                             </a>
                                                             <div className="action-share-option">
                                                                 <div className="single-action openuptip message-show-action" data-flow="up" title="Add To Wishlist">
@@ -512,7 +552,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                                         <button className="button plus">+<i className="fa-regular fa-chevron-up"></i></button>
                                                                     </div>
                                                                 </div>
-                                                                <a className="rts-btn btn-primary radious-sm with-icon">
+                                                                <a className="rts-btn btn-primary radious-sm with-icon"  onClick={() => addCart(res)} style={{cursor:'pointer'}}>
                                                                     <div className="btn-text">
                                                                         Add To Cart
                                                                     </div>

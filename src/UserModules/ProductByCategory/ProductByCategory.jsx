@@ -3,14 +3,52 @@ import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import api from '../../ApiService/apiService';
 import { useLocation } from 'react-router-dom';
+import NotificationCenter from '../../CommonModule/Notification/Notification';
 
 const ProductCategory = ({ setLoading }) => {
     const [ProductCategories, setProductCategory] = useState([]);
     const [Category, setCategory] = useState('');
     const location = useLocation();
+    const [loading, setLoad] = useState(false);
     const searchParams = new URLSearchParams(location.search);
     const productCategory = searchParams.get('category');
     console.log(productCategory);
+
+
+    const notificationRef = useRef();
+    const triggerNotification = (type, title, subtitle, button, path) => {
+        if (notificationRef.current) {
+            notificationRef.current.spawnNotification(type, title, subtitle, button, path);
+        }
+    };
+    const addCart = (data) => {
+        console.log(data);
+        const isLogged = localStorage.getItem('login')
+        if (isLogged == 'success') {
+            console.log('Cart Added');
+
+            let post = {
+                "productId": data._id,
+                "quantity": data.productQuantity,
+                "userId": localStorage.getItem('userId')
+            }
+            api.AddToCart(post)
+                .then(response => {
+                    setLoad(true);
+        setTimeout(() => {
+            setLoad(false);
+        }, 3000);
+                    console.log(response.data);
+                    triggerNotification('success', 'Success', 'Successfully Added in cart', 'x', null)
+                }).catch(error => {
+                    console.log(error.response.data.message);
+                    triggerNotification('error', 'Error', error.response.data.message, 'x', null)
+                })
+        } else {
+            console.log('Kindly Loggin');
+            triggerNotification('warning', 'Warning', 'Login to continue !', null, 'login')
+        }
+    }
 
     useEffect(() => {
         if (productCategory) {
@@ -39,6 +77,10 @@ const ProductCategory = ({ setLoading }) => {
 
     return (
         <div>
+             <NotificationCenter ref={notificationRef} />
+
+
+
             <Header />
 
             <div class="shop-grid-sidebar-area rts-section-gap">
@@ -299,8 +341,8 @@ const ProductCategory = ({ setLoading }) => {
                                                                     <button class="button plus">+<i class="fa-regular fa-chevron-up"></i></button>
                                                                 </div>
                                                             </div>
-                                                            <a href="#" class="rts-btn btn-primary radious-sm with-icon" style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                                                <div class="btn-text">
+                                                            <a  class="rts-btn btn-primary radious-sm with-icon" style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                                <div class="btn-text"  onClick={() => addCart(category)} style={{cursor:'pointer'}}>
                                                                     Add To Cart
                                                                 </div>
                                                                 <div class="arrow-icon">
@@ -322,14 +364,14 @@ const ProductCategory = ({ setLoading }) => {
                                         {ProductCategories.map((category) => (
                                             <div class="col-lg-6">
                                                 <div class="single-shopping-card-one discount-offer">
-                                                    <a href="shop-details.html" class="thumbnail-preview">
+                                                    <a  class="thumbnail-preview" >
                                                         <div class="badge">
                                                             <span>25% <br />
                                                                 Off
                                                             </span>
                                                             <i class="fa-solid fa-bookmark"></i>
                                                         </div>
-                                                        <img src={category.productImage} alt="grocery" style={{ maxWidth: '241px' }} />
+                                                        <img src={category.productImage} alt="grocery" style={{width: '69%',objectFit: 'contain'}} />
                                                     </a>
                                                     <div class="body-content">
                                                         <div class="title-area-left">
@@ -349,8 +391,8 @@ const ProductCategory = ({ setLoading }) => {
                                                                         <button class="button plus">+<i class="fa-regular fa-chevron-up"></i></button>
                                                                     </div>
                                                                 </div>
-                                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                                    <div class="btn-text">
+                                                                <a  class="rts-btn btn-primary radious-sm with-icon"  onClick={() => addCart(category)} style={{cursor:'pointer'}}>
+                                                                    <div class="btn-text" >
                                                                         Add To Cart
                                                                     </div>
                                                                     <div class="arrow-icon">

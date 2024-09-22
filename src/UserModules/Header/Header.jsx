@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import api from '../../ApiService/apiService';
 import NotificationCenter from '../../CommonModule/Notification/Notification';
+import './header.scss';
 
 export const Header = () => {
 
@@ -9,12 +10,32 @@ export const Header = () => {
     const [cartDataLength, setcartlength] = useState(0);
     const [loading, setLoading] = useState(false);
     const [isLogged, setisLogged] = useState('');
+    const [FilterData, setFilterData] = useState([]);
+    
 
     const navigate = useNavigate();
 
     const RouteTo = (data) => {
         navigate('/' + data);
     };
+
+const Filter =()=>{
+api.getAllProducts()
+.then(res=>{
+    console.log(res.data);
+    setFilterData(res.data)
+    
+})
+}
+
+const [openCategories, setOpenCategories] = useState({});
+
+const toggleCategory = (category) => {
+  setOpenCategories((prevState) => ({
+    ...prevState,
+    [category]: !prevState[category], // Toggle the state for the clicked category
+  }));
+};
 
 
     const handleClick = () => {
@@ -33,7 +54,7 @@ export const Header = () => {
             navigate('/checkout');
         }
         else if (data == 'account') {
-            navigate('/MyOrder');
+            navigate('/Dashboard');
         }
     }
 
@@ -69,6 +90,7 @@ export const Header = () => {
     };
 
     useEffect(() => {
+        Filter()
         const loggedStatus = localStorage.getItem('login');
         setisLogged(loggedStatus);
         if (loggedStatus) {
@@ -214,91 +236,56 @@ export const Header = () => {
                                             <img className="parent" src="images/icons/bar-1.svg" alt="icons" />
                                             <span>Categories</span>
                                             <ul className="category-sub-menu" id="category-active-four">
-                                                <li>
+      {FilterData.reduce((acc, curr) => {
+        const categoryExists = acc.find(item => item.productCategory === curr.productCategory);
+
+        if (!categoryExists) {
+          acc.push(curr); // Add unique categories to the accumulator
+        }
+
+        return acc;
+      }, []).map((res, index) => (
+        <li key={index}>
+          <a className="menu-item">
+            <img src="images/icons/01.svg" alt="icons" />
+            <span>{res.productCategory}</span>
+            <i
+              className={`fa-regular fa-${openCategories[res.productCategory] ? 'minus' : 'plus'}`}
+              onClick={() => toggleCategory(res.productCategory)} // Toggle dropdown on click
+              style={{ cursor: 'pointer' }}
+            ></i>
+          </a>
+
+          {/* Show or hide submenu based on the state of the clicked category */}
+          {openCategories[res.productCategory] && (
+            <ul className="submenu mm-collapse">
+              {FilterData.filter(item => item.productCategory === res.productCategory)
+                .map((filteredProduct, i) => (
+                  <li key={i}>
+                    <a className="mobile-menu-link">{filteredProduct.productName}</a>
+                  </li>
+                ))}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
+
+                                            {/* <ul className="category-sub-menu" id="category-active-four">
+                                            {FilterData.map((res, index) => (
+                                                <li key={index}>
                                                     <a href="http://google.com" className="menu-item">
                                                         <img src="images/icons/01.svg" alt="icons" />
-                                                        <span>Breakfast &amp; Dairy</span>
+                                                        <span>{res.productCategory}</span>
                                                         <i className="fa-regular fa-plus"></i>
                                                     </a>
                                                     <ul className="submenu mm-collapse">
-                                                        <li><a className="mobile-menu-link" href="http://google.com">Breakfast</a></li>
-                                                        <li><a className="mobile-menu-link" href="http://google.com">Dinner</a></li>
-                                                        <li><a className="mobile-menu-link" href="http://google.com"> Pumking</a></li>
+                                                        <li><a className="mobile-menu-link" > {res.productName}</a></li>
                                                     </ul>
                                                 </li>
-                                                <li>
-                                                    <a href="http://google.com" className="menu-item">
-                                                        <img src="images/icons/02.svg" alt="icons" />
-                                                        <span>Meats &amp; Seafood</span>
-                                                        <i className="fa-regular fa-plus"></i>
-                                                    </a>
-                                                    <ul className="submenu mm-collapse">
-                                                        <li><a className="mobile-menu-link" href="http://google.com">Breakfast</a></li>
-                                                        <li><a className="mobile-menu-link" href="http://google.com">Dinner</a></li>
-                                                        <li><a className="mobile-menu-link" href="http://google.com"> Pumking</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a href="http://google.com" className="menu-item">
-                                                        <img src="images/icons/03.svg" alt="icons" />
-                                                        <span>Breads &amp; Bakery</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="http://google.com" className="menu-item">
-                                                        <img src="images/icons/04.svg" alt="icons" />
-                                                        <span>Chips &amp; Snacks</span>
-                                                        <i className="fa-regular fa-plus"></i>
-                                                    </a>
-                                                    <ul className="submenu mm-collapse">
-                                                        <li><a className="mobile-menu-link" href="http://google.com">Breakfast</a></li>
-                                                        <li><a className="mobile-menu-link" href="http://google.com">Dinner</a></li>
-                                                        <li><a className="mobile-menu-link" href="http://google.com"> Pumking</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a href="http://google.com" className="menu-item">
-                                                        <img src="images/icons/05.svg" alt="icons" />
-                                                        <span>Medical Healthcare</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="http://google.com" className="menu-item">
-                                                        <img src="images/icons/06.svg" alt="icons" />
-                                                        <span>Breads &amp; Bakery</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="http://google.com" className="menu-item">
-                                                        <img src="images/icons/07.svg" alt="icons" />
-                                                        <span>Biscuits &amp; Snacks</span>
-                                                        <i className="fa-regular fa-plus"></i>
-                                                    </a>
-                                                    <ul className="submenu mm-collapse">
-                                                        <li><a className="mobile-menu-link" href="http://google.com">Breakfast</a></li>
-                                                        <li><a className="mobile-menu-link" href="http://google.com">Dinner</a></li>
-                                                        <li><a className="mobile-menu-link" href="http://google.com"> Pumking</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a href="http://google.com" className="menu-item">
-                                                        <img src="images/icons/08.svg" alt="icons" />
-                                                        <span>Frozen Foods</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="http://google.com" className="menu-item">
-                                                        <img src="images/icons/09.svg" alt="icons" />
-                                                        <span>Grocery &amp; Staples</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="http://google.com" className="menu-item">
-                                                        <img src="images/icons/10.svg" alt="icons" />
-                                                        <span>Other Items</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
+                                                 ))}
+                                            </ul> */}
+    
                                         </div>
                                         <form action="#" className="search-header">
                                             <input type="text" placeholder="Search for products, categories or brands" required />
@@ -334,7 +321,7 @@ export const Header = () => {
                                         </div>
                                     </div>
                                     <div className="accont-wishlist-cart-area-header">
-                                        <a className="btn-border-only account" onClick={() => routeCart('account')}>
+                                        <a className="btn-border-only account" onClick={() => routeCart('account')} style={{cursor:'pointer'}}>
                                             <i className="fa-light fa-user"></i>
                                             <span>Account</span>
                                         </a>
@@ -391,7 +378,6 @@ export const Header = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <a href="cart.html" className="over_link"></a>
                                         </div>
 
                                     </div>
