@@ -258,7 +258,7 @@ const ProductCategory = ({ setLoading }) => {
                                     <div class="row g-4">
                                         {ProductCategories.map((category) => (
                                             <div class="col-lg-20 col-lg-4 col-md-6 col-sm-6 col-12">
-                                                <div class="single-shopping-card-one" style={{ height: '360px' }}>
+                                                <div class="single-shopping-card-one" style={{ height: 'auto' }}>
                                                     <div class="image-and-action-area-wrapper" style={{ minHeight: '140px', maxHeight: '140px' }}>
                                                         <a href="shop-details.html" class="thumbnail-preview">
                                                             <div class="badge">
@@ -267,7 +267,7 @@ const ProductCategory = ({ setLoading }) => {
                                                                 </span>
                                                                 <i class="fa-solid fa-bookmark"></i>
                                                             </div>
-                                                            <img src={category.productImage} alt="grocery" style={{ width: '100%', height: '140px' }} />
+                                                            <img src={category.productImage} alt="grocery" style={{ width: '100%', height: '140px',objectFit: 'contain' }} />
                                                         </a>
                                                         <div class="action-share-option">
                                                             <div class="single-action openuptip message-show-action" data-flow="up" title="Add To Wishlist">
@@ -292,7 +292,7 @@ const ProductCategory = ({ setLoading }) => {
                                                             <div class="previous">₹{category.productOriginalRate}</div>
                                                         </div>
                                                         <div class="cart-counter-action">
-                                                            <div class="quantity-edit" style={{ width: '100%', display: 'flex', alignItems: 'space-around', justifyContent: 'center' }}>
+                                                            <div class="quantity-edit" style={{ display: 'flex', alignItems: 'space-around', justifyContent: 'center' }}>
                                                                 <input type="text" class="input" value={category.productQuantity} />
                                                                 <div class="button-wrapper-action">
                                                                     <button class="button"><i class="fa-regular fa-chevron-down"></i></button>

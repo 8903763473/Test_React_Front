@@ -7,12 +7,41 @@ import NotificationCenter from '../../CommonModule/Notification/Notification';
 import { useNavigate } from 'react-router-dom';
 
 const Checkout = ({ setLoading }) => {
+    const [checkoutId,setcheckoutId]=useState(0)
     const [showPopup, setShowPopup] = useState(false);
 const navigate = useNavigate()
     const [myCart, setMyCart] = useState([]);
     const [Total, setTotal] = useState(0);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [feedback, setFeedback] = useState('');
+    const [rating, setRating] = useState(0); 
 
+    const handleNameChange = (e) => setName(e.target.value);
+    const handleEmailChange = (e) => setEmail(e.target.value);
+    const handleFeedbackChange = (e) => setFeedback(e.target.value);
+  
+    const handleRatingClick = (value) => setRating(value);
+  
+    const handleSubmit = (e) => {
+      e.preventDefault(); 
+      console.log('User Input:', { name, email, feedback, rating });
+      let post={
+        "customerName": name,
+        "email": email,
+        "feedbackText": feedback,
+        "rating": rating
+    }
+api.Feedback(post)
+.then(res=>{
+    console.log(res);
+    console.log(checkoutId);
+    
+    navigate('/invoice?orderId=' + checkoutId);
+    
+})
 
+    };
 
     const [formData, setFormData] = useState({
         firstName: '',
@@ -158,7 +187,7 @@ const navigate = useNavigate()
             setShowPopup(!showPopup);
             triggerNotification('success', 'Success', 'Thanks for you order', 'x', null);
             setLoading(false)
-            navigate('/invoice?orderId=' + response.data.checkout._id);
+            setcheckoutId(response.data.checkout._id)
         } catch (error) {
             console.error('Error while checkout:', error);
             setLoading(false)
@@ -354,28 +383,40 @@ const navigate = useNavigate()
 <div className="feedbackpopup">
     <div className="fullpage">
    
-        <div className="content">
-        <div class='rating'>
-      <i class='fa fa-star'></i>
-      <i class='fa fa-star'></i>
-      <i class='fa fa-star'></i>
-      <i class='fa fa-star'></i>
-      <i class='fa fa-star'></i>
-    </div>
-            <div className="fields">
-            <label>Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label><input type='text'/>
-            </div>
-            <div className="fields">
-            <label>Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :</label><input type='text'/>
-            </div>
-            <div className="fields">
-            <label>feedback &nbsp;:</label><textarea type='text'></textarea>
-            </div>
+    <div className="content">
+      <h1 className='text'>Feedback</h1>
+      
+      <form onSubmit={handleSubmit}>
+        <div className="fields">
+          <label>Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
+          <input type="text" value={name} onChange={handleNameChange} />
+        </div>
+        
+        <div className="fields">
+          <label>Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
+          <input type="email" value={email} onChange={handleEmailChange} />
+        </div>
+        
+        <div className="fields">
+          <label>Feedback&nbsp;&nbsp;:</label>
+          <textarea value={feedback} onChange={handleFeedbackChange}></textarea>
+        </div>
 
-            <div className="btn">
-            <button>Submit</button>
+        <div className="rating">
+          {Array.from({ length: 5 }, (_, index) => (
+            <i
+              key={index}
+              className={`fa fa-star ${index < rating ? 'selected' : ''}`}
+              onClick={() => handleRatingClick(index + 1)} // Set rating on click
+            ></i>
+          ))}
         </div>
+
+        <div className="btn">
+          <button type="submit">Submit</button>
         </div>
+      </form>
+    </div>
 
        
     </div>

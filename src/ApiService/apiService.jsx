@@ -73,8 +73,13 @@ const api = {
 
     trackOrder: (data) => {
         return apiInstance.post("/checkout/trackOrder", data);
-    }
+    },
 
+    Feedback:(data)=>{
+        return apiInstance.post("/feedback/send", data);
+
+     
+    }
 
 }
 
