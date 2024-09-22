@@ -2,12 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import api from '../../ApiService/apiService';
 
-
-
 export const Header = () => {
 
     const [cartData, setmyCart] = useState([]);
-    const [cartDataLength, cartlength] = useState([]);
+    const [cartDataLength, setcartlength] = useState(0);
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
@@ -61,7 +59,7 @@ export const Header = () => {
             .then(response => {
                 console.log("Categories:", response.data);
                 setmyCart(response.data.items)
-                cartlength(response.data.items.length)
+                setcartlength(response.data.items.length)
             })
             .catch(error => {
                 console.error("Error fetching categories:", error);
@@ -73,14 +71,16 @@ export const Header = () => {
         handleClick()
     }, []);
 
+
+
     return (
         <div>
             {loading && (
                 <div className='LoaderView' style={{ position: 'fixed', width: '100%', height: '100%', background: 'white', zIndex: '111' }}>
-                    <div class="container">
+                    <div className="container">
                         <section>
-                            <div class="loader loader-20" style={{ fontsize: '40px' }}>
-                                {/* <div class="css-diamond"></div> */}
+                            <div className="loader loader-20" style={{ fontsize: '40px' }}>
+                                {/* <div className="css-diamond"></div> */}
                             </div>
                         </section>
 

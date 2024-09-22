@@ -22,12 +22,12 @@ const HomePage = ({ setLoading }) => {
 
     const ProductId = (data) => {
         sessionStorage.setItem('SelectedProdId', data)
-        navigate('/productDetail?productId='+data);
+        navigate('/productDetail?productId=' + data);
     };
     const ProductCategory = (category) => {
         console.log('Selected Category:', category);
         sessionStorage.setItem('ProductByCategory', category)
-        navigate('/ProductCategory?category=' +category);
+        navigate('/ProductCategory?category=' + category);
     };
 
     const getAllCategories = () => {
@@ -42,12 +42,12 @@ const HomePage = ({ setLoading }) => {
             });
     }
 
-  
+
 
     useEffect(() => {
         getAllCategories();
-       
-        
+
+
     }, []);
 
     const notificationRef = useRef();
@@ -385,7 +385,7 @@ const HomePage = ({ setLoading }) => {
                                                             Do not miss our amazing   <br />
                                                             grocery deals
                                                         </h1>
-                                                        <a  className="rts-btn btn-primary radious-sm with-icon">
+                                                        <a className="rts-btn btn-primary radious-sm with-icon">
                                                             <div className="btn-text">
                                                                 Shop Now
                                                             </div>
@@ -407,7 +407,7 @@ const HomePage = ({ setLoading }) => {
                                                             Do not miss our amazing   <br />
                                                             grocery deals
                                                         </h1>
-                                                        <a  className="rts-btn btn-primary radious-sm with-icon">
+                                                        <a className="rts-btn btn-primary radious-sm with-icon">
                                                             <div className="btn-text">
                                                                 Shop Now
                                                             </div>
@@ -440,7 +440,7 @@ const HomePage = ({ setLoading }) => {
                                 <div className="category-area-main-wrapper-one" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '20px' }}>
 
                                     {allCategories.map((cart) => (
-                                        <div className="swiper mySwiper-category-1 swiper-data" data-swiper='{
+                                        <div className="swiper mySwiper-category-1 swiper-data" key={cart._id} data-swiper='{
                             "spaceBetween":12,
                             "slidesPerView":10,
                             "loop": true,
@@ -467,7 +467,7 @@ const HomePage = ({ setLoading }) => {
                             }
                         }' style={{ width: '20%' }}>
                                             <div className="swiper-wrapper"  >
-                                                <div className="swiper-slide"  onClick={() => ProductCategory(cart.name)}>
+                                                <div className="swiper-slide" onClick={() => ProductCategory(cart.name)}>
                                                     <a className="single-category-one">
                                                         <img src={cart.image} alt="category" />
                                                         <p>{cart.name}</p>
@@ -4069,7 +4069,7 @@ const HomePage = ({ setLoading }) => {
                                         Drink Fresh Corn Juice   <br />
                                         <span>Good Taste</span>
                                     </h3>
-                                    <a  className="shop-now-goshop-btn">
+                                    <a className="shop-now-goshop-btn">
                                         <span className="text">Shop Now</span>
                                         <div className="plus-icon">
                                             <i className="fa-sharp fa-regular fa-plus"></i>
@@ -4084,12 +4084,12 @@ const HomePage = ({ setLoading }) => {
                         <div className="col-lg-3 col-md-6 col-sm-12 col-12">
                             <div className="single-feature-card bg_image two">
                                 <div className="content-area">
-                                    <a  className="rts-btn btn-primary">Weekend Discount</a>
+                                    <a className="rts-btn btn-primary">Weekend Discount</a>
                                     <h3 className="title">
                                         Organic Lemon Flavored
                                         <span>Banana Chips</span>
                                     </h3>
-                                    <a  className="shop-now-goshop-btn">
+                                    <a className="shop-now-goshop-btn">
                                         <span className="text">Shop Now</span>
                                         <div className="plus-icon">
                                             <i className="fa-sharp fa-regular fa-plus"></i>
@@ -4104,12 +4104,12 @@ const HomePage = ({ setLoading }) => {
                         <div className="col-lg-3 col-md-6 col-sm-12 col-12">
                             <div className="single-feature-card bg_image three">
                                 <div className="content-area">
-                                    <a  className="rts-btn btn-primary">Weekend Discount</a>
+                                    <a className="rts-btn btn-primary">Weekend Discount</a>
                                     <h3 className="title">
                                         Nozes Pecanera Brasil
                                         <span>Chocolate Snacks</span>
                                     </h3>
-                                    <a  className="shop-now-goshop-btn">
+                                    <a className="shop-now-goshop-btn">
                                         <span className="text">Shop Now</span>
                                         <div className="plus-icon">
                                             <i className="fa-sharp fa-regular fa-plus"></i>
@@ -4124,12 +4124,12 @@ const HomePage = ({ setLoading }) => {
                         <div className="col-lg-3 col-md-6 col-sm-12 col-12">
                             <div className="single-feature-card bg_image four">
                                 <div className="content-area">
-                                    <a  className="rts-btn btn-primary">Weekend Discount</a>
+                                    <a className="rts-btn btn-primary">Weekend Discount</a>
                                     <h3 className="title">
                                         Strawberry Water Drinks
                                         <span>Flavors Awesome</span>
                                     </h3>
-                                    <a  className="shop-now-goshop-btn">
+                                    <a className="shop-now-goshop-btn">
                                         <span className="text">Shop Now</span>
                                         <div className="plus-icon">
                                             <i className="fa-sharp fa-regular fa-plus"></i>
