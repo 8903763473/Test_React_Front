@@ -68,17 +68,15 @@ const api = {
         return apiInstance.put("/cart/updateMyCart", data);
     },
     getOrdersById: (id) => {
-        return apiInstance.get("/checkout/getMyOrdersById/" + id);
+        return apiInstance.get("/checkout/getCheckoutById/" + id);
     },
 
     trackOrder: (data) => {
         return apiInstance.post("/checkout/trackOrder", data);
     },
 
-    Feedback:(data)=>{
+    Feedback: (data) => {
         return apiInstance.post("/feedback/send", data);
-
-     
     }
 
 }

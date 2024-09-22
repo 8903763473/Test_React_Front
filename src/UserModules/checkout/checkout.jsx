@@ -7,39 +7,39 @@ import NotificationCenter from '../../CommonModule/Notification/Notification';
 import { useNavigate } from 'react-router-dom';
 
 const Checkout = ({ setLoading }) => {
-    const [checkoutId,setcheckoutId]=useState(0)
+    const [checkoutId, setcheckoutId] = useState(0)
     const [showPopup, setShowPopup] = useState(false);
-const navigate = useNavigate()
+    const navigate = useNavigate()
     const [myCart, setMyCart] = useState([]);
     const [Total, setTotal] = useState(0);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [feedback, setFeedback] = useState('');
-    const [rating, setRating] = useState(0); 
+    const [rating, setRating] = useState(0);
 
     const handleNameChange = (e) => setName(e.target.value);
     const handleEmailChange = (e) => setEmail(e.target.value);
     const handleFeedbackChange = (e) => setFeedback(e.target.value);
-  
+
     const handleRatingClick = (value) => setRating(value);
-  
+
     const handleSubmit = (e) => {
-      e.preventDefault(); 
-      console.log('User Input:', { name, email, feedback, rating });
-      let post={
-        "customerName": name,
-        "email": email,
-        "feedbackText": feedback,
-        "rating": rating
-    }
-api.Feedback(post)
-.then(res=>{
-    console.log(res);
-    console.log(checkoutId);
-    
-    navigate('/invoice?orderId=' + checkoutId);
-    
-})
+        e.preventDefault();
+        console.log('User Input:', { name, email, feedback, rating });
+        let post = {
+            "customerName": name,
+            "email": email,
+            "feedbackText": feedback,
+            "rating": rating
+        }
+        api.Feedback(post)
+            .then(res => {
+                console.log(res);
+                console.log(checkoutId);
+
+                navigate('/invoice?orderId=' + checkoutId);
+
+            })
 
     };
 
@@ -85,7 +85,7 @@ api.Feedback(post)
     const triggerNotification = (type, title, subtitle, button, path) => {
         if (notificationRef.current) {
             notificationRef.current.spawnNotification(type, title, subtitle, button, path);
-            
+
         }
     };
 
@@ -184,10 +184,11 @@ api.Feedback(post)
         try {
             const response = await api.checkoutProducts(post);
             console.log('Payment verification successful', response.data);
-            setShowPopup(!showPopup);
+            // setShowPopup(!showPopup);
             triggerNotification('success', 'Success', 'Thanks for you order', 'x', null);
             setLoading(false)
-            setcheckoutId(response.data.checkout._id)
+            // setcheckoutId(response.data.checkout._id)
+            navigate('/invoice?orderId=' + response.data.checkout._id);
         } catch (error) {
             console.error('Error while checkout:', error);
             setLoading(false)
@@ -209,14 +210,14 @@ api.Feedback(post)
 
             <NotificationCenter ref={notificationRef} />
             <Header />
-<div className="container">
+            <div className="container">
 
 
-            <div className="checkout-area rts-section-gap">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-8 pr--40 pr_md--5 pr_sm--5 order-2 order-xl-1 order-lg-2 order-md-2 order-sm-2 mt_md--30 mt_sm--30">
-                            {/* <div className="coupon-input-area-1 login-form">
+                <div className="checkout-area rts-section-gap">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-8 pr--40 pr_md--5 pr_sm--5 order-2 order-xl-1 order-lg-2 order-md-2 order-sm-2 mt_md--30 mt_sm--30">
+                                {/* <div className="coupon-input-area-1 login-form">
                         <div className="coupon-area">
                             <div className="coupon-ask">
                                 <span>Returning customers?</span>
@@ -252,176 +253,176 @@ api.Feedback(post)
                         </div>
                     </div> */}
 
-                            <div className="rts-billing-details-area">
-                                <h3 className="title">Billing Details</h3>
-                                <form onSubmit={openGateway}>
-                                    <div className="half-input-wrapper">
-                                        <div className="single-input">
-                                            <label htmlFor="firstName">First Name*</label>
-                                            <input id="firstName" type="text" value={formData.firstName} onChange={handleInputChange} required />
-                                        </div>
-                                        <div className="single-input">
-                                            <label htmlFor="email">Email Address*</label>
-                                            <input id="email" type="text" value={formData.email} onChange={handleInputChange} required />
-                                        </div>
-                                    </div>
-                                    <div className="half-input-wrapper">
-                                        <div className="single-input">
-                                            <label htmlFor="phone">Phone*</label>
-                                            <input id="phone" type="text" value={formData.phone} onChange={handleInputChange} required />
-                                        </div>
-                                        <div className="single-input">
-                                            <label htmlFor="street">Street Address*</label>
-                                            <input id="street" type="text" value={formData.street} onChange={handleInputChange} required />
-                                        </div>
-                                    </div>
-                                    <div className="half-input-wrapper">
-                                        <div className="single-input">
-                                            <label htmlFor="city">Town / City*</label>
-                                            <input id="city" type="text" value={formData.city} onChange={handleInputChange} required />
-                                        </div>
-                                        <div className="single-input">
-                                            <label htmlFor="state">State*</label>
-                                            <input id="state" type="text" value={formData.state} onChange={handleInputChange} required />
-                                        </div>
-                                    </div>
-                                    <div className="half-input-wrapper">
-                                        <div className="single-input">
-                                            <label htmlFor="country">Country / Region*</label>
-                                            <input id="country" type="text" value={formData.country} onChange={handleInputChange} required />
-                                        </div>
-                                        <div className="single-input">
-                                            <label htmlFor="zipCode">Zip Code*</label>
-                                            <input id="zipCode" type="text" value={formData.zipCode} onChange={handleInputChange} required />
-                                        </div>
-                                    </div>
-
-                                    <div className="single-input">
-                                        <label htmlFor="orderNotes">Order Notes</label>
-                                        <textarea id="orderNotes" value={formData.orderNotes} onChange={handleInputChange}></textarea>
-                                    </div>
-                                    {/* <button className="rts-btn btn-primary" type="submit">Update Cart</button> */}
-                                </form>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-4 order-1 order-xl-2 order-lg-1 order-md-1 order-sm-1">
-                            <h3 className="title-checkout">Your Order</h3>
-                            <div className="right-card-sidebar-checkout">
-                                <div className="top-wrapper">
-                                    <div className="product">Products</div>
-                                    <div className="price">Price</div>
-                                </div>
-                                {myCart.length > 0 ? (
-                                    myCart.map(res => (
-                                        <div className="single-shop-list" key={res._id}> {/* Ensure unique key for each item */}
-                                            <div className="left-area">
-                                                <a className="thumbnail">
-                                                    <img src={res.productImage} alt={res.productImage} />
-                                                </a>
-                                                <a className="title">{res.productName}</a>
+                                <div className="rts-billing-details-area">
+                                    <h3 className="title">Billing Details</h3>
+                                    <form onSubmit={openGateway}>
+                                        <div className="half-input-wrapper">
+                                            <div className="single-input">
+                                                <label htmlFor="firstName">First Name*</label>
+                                                <input id="firstName" type="text" value={formData.firstName} onChange={handleInputChange} required />
                                             </div>
-                                            <span className="price">₹ {res.productCurrentRate * res.quantity}.00</span>
+                                            <div className="single-input">
+                                                <label htmlFor="email">Email Address*</label>
+                                                <input id="email" type="text" value={formData.email} onChange={handleInputChange} required />
+                                            </div>
                                         </div>
-                                    ))
-                                ) : (
-                                    <p>No items in the cart</p>
-                                )}
-                                {/* Add more products as needed */}
-                                <div className="single-shop-list">
-                                    <div className="left-area">
-                                        <span>Subtotal</span>
-                                    </div>
-                                    <span className="price">₹ {Total}.00</span>
+                                        <div className="half-input-wrapper">
+                                            <div className="single-input">
+                                                <label htmlFor="phone">Phone*</label>
+                                                <input id="phone" type="text" value={formData.phone} onChange={handleInputChange} required />
+                                            </div>
+                                            <div className="single-input">
+                                                <label htmlFor="street">Street Address*</label>
+                                                <input id="street" type="text" value={formData.street} onChange={handleInputChange} required />
+                                            </div>
+                                        </div>
+                                        <div className="half-input-wrapper">
+                                            <div className="single-input">
+                                                <label htmlFor="city">Town / City*</label>
+                                                <input id="city" type="text" value={formData.city} onChange={handleInputChange} required />
+                                            </div>
+                                            <div className="single-input">
+                                                <label htmlFor="state">State*</label>
+                                                <input id="state" type="text" value={formData.state} onChange={handleInputChange} required />
+                                            </div>
+                                        </div>
+                                        <div className="half-input-wrapper">
+                                            <div className="single-input">
+                                                <label htmlFor="country">Country / Region*</label>
+                                                <input id="country" type="text" value={formData.country} onChange={handleInputChange} required />
+                                            </div>
+                                            <div className="single-input">
+                                                <label htmlFor="zipCode">Zip Code*</label>
+                                                <input id="zipCode" type="text" value={formData.zipCode} onChange={handleInputChange} required />
+                                            </div>
+                                        </div>
+
+                                        <div className="single-input">
+                                            <label htmlFor="orderNotes">Order Notes</label>
+                                            <textarea id="orderNotes" value={formData.orderNotes} onChange={handleInputChange}></textarea>
+                                        </div>
+                                        {/* <button className="rts-btn btn-primary" type="submit">Update Cart</button> */}
+                                    </form>
                                 </div>
-                                <div className="single-shop-list">
-                                    <div className="left-area">
-                                        <span>Shipping</span>
+                            </div>
+
+                            <div className="col-lg-4 order-1 order-xl-2 order-lg-1 order-md-1 order-sm-1">
+                                <h3 className="title-checkout">Your Order</h3>
+                                <div className="right-card-sidebar-checkout">
+                                    <div className="top-wrapper">
+                                        <div className="product">Products</div>
+                                        <div className="price">Price</div>
                                     </div>
-                                    <span className="price">Flat rate: ₹ 50.00</span>
-                                </div>
-                                <div className="single-shop-list">
-                                    <div className="left-area">
-                                        <span style={{ fontWeight: 600, color: '#2C3C28' }}>Total Price:</span>
+                                    {myCart.length > 0 ? (
+                                        myCart.map(res => (
+                                            <div className="single-shop-list" key={res._id}> {/* Ensure unique key for each item */}
+                                                <div className="left-area">
+                                                    <a className="thumbnail">
+                                                        <img src={res.productImage} alt={res.productImage} />
+                                                    </a>
+                                                    <a className="title">{res.productName}</a>
+                                                </div>
+                                                <span className="price">₹ {res.productCurrentRate * res.quantity}.00</span>
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <p>No items in the cart</p>
+                                    )}
+                                    {/* Add more products as needed */}
+                                    <div className="single-shop-list">
+                                        <div className="left-area">
+                                            <span>Subtotal</span>
+                                        </div>
+                                        <span className="price">₹ {Total}.00</span>
                                     </div>
-                                    <span className="price" style={{ color: '#629D23' }}>₹ {Total + 50}.00</span>
-                                </div>
-                                <div className="cottom-cart-right-area">
-                                    <ul>
-                                        <li>
-                                            <input type="radio" id="f-options" name="selector" />
-                                            <label htmlFor="f-options">Direct Bank Transfer</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" id="s-options" name="selector" />
-                                            <label htmlFor="s-options">Cash On Delivery</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" id="t-options" name="selector" />
-                                            <label htmlFor="t-options">Paypal</label>
-                                        </li>
-                                    </ul>
-                                    <p className="mb--20">
-                                        Your personal data will be used to process your order, support your experience, and for other purposes described in our privacy policy.
-                                    </p>
-                                    <div className="single-category mb--30">
-                                        <input id="cat14" type="checkbox" />
-                                        <label htmlFor="cat14">I have read and agree to the terms and conditions *</label>
+                                    <div className="single-shop-list">
+                                        <div className="left-area">
+                                            <span>Shipping</span>
+                                        </div>
+                                        <span className="price">Flat rate: ₹ 50.00</span>
                                     </div>
-                                    <a className="rts-btn btn-primary pointer" onClick={openGateway}>Place Order</a>
+                                    <div className="single-shop-list">
+                                        <div className="left-area">
+                                            <span style={{ fontWeight: 600, color: '#2C3C28' }}>Total Price:</span>
+                                        </div>
+                                        <span className="price" style={{ color: '#629D23' }}>₹ {Total + 50}.00</span>
+                                    </div>
+                                    <div className="cottom-cart-right-area">
+                                        <ul>
+                                            <li>
+                                                <input type="radio" id="f-options" name="selector" />
+                                                <label htmlFor="f-options">Direct Bank Transfer</label>
+                                            </li>
+                                            <li>
+                                                <input type="radio" id="s-options" name="selector" />
+                                                <label htmlFor="s-options">Cash On Delivery</label>
+                                            </li>
+                                            <li>
+                                                <input type="radio" id="t-options" name="selector" />
+                                                <label htmlFor="t-options">Paypal</label>
+                                            </li>
+                                        </ul>
+                                        <p className="mb--20">
+                                            Your personal data will be used to process your order, support your experience, and for other purposes described in our privacy policy.
+                                        </p>
+                                        <div className="single-category mb--30">
+                                            <input id="cat14" type="checkbox" />
+                                            <label htmlFor="cat14">I have read and agree to the terms and conditions *</label>
+                                        </div>
+                                        <a className="rts-btn btn-primary pointer" onClick={openGateway}>Place Order</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
 
 
-{/* popup */}
-  {showPopup && (
-<div className="feedbackpopup">
-    <div className="fullpage">
-   
-    <div className="content">
-      <h1 className='text'>Feedback</h1>
-      
-      <form onSubmit={handleSubmit}>
-        <div className="fields">
-          <label>Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
-          <input type="text" value={name} onChange={handleNameChange} />
-        </div>
-        
-        <div className="fields">
-          <label>Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
-          <input type="email" value={email} onChange={handleEmailChange} />
-        </div>
-        
-        <div className="fields">
-          <label>Feedback&nbsp;&nbsp;:</label>
-          <textarea value={feedback} onChange={handleFeedbackChange}></textarea>
-        </div>
+            {/* popup */}
+            {showPopup && (
+                <div className="feedbackpopup">
+                    <div className="fullpage">
 
-        <div className="rating">
-          {Array.from({ length: 5 }, (_, index) => (
-            <i
-              key={index}
-              className={`fa fa-star ${index < rating ? 'selected' : ''}`}
-              onClick={() => handleRatingClick(index + 1)} // Set rating on click
-            ></i>
-          ))}
-        </div>
+                        <div className="content">
+                            <h1 className='text'>Feedback</h1>
 
-        <div className="btn">
-          <button type="submit">Submit</button>
-        </div>
-      </form>
-    </div>
+                            <form onSubmit={handleSubmit}>
+                                <div className="fields">
+                                    <label>Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
+                                    <input type="text" value={name} onChange={handleNameChange} />
+                                </div>
 
-       
-    </div>
-</div>
-  )};
+                                <div className="fields">
+                                    <label>Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
+                                    <input type="email" value={email} onChange={handleEmailChange} />
+                                </div>
+
+                                <div className="fields">
+                                    <label>Feedback&nbsp;&nbsp;:</label>
+                                    <textarea value={feedback} onChange={handleFeedbackChange}></textarea>
+                                </div>
+
+                                <div className="rating">
+                                    {Array.from({ length: 5 }, (_, index) => (
+                                        <i
+                                            key={index}
+                                            className={`fa fa-star ${index < rating ? 'selected' : ''}`}
+                                            onClick={() => handleRatingClick(index + 1)} // Set rating on click
+                                        ></i>
+                                    ))}
+                                </div>
+
+                                <div className="btn">
+                                    <button type="submit">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+
+
+                    </div>
+                </div>
+            )};
             <Footer />
         </div>
     );
