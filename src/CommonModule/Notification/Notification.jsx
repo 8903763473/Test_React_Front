@@ -36,7 +36,13 @@ const Notification = ({ id, type, title, subtitle, timeout, onClose, button, pat
     };
 
     const navigateTo = (data) => {
-        navigate('/' + data)
+        handleDismiss();
+        if (path == 'logout') {
+            localStorage.clear()
+            window.location.reload();
+        } else {
+            navigate('/' + data)
+        }
     }
 
     return (

@@ -25,9 +25,8 @@ const HomePage = ({ setLoading }) => {
         navigate('/productDetail?productId=' + data);
     };
     const ProductCategory = (category) => {
-        console.log('Selected Category:', category);
-        sessionStorage.setItem('ProductByCategory', category)
-        navigate('/ProductCategory?category=' + category);
+        const formattedCategory = encodeURIComponent(category.trim())
+        navigate('/ProductCategory?category=' + formattedCategory);
     };
 
     const getAllCategories = () => {

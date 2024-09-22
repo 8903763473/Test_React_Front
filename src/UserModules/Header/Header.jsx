@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import api from '../../ApiService/apiService';
+import NotificationCenter from '../../CommonModule/Notification/Notification';
 
 export const Header = () => {
 
     const [cartData, setmyCart] = useState([]);
     const [cartDataLength, setcartlength] = useState(0);
     const [loading, setLoading] = useState(false);
+    const [isLogged, setisLogged] = useState('');
 
     const navigate = useNavigate();
 
@@ -67,14 +69,37 @@ export const Header = () => {
     };
 
     useEffect(() => {
-        getcartdata();
-        handleClick()
+        const loggedStatus = localStorage.getItem('login');
+        setisLogged(loggedStatus);
+        if (loggedStatus) {
+            getcartdata();
+            handleClick();
+        }
     }, []);
 
+    useEffect(() => {
+        if (isLogged) {
+            getcartdata();
+            handleClick();
+        }
+    }, [isLogged]);
 
+
+    const notificationRef = useRef();
+
+    const triggerNotification = (type, title, subtitle, button, path) => {
+        if (notificationRef.current && isLogged == 'success') {
+            notificationRef.current.spawnNotification(type, title, subtitle, button, path);
+        } else {
+            navigate('/login')
+        }
+    };
 
     return (
         <div>
+
+            <NotificationCenter ref={notificationRef} />
+
             {loading && (
                 <div className='LoaderView' style={{ position: 'fixed', width: '100%', height: '100%', background: 'white', zIndex: '111' }}>
                     <div className="container">
@@ -489,6 +514,7 @@ export const Header = () => {
                                                     </ul>
                                                 </li>
                                                 <li className="parent" onClick={() => RouteTo('contact')}><a className='pointer'>Contact</a></li>
+                                                <li className="parent" onClick={() => triggerNotification('warning', 'Warning', 'Sure to Logout', 'Sure', 'logout')}><a className='pointer'>{isLogged == 'success' ? 'Logout' : 'Login'}</a></li>
                                             </ul>
                                         </nav>
                                     </div>
