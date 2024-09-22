@@ -40,12 +40,12 @@ function App() {
           <Route path="/checkout" element={<Checkout setLoading={setLoading} />} />
           <Route path="/contact" element={<Contact setLoading={setLoading} />} />
           <Route path="/productDetail" element={<ProductDetail setLoading={setLoading} />} />
-          <Route path="/MyOrder" element={<UserDashboard setLoading={setLoading} />} />
+          <Route path="/Dashboard" element={<UserDashboard setLoading={setLoading} />} />
           <Route path="/ProductCategory" element={<ProductCategory setLoading={setLoading} />} />
 
-          <Route path="/dashboard" element={<Dashboard setLoading={setLoading} />} />
+          {/* <Route path="/dashboard" element={<Dashboard setLoading={setLoading} />} /> */}
           <Route path="/invoice" element={<InVoice setLoading={setLoading} />} />
-          <Route path="/TrackMyOrder/:id" element={<TrackMyOrder setLoading={setLoading} />} />
+          <Route path="/TrackMyOrder" element={<TrackMyOrder setLoading={setLoading} />} />
 
 
         </Routes>

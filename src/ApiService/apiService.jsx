@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:8000/api/grocery";
+const API_BASE_URL = "http://localhost:8001/api/grocery";
 
 const apiInstance = axios.create({
     baseURL: API_BASE_URL,
@@ -64,12 +64,17 @@ const api = {
     getProductsById: (productId) => {
         return apiInstance.get("/product/getProductsById/" + productId);
     },
- // In your ApiService (apiService.js or similar)
-UpdateCart: (data) => {
-    return apiInstance.put("/cart/updateMyCart", data); // Ensure data is sent as body
-}
+    UpdateCart: (data) => {
+        return apiInstance.put("/cart/updateMyCart", data);
+    },
+    getOrdersById: (id) => {
+        return apiInstance.get("/checkout/getMyOrdersById/" + id);
+    },
 
-    
+    trackOrder: (data) => {
+        return apiInstance.post("/checkout/trackOrder", data);
+    }
+
 
 }
 

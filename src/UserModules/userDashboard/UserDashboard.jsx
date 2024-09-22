@@ -2,15 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import api from '../../ApiService/apiService'
+import { useNavigate } from 'react-router-dom';
 
 const UserDashboard = ({ setLoading }) => {
     const [myOrdersList, setmyOrdersList] = useState([])
     const [copiedOrderId, setcopiedOrderId] = useState(0);
+    const [isCopied, setisCopied] = useState(false);
+    const navigate = useNavigate();
 
     const copyOrderId = (orderId) => {
         navigator.clipboard.writeText(orderId)
             .then(() => {
                 setcopiedOrderId(orderId);
+                setisCopied(true)
             })
             .catch(err => {
                 console.error('Error copying text: ', err);
@@ -20,7 +24,8 @@ const UserDashboard = ({ setLoading }) => {
     useEffect(() => {
         if (copiedOrderId) {
             const timer = setTimeout(() => {
-                setcopiedOrderId(0);
+                // setcopiedOrderId(0);
+                setisCopied(false)
             }, 3000);
             return () => clearTimeout(timer);
         }
@@ -39,6 +44,12 @@ const UserDashboard = ({ setLoading }) => {
             .catch(err => {
                 console.log(err);
             })
+    }
+
+    const trackOrder = (e) => {
+        e.preventDefault()
+        console.log(copiedOrderId);
+        navigate('/TrackMyOrder?orderId=' + copiedOrderId)
     }
 
 
@@ -110,7 +121,7 @@ const UserDashboard = ({ setLoading }) => {
                                                                 <td>
                                                                     {data._id.slice(0, 10)}
                                                                     <i
-                                                                        className={copiedOrderId === data._id ? "bi bi-clipboard-check-fill copyIcon pointer" : "bi bi-clipboard copyIcon pointer"}
+                                                                        className={copiedOrderId === data._id && isCopied === true ? "bi bi-clipboard-check-fill copyIcon pointer" : "bi bi-clipboard copyIcon pointer"}
                                                                         onClick={() => copyOrderId(data._id)}
                                                                     ></i>
                                                                 </td>
@@ -145,7 +156,7 @@ const UserDashboard = ({ setLoading }) => {
                                                 <label htmlFor="billing-email">Billing email</label>
                                                 <input type="text" placeholder="Email you used during checkout" />
                                             </div>
-                                            <button className="rts-btn btn-primary">Track</button>
+                                            <button className="rts-btn btn-primary" onClick={trackOrder}>Track</button>
                                         </form>
                                     </div>
                                 </div>
