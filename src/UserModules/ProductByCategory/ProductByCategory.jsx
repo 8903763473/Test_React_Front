@@ -4,7 +4,6 @@ import { Footer } from '../Footer/Footer';
 import api from '../../ApiService/apiService';
 import { useLocation } from 'react-router-dom';
 
-
 const ProductCategory = ({ setLoading }) => {
     const [ProductCategories, setProductCategory] = useState([]);
     const [Category, setCategory] = useState('');

@@ -7,9 +7,12 @@ import NotificationCenter from '../../CommonModule/Notification/Notification';
 import { useNavigate } from 'react-router-dom';
 
 const Checkout = ({ setLoading }) => {
-    const navigate = useNavigate()
+    const [showPopup, setShowPopup] = useState(false);
+const navigate = useNavigate()
     const [myCart, setMyCart] = useState([]);
     const [Total, setTotal] = useState(0);
+
+
 
     const [formData, setFormData] = useState({
         firstName: '',
@@ -53,6 +56,7 @@ const Checkout = ({ setLoading }) => {
     const triggerNotification = (type, title, subtitle, button, path) => {
         if (notificationRef.current) {
             notificationRef.current.spawnNotification(type, title, subtitle, button, path);
+            
         }
     };
 
@@ -151,6 +155,7 @@ const Checkout = ({ setLoading }) => {
         try {
             const response = await api.checkoutProducts(post);
             console.log('Payment verification successful', response.data);
+            setShowPopup(!showPopup);
             triggerNotification('success', 'Success', 'Thanks for you order', 'x', null);
             setLoading(false)
             navigate('/invoice?orderId=' + response.data.checkout._id);
@@ -175,6 +180,8 @@ const Checkout = ({ setLoading }) => {
 
             <NotificationCenter ref={notificationRef} />
             <Header />
+<div className="container">
+
 
             <div className="checkout-area rts-section-gap">
                 <div className="container">
@@ -339,8 +346,41 @@ const Checkout = ({ setLoading }) => {
                     </div>
                 </div>
             </div>
+            </div>
 
 
+{/* popup */}
+  {showPopup && (
+<div className="feedbackpopup">
+    <div className="fullpage">
+   
+        <div className="content">
+        <div class='rating'>
+      <i class='fa fa-star'></i>
+      <i class='fa fa-star'></i>
+      <i class='fa fa-star'></i>
+      <i class='fa fa-star'></i>
+      <i class='fa fa-star'></i>
+    </div>
+            <div className="fields">
+            <label>Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label><input type='text'/>
+            </div>
+            <div className="fields">
+            <label>Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :</label><input type='text'/>
+            </div>
+            <div className="fields">
+            <label>feedback &nbsp;:</label><textarea type='text'></textarea>
+            </div>
+
+            <div className="btn">
+            <button>Submit</button>
+        </div>
+        </div>
+
+       
+    </div>
+</div>
+  )};
             <Footer />
         </div>
     );

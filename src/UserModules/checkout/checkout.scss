@@ -14,3 +14,97 @@
         display: flex !important;
     }
 }
+
+
+.fullpage{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: #00000091;
+    top: 0;
+    z-index: 11111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .content{
+        width: 50%;
+        padding: 10px;
+        background: white;
+        border-radius: 9px;
+        /* border: 3px solid green; */
+        box-shadow: -5px 1px 10px 10px;
+    .fields{
+        display: flex;
+        align-items: baseline;
+        justify-content: space-evenly;
+        label{
+            font-size: 24px;
+        }
+        input{
+            border: 1px solid #00000059;
+            padding: 10px;
+            width: 53%;
+            border-radius: 10px;
+            margin: 15px;
+            height: 42px;
+        
+    }
+
+    textarea{
+        border: 1px solid #00000059;
+        padding: 12px;
+        width: 53%;
+        border-radius: 10px;
+        margin: 31px;
+        height: 100px;
+    }
+}
+.rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 46px;
+    margin: 36px;
+    i {
+      font-size: 40px;
+      color: #dddcdc;
+  
+      &:hover {
+        color: #f7f70b; /* Change to orange on hover */
+      }
+    }
+  }
+  .btn{
+    background: #629D23;
+    width: 75%;
+    padding: 8px;
+    border-radius: 10px;
+    font-size: 20px;
+    margin-bottom: 25px;
+    button{
+        font-weight: bold;
+        color: white;
+    }
+  }
+
+    }
+    .feedbackText{
+        border: 1px solid #00000059;
+        padding: 12px;
+        width: 53%;
+        border-radius: 10px;
+        margin: 31px;
+        height: 42px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
