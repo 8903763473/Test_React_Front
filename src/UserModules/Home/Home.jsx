@@ -644,7 +644,7 @@ const HomePage = ({ setLoading }) => {
                                                 <div className="image-and-action-area-wrapper">
                                                     <a href="shop-details.html" className="thumbnail-preview">
                                                         <div className="badge">
-                                                            <span>2115%   <br />
+                                                            <span>21%   <br />
                                                                 Off
                                                             </span>
                                                             <i className="fa-solid fa-bookmark"></i>
