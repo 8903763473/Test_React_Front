@@ -11,7 +11,7 @@ export const Header = () => {
     const [loading, setLoading] = useState(false);
     const [isLogged, setisLogged] = useState('');
     const [FilterData, setFilterData] = useState([]);
-    
+
 
     const navigate = useNavigate();
 
@@ -19,23 +19,23 @@ export const Header = () => {
         navigate('/' + data);
     };
 
-const Filter =()=>{
-api.getAllProducts()
-.then(res=>{
-    console.log(res.data);
-    setFilterData(res.data)
-    
-})
-}
+    const Filter = () => {
+        api.getAllProducts()
+            .then(res => {
+                console.log(res.data);
+                setFilterData(res.data)
 
-const [openCategories, setOpenCategories] = useState({});
+            })
+    }
 
-const toggleCategory = (category) => {
-  setOpenCategories((prevState) => ({
-    ...prevState,
-    [category]: !prevState[category], // Toggle the state for the clicked category
-  }));
-};
+    const [openCategories, setOpenCategories] = useState({});
+
+    const toggleCategory = (category) => {
+        setOpenCategories((prevState) => ({
+            ...prevState,
+            [category]: !prevState[category], // Toggle the state for the clicked category
+        }));
+    };
 
 
     const handleClick = () => {
@@ -240,40 +240,40 @@ const toggleCategory = (category) => {
                                             <img className="parent" src="images/icons/bar-1.svg" alt="icons" />
                                             <span>Categories</span>
                                             <ul className="category-sub-menu" id="category-active-four">
-      {FilterData.reduce((acc, curr) => {
-        const categoryExists = acc.find(item => item.productCategory === curr.productCategory);
+                                                {FilterData.reduce((acc, curr) => {
+                                                    const categoryExists = acc.find(item => item.productCategory === curr.productCategory);
 
-        if (!categoryExists) {
-          acc.push(curr); // Add unique categories to the accumulator
-        }
+                                                    if (!categoryExists) {
+                                                        acc.push(curr); // Add unique categories to the accumulator
+                                                    }
 
-        return acc;
-      }, []).map((res, index) => (
-        <li key={index}>
-          <a className="menu-item">
-            <img src="images/icons/01.svg" alt="icons" />
-            <span>{res.productCategory}</span>
-            <i
-              className={`fa-regular fa-${openCategories[res.productCategory] ? 'minus' : 'plus'}`}
-              onClick={() => toggleCategory(res.productCategory)} // Toggle dropdown on click
-              style={{ cursor: 'pointer' }}
-            ></i>
-          </a>
+                                                    return acc;
+                                                }, []).map((res, index) => (
+                                                    <li key={index}>
+                                                        <a className="menu-item">
+                                                            <img src="images/icons/01.svg" alt="icons" />
+                                                            <span>{res.productCategory}</span>
+                                                            <i
+                                                                className={`fa-regular fa-${openCategories[res.productCategory] ? 'minus' : 'plus'}`}
+                                                                onClick={() => toggleCategory(res.productCategory)} // Toggle dropdown on click
+                                                                style={{ cursor: 'pointer' }}
+                                                            ></i>
+                                                        </a>
 
-          {/* Show or hide submenu based on the state of the clicked category */}
-          {openCategories[res.productCategory] && (
-            <ul className="submenu mm-collapse">
-              {FilterData.filter(item => item.productCategory === res.productCategory)
-                .map((filteredProduct, i) => (
-                  <li key={i}>
-                    <a className="mobile-menu-link">{filteredProduct.productName}</a>
-                  </li>
-                ))}
-            </ul>
-          )}
-        </li>
-      ))}
-    </ul>
+                                                        {/* Show or hide submenu based on the state of the clicked category */}
+                                                        {openCategories[res.productCategory] && (
+                                                            <ul className="submenu mm-collapse">
+                                                                {FilterData.filter(item => item.productCategory === res.productCategory)
+                                                                    .map((filteredProduct, i) => (
+                                                                        <li key={i}>
+                                                                            <a className="mobile-menu-link">{filteredProduct.productName}</a>
+                                                                        </li>
+                                                                    ))}
+                                                            </ul>
+                                                        )}
+                                                    </li>
+                                                ))}
+                                            </ul>
 
                                             {/* <ul className="category-sub-menu" id="category-active-four">
                                             {FilterData.map((res, index) => (
@@ -289,7 +289,7 @@ const toggleCategory = (category) => {
                                                 </li>
                                                  ))}
                                             </ul> */}
-    
+
                                         </div>
                                         <form action="#" className="search-header">
                                             <input type="text" placeholder="Search for products, categories or brands" required />
@@ -325,7 +325,7 @@ const toggleCategory = (category) => {
                                         </div>
                                     </div>
                                     <div className="accont-wishlist-cart-area-header">
-                                        <a className="btn-border-only account" onClick={() => routeCart('account')} style={{cursor:'pointer'}}>
+                                        <a className="btn-border-only account" onClick={() => routeCart('account')} style={{ cursor: 'pointer' }}>
                                             <i className="fa-light fa-user"></i>
                                             <span>Account</span>
                                         </a>
@@ -337,7 +337,7 @@ const toggleCategory = (category) => {
 
                                         <div className="btn-border-only cart category-hover-header">
                                             <i className="fa-sharp fa-regular fa-cart-shopping"></i>
-                                            <span className="text">My Cart</span>
+                                            <span className="text">Cart</span>
                                             <span className="number">{cartDataLength}</span>
                                             <div className="category-sub-menu card-number-show">
                                                 <h5 className="shopping-cart-number">Shopping Cart ({cartDataLength})</h5>
@@ -620,7 +620,7 @@ const toggleCategory = (category) => {
                                             </a>
                                             <div className="btn-border-only cart category-hover-header">
                                                 <i className="fa-sharp fa-regular fa-cart-shopping"></i>
-                                                <span className="text">My Cart</span>
+                                                <span className="text">Cart</span>
                                                 <div className="category-sub-menu card-number-show">
                                                     <h5 className="shopping-cart-number">Shopping Cart (03)</h5>
                                                     <div className="cart-item-1 border-top">
