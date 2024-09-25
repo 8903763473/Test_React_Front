@@ -77,6 +77,12 @@ const api = {
 
     Feedback: (data) => {
         return apiInstance.post("/feedback/send", data);
+    },
+    AddwishList: (data) => {
+        return apiInstance.post("/wish/addtoWish", data);
+    },
+    GetwishList: (userId) => {
+        return apiInstance.post("/wish/getmyWish", userId);
     }
 
 }

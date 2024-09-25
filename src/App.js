@@ -14,6 +14,8 @@ import UserDashboard from './UserModules/userDashboard/UserDashboard';
 import InVoice from './UserModules/invoice/invoice';
 import { TrackMyOrder } from './UserModules/TrackMyOrder/TrackMyOrder';
 import ProductCategory from './UserModules/ProductByCategory/ProductByCategory';
+import Wishlist from './UserModules/Wishlist/Wishlist';
+import SearchProduct from './UserModules/SearchProduct/SearchProduct';
 
 
 function App() {
@@ -42,6 +44,9 @@ function App() {
           <Route path="/productDetail" element={<ProductDetail setLoading={setLoading} />} />
           <Route path="/Dashboard" element={<UserDashboard setLoading={setLoading} />} />
           <Route path="/ProductCategory" element={<ProductCategory setLoading={setLoading} />} />
+          {/* <Route path="/Wishlist" element={<Wishlist setLoading={setLoading} />} /> */}
+          <Route path="/Wishlist" element={<Wishlist setLoading={setLoading} />} />
+          <Route path="/Search" element={<SearchProduct setLoading={setLoading} />} />
 
           {/* <Route path="/dashboard" element={<Dashboard setLoading={setLoading} />} /> */}
           <Route path="/invoice" element={<InVoice setLoading={setLoading} />} />

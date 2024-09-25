@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './cart.scss';
 import api from "../../ApiService/apiService";
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
+import NotificationCenter from '../../CommonModule/Notification/Notification';
 
 const Cartpage = ({ setLoading }) => {
     const [myCart, setmyCart] = useState([]);
     const [hasQuantityChanged, setHasQuantityChanged] = useState(false);
     const navigate = useNavigate();
+    const [isLogged, setisLogged] = useState('');
 
     const getcartdata = () => {
         let post = {
@@ -76,11 +78,21 @@ const Cartpage = ({ setLoading }) => {
                 .catch(error => {
                     console.error('Error updating cart:', error);
                 });
-        } else {
+        } else if(myCart.length==0) {
+            triggerNotification('warning', 'Warning', 'No Cart data !', null, 'Add cart')
+        }
+        else{
             navigate('/checkout');
         }
     };
 
+    const notificationRef = useRef();
+    const triggerNotification = (type, title, subtitle, button, path) => {
+        if (notificationRef.current) {
+            notificationRef.current.spawnNotification(type, title, subtitle, button, path);
+        }
+    };
+    
     const RemoveCart = (productId) => {
         let post = {
             "userId": localStorage.getItem("userId"),
@@ -108,11 +120,16 @@ const Cartpage = ({ setLoading }) => {
                 console.log(err);
             });
     };
+    
+
+
+   
 
     return (
         <div>
+             <NotificationCenter ref={notificationRef} />
             <Header />
-
+           
             <div className="rts-cart-area rts-section-gap bg_light-1">
                 <div className="container">
                     <div className="row g-5">

@@ -50,13 +50,17 @@ const toggleCategory = (category) => {
         if (data == 1) {
             navigate('/cart');
         }
-        else if (data == 2) {
+        else if (data == 2 && cartData.length>0) {
             navigate('/checkout');
         }
         else if (data == 'account') {
             navigate('/Dashboard');
         }
+        else{
+            triggerNotification('warning', 'Warning', 'No Cart data !', null, 'Add cart')
+        }
     }
+    
 
     const RemoveCart = (productId) => {
         let post = {

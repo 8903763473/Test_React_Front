@@ -43,6 +43,7 @@ const Checkout = ({ setLoading }) => {
 
     };
 
+  
     const [formData, setFormData] = useState({
         firstName: '',
         email: '',
@@ -184,17 +185,21 @@ const Checkout = ({ setLoading }) => {
         try {
             const response = await api.checkoutProducts(post);
             console.log('Payment verification successful', response.data);
-            // setShowPopup(!showPopup);
+            setShowPopup(true);
             triggerNotification('success', 'Success', 'Thanks for you order', 'x', null);
             setLoading(false)
-            // setcheckoutId(response.data.checkout._id)
-            navigate('/invoice?orderId=' + response.data.checkout._id);
+            setcheckoutId(response.data.checkout._id)
+            // navigate('/invoice?orderId=' + response.data.checkout._id);
+            
         } catch (error) {
             console.error('Error while checkout:', error);
             setLoading(false)
         }
     }
 
+    // const Feedbacksubmit=()=>{
+       
+    // }
     const handleInputChange = (e) => {
         const { id, value } = e.target;
         setFormData((prevData) => ({
@@ -412,7 +417,7 @@ const Checkout = ({ setLoading }) => {
                                         ></i>
                                     ))}
                                 </div>
-
+                               
                                 <div className="btn">
                                     <button type="submit">Submit</button>
                                 </div>

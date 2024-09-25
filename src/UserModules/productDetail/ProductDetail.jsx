@@ -76,6 +76,11 @@ export const ProductDetail = ({ setLoading }) => {
         }
     }
 
+
+    const addToWishlist=(data)=>{
+        console.log(data);
+        
+    }
     useEffect(() => {
         // setselectedId(localStorage.getItem('SelectedProdId'))
         getProdById(productId)
@@ -164,7 +169,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                                 <i className="fa-regular fa-cart-shopping"></i>
                                                             </div>
                                                         </a>
-                                                        <a href="javascript:void(0);" className="rts-btn btn-primary ml--20"><i className="fa-light fa-heart"></i></a>
+                                                        <a  className="rts-btn btn-primary ml--20"  ><i className="fa-light fa-heart"></i></a>
                                                     </div>
                                                     <div className="product-uniques" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'center', flexDirection: 'column' }}>
                                                         <span className="sku product-unipue mb--10"><span className='prodDetailText'>Status: </span> {prodDetail.productStatus}</span>
@@ -175,8 +180,8 @@ export const ProductDetail = ({ setLoading }) => {
                                                         <span className="tags product-unipue mb--10"><span className='prodDetailText'>Category: </span> {prodDetail.productCategory}</span>
                                                     </div>
                                                     <div className="share-option-shop-details">
-                                                        <div className="single-share-option">
-                                                            <div className="icon">
+                                                        <div className="single-share-option" onClick={() => addToWishlist(prodDetail)}>
+                                                            <div className="icon"  >
                                                                 <i className="fa-regular fa-heart"></i>
                                                             </div>
                                                             <span>Add To Wishlist</span>
@@ -519,7 +524,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                                 <img src={res.productImage} alt={res.productName}  style={{width: '50%'}}/>
                                                             </a>
                                                             <div className="action-share-option">
-                                                                <div className="single-action openuptip message-show-action" data-flow="up" title="Add To Wishlist">
+                                                                <div className="single-action openuptip message-show-action" data-flow="up" title="Add To Wishlist" onClick={() => addToWishlist(prodDetail)}>
                                                                     <i className="fa-light fa-heart"></i>
                                                                 </div>
                                                                 <div className="single-action openuptip" data-flow="up" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -1027,3 +1032,5 @@ export const ProductDetail = ({ setLoading }) => {
         </div >
     )
 }
+
+export default ProductDetail;

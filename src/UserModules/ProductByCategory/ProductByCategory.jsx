@@ -48,7 +48,28 @@ const ProductCategory = ({ setLoading }) => {
             console.log('Kindly Loggin');
             triggerNotification('warning', 'Warning', 'Login to continue !', null, 'login')
         }
-    }
+    };
+    const addToWishlist = (Category) => {
+        console.log("Adding to wishlist:", Category);
+        let post = {
+            "productId": Category._id,
+          "quantity": Category.productQuantity,            
+          "userId": localStorage.getItem('userId') 
+        };
+        api.AddwishList(post)
+          .then((res) => {
+            console.log('Wishlist response:', res);
+            triggerNotification('success', 'Success', 'Successfully Added in Wishlist', 'x', null)
+
+          })
+          .catch((error) => {
+            console.error('Error adding to wishlist:', error);
+            triggerNotification('error', 'Error', error.response.data.message, 'x', null)
+
+          });
+      };
+      
+  
 
     useEffect(() => {
         if (productCategory) {
@@ -312,9 +333,12 @@ const ProductCategory = ({ setLoading }) => {
                                                             <img src={category.productImage} alt="grocery" style={{ width: '100%', height: '140px',objectFit: 'contain' }} />
                                                         </a>
                                                         <div class="action-share-option">
-                                                            <div class="single-action openuptip message-show-action" data-flow="up" title="Add To Wishlist">
-                                                                <i class="fa-light fa-heart"></i>
-                                                            </div>
+                                                        <div class="single-action openuptip message-show-action" 
+     data-flow="up" 
+     title="Add To Wishlist" 
+     onClick={() => addToWishlist(category)}>
+  <i class="fa-light fa-heart"></i>
+</div>
                                                             <div class="single-action openuptip" data-flow="up" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                                 <i class="fa-solid fa-arrows-retweet"></i>
                                                             </div>

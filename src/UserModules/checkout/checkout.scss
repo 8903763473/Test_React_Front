@@ -31,10 +31,11 @@
         padding: 10px;
         background: white;
         border-radius: 9px;
-        /* border: 3px solid green; */
+        border: 1px solid green;
+        height: auto;
         box-shadow: -5px 1px 10px 10px;
         .text{
-        margin: 18px;
+        margin: 11px;
         }
     .fields{
         display: flex;
@@ -52,8 +53,8 @@
             padding: 10px;
             width: 75%;
             border-radius: 10px;
-            margin: 15px;
-            height: 42px;
+            margin: 11px;
+            height: 31px;
         
     }
     .rating i {
@@ -70,16 +71,16 @@
         padding: 12px;
         width: 75%;
         border-radius: 10px;
-        margin: 31px;
-        height: 100px;
+        margin: 11px;
+        height: 71px;
     }
 }
 .rating {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 46px;
-    margin: 36px;
+    gap: 23px;
+    margin: 11px;
     i {
       font-size: 40px;
       color: #dddcdc;
@@ -96,6 +97,7 @@
     border-radius: 10px;
     font-size: 20px;
     margin-bottom: 25px;
+    margin: 11px;
     button{
         font-weight: bold;
         color: white;
@@ -108,7 +110,7 @@
         padding: 12px;
         width: 53%;
         border-radius: 10px;
-        margin: 31px;
+        margin: 11px;
         height: 42px;
     }
 }
