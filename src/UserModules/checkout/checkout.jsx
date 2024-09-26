@@ -7,9 +7,9 @@ import NotificationCenter from '../../CommonModule/Notification/Notification';
 import { useNavigate } from 'react-router-dom';
 
 const Checkout = ({ setLoading }) => {
-    const [checkoutId, setcheckoutId] = useState(0)
-    const [showPopup, setShowPopup] = useState(false);
     const navigate = useNavigate()
+    const [checkoutId, setcheckoutId] = useState(0)
+    const [showPopup, setShowPopup] = useState(true);
     const [myCart, setMyCart] = useState([]);
     const [Total, setTotal] = useState(0);
     const [name, setName] = useState('');
@@ -43,7 +43,7 @@ const Checkout = ({ setLoading }) => {
 
     };
 
-  
+
     const [formData, setFormData] = useState({
         firstName: '',
         email: '',
@@ -190,7 +190,7 @@ const Checkout = ({ setLoading }) => {
             setLoading(false)
             setcheckoutId(response.data.checkout._id)
             // navigate('/invoice?orderId=' + response.data.checkout._id);
-            
+
         } catch (error) {
             console.error('Error while checkout:', error);
             setLoading(false)
@@ -198,7 +198,7 @@ const Checkout = ({ setLoading }) => {
     }
 
     // const Feedbacksubmit=()=>{
-       
+
     // }
     const handleInputChange = (e) => {
         const { id, value } = e.target;
@@ -414,10 +414,11 @@ const Checkout = ({ setLoading }) => {
                                             key={index}
                                             className={`fa fa-star ${index < rating ? 'selected' : ''}`}
                                             onClick={() => handleRatingClick(index + 1)} // Set rating on click
+                                            style={{ cursor: 'pointer', color: index < rating ? 'yellow' : 'gray' }} // Set color based on rating
                                         ></i>
                                     ))}
                                 </div>
-                               
+
                                 <div className="btn">
                                     <button type="submit">Submit</button>
                                 </div>
