@@ -29,8 +29,12 @@ const Login = () => {
 
         try {
             const response = await api.Login(post);
-            let id = JSON.parse(response.data.user)
-            localStorage.setItem('userId', id._id);
+            let Result = JSON.parse(response.data.user)
+            localStorage.setItem('userId', Result._id);
+            localStorage.setItem('name', Result.name);
+            localStorage.setItem('email', Result.email);
+            localStorage.setItem('mobile', Result.mobile);
+
             localStorage.setItem('login', "success");
             triggerNotification('success', 'Success', 'Login Successful', 'x', null)
             setTimeout(() => {

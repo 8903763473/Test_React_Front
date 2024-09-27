@@ -1,13 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import api from '../../ApiService/apiService'
 import { useNavigate } from 'react-router-dom';
+import NotificationCenter from '../../CommonModule/Notification/Notification';
+import './UserDashboard.scss';
 
 const UserDashboard = ({ setLoading }) => {
     const [myOrdersList, setmyOrdersList] = useState([])
+    const [orderTrackedData, setorderTrackedData] = useState([])
+    const [AccountDetails, setAccountDetails] = useState({})
     const [copiedOrderId, setcopiedOrderId] = useState(0);
     const [isCopied, setisCopied] = useState(false);
+    const [isLogged, setisLogged] = useState('');
+    const [viewOrderId, setviewOrderId] = useState(0);
+    const [totalAmount, settotalAmount] = useState(0);
+
     const navigate = useNavigate();
 
     const copyOrderId = (orderId) => {
@@ -53,8 +61,64 @@ const UserDashboard = ({ setLoading }) => {
     }
 
 
+    useEffect(() => {
+        const loggedStatus = localStorage.getItem('login');
+        setisLogged(loggedStatus);
+        getAccountDetails();
+    }, [isLogged])
+
+    const getAccountDetails = () => {
+        setLoading(true)
+        api.GetAccountDetail(localStorage.getItem('userId'))
+            .then(res => {
+                console.log(res);
+                setAccountDetails(res.data)
+                setLoading(false)
+            })
+            .catch(err => {
+                console.log(err);
+                setLoading(false)
+            })
+    }
+
+    const notificationRef = useRef();
+
+    const triggerNotification = (type, title, subtitle, button, path) => {
+        if (notificationRef.current && isLogged == 'success') {
+            notificationRef.current.spawnNotification(type, title, subtitle, button, path);
+        } else {
+            navigate('/login')
+        }
+    };
+
+    const ViewOrderDetails = (data) => {
+        setviewOrderId(data._id);
+        api.TrackOrder(data._id)
+            .then(res => {
+                console.log(res);
+                const products = res.data.products;
+                setorderTrackedData(products)
+
+                const total = products && products.length > 0
+                    ? products.reduce((acc, product) => acc + product.price * product.quantity, 0)
+                    : 0;
+                console.log(total);
+
+                settotalAmount(total)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+    const closeOpenedOrder = () => {
+        setviewOrderId(0);
+    }
+
+
     return (
         <div >
+            <NotificationCenter ref={notificationRef} />
             <Header />
 
             <div className="account-tab-area-start rts-section-gap">
@@ -77,7 +141,7 @@ const UserDashboard = ({ setLoading }) => {
                                 <button className="nav-link" id="v-pills-settingsa-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settingsa" type="button" role="tab" aria-controls="v-pills-settingsa" aria-selected="false">
                                     <i className="fa-light fa-user"></i> Account Details
                                 </button>
-                                <button className="nav-link" id="v-pills-settingsb-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settingsb" type="button" role="tab" aria-controls="v-pills-settingsb" aria-selected="false">
+                                <button className="nav-link" id="v-pills-settingsb-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settingsb" type="button" role="tab" aria-controls="v-pills-settingsb" aria-selected="false" onClick={() => triggerNotification('warning', 'Warning', 'Sure to Logout', 'Sure', 'logout')}>
                                     <a href="/login"><i className="fa-light fa-right-from-bracket"></i> Log Out</a>
                                 </button>
                             </div>
@@ -128,7 +192,7 @@ const UserDashboard = ({ setLoading }) => {
                                                                 <td>{new Date(data.createdAt).toLocaleDateString('en-GB')}</td>
                                                                 <td>Processing</td>
                                                                 <td>₹ 250 for {data.products.length} items</td>
-                                                                <td><button className="btn-small d-block">View</button></td>
+                                                                <td><button className="btn-small d-block" onClick={() => ViewOrderDetails(data)}>View</button></td>
                                                             </tr>
                                                         ))
                                                     }
@@ -195,20 +259,20 @@ const UserDashboard = ({ setLoading }) => {
                                 <div className="tab-pane fade" id="v-pills-settingsa" role="tabpanel" aria-labelledby="v-pills-settingsa-tab" tabIndex="0">
                                     <form className="account-details-area">
                                         <h2 className="title">Account Details</h2>
-                                        <div className="input-half-area">
+                                        {/* <div className="input-half-area">
                                             <div className="single-input">
                                                 <input type="text" placeholder="First Name" />
                                             </div>
                                             <div className="single-input">
                                                 <input type="text" placeholder="Last Name" />
                                             </div>
-                                        </div>
+                                        </div> */}
 
-                                        <input type="text" placeholder="Display Name" required />
-                                        <input type="email" placeholder="Email Address *" required />
-                                        <input type="password" placeholder="Current Password *" required />
-                                        <input type="password" placeholder="New Password *" />
-                                        <input type="password" placeholder="Confirm Password *" />
+                                        <input type="text" placeholder="Display Name" required value={AccountDetails.name} />
+                                        <input type="email" placeholder="Email Address *" required value={AccountDetails.email} />
+                                        <input type="number" placeholder="Mobile Number *" required value={AccountDetails.mobile} />
+                                        {/* <input type="password" placeholder="New Password *" />
+                                        <input type="password" placeholder="Confirm Password *" /> */}
                                         <button className="rts-btn btn-primary">Save Change</button>
                                     </form>
                                 </div>
@@ -217,6 +281,65 @@ const UserDashboard = ({ setLoading }) => {
                     </div>
                 </div>
             </div>
+
+            {/* *****************************************VIEW ORDER***************************** */}
+
+
+            {/* {viewOrderId != 0 &&
+                
+            } */}
+
+            <div className={`ViewOrderInfo ${viewOrderId !== 0 ? 'd-block' : 'd-none'}`}>
+                <div className={`order-detail ${viewOrderId !== 0 ? 'left-shown' : 'left-hidden'}`}>
+                    <i class="bi bi-x-octagon color-white pointer closeIcon" onClick={closeOpenedOrder}></i>
+                    <nav>
+                        <img src="images/Grocery.png" alt="KFC Logo" />
+                    </nav>
+                    <div class="caption">
+                        <p></p>
+                        <h5>Welcome Grocery</h5>
+                    </div>
+                    <div class="orders-box">
+                        {
+                            orderTrackedData.map(res => (
+                                <div className="order-item" key={res._id}>
+                                    <p className="order-title">{res.productId.productName}</p>
+                                    <span>|</span>
+                                    <p className="order-size">{res.productId.productCategory}</p> {/* Update this if needed */}
+                                    <span className="minus">-</span>
+                                    <div className="order-quantity">
+                                        <p>{res.quantity}</p>
+                                    </div>
+                                    <span className="plus">+</span>
+                                    <p className="order-price">₹ {res.price}</p>
+                                    <div className="remove-order">
+                                        <i className="fa-solid fa-x"></i>
+                                    </div>
+                                </div>
+                            ))
+                        }
+                        {/* <div class="beverage-section">
+                            <img src="https://static.thenounproject.com/png/209029-200.png" alt="Beverage Icon" />
+                            <h5 class="beverage-title">Add a beverage</h5>
+                        </div> */}
+                        <div class="billing-summary">
+                            <div class="info">
+                                <p>Subtotal</p>
+                                <p>Shipping</p>
+                                <p className='font-bold'>Total (TVA Incl.)</p>
+                            </div>
+                            <div class="money">
+                                <p>₹ {totalAmount}</p>
+                                <p>₹ 40</p>
+                                <p className='font-bold'>₹ {totalAmount + 40}</p>
+                            </div>
+                        </div>
+                        <div class="checkout-button">Track Order</div>
+                    </div>
+                </div>
+            </div>
+
+
             <Footer />
         </div >
     )
