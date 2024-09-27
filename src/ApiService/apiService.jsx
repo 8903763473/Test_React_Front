@@ -71,9 +71,13 @@ const api = {
         return apiInstance.get("/checkout/getCheckoutById/" + id);
     },
 
-    trackOrder: (data) => {
-        return apiInstance.post("/checkout/trackOrder", data);
+
+    TrackOrder: (data) => {
+        return apiInstance.get("/checkout/TrackOrder/",data);
     },
+    // trackOrder: (data) => {
+    //     return apiInstance.post("/checkout/trackOrder", data);
+    // },
 
     Feedback: (data) => {
         return apiInstance.post("/feedback/send", data);
@@ -83,6 +87,18 @@ const api = {
     },
     GetwishList: (userId) => {
         return apiInstance.post("/wish/getmyWish", userId);
+    },
+
+    RemoveWishlist: (productId, userId) => {
+        return apiInstance.delete(`/wish/removeWish/${productId}?userId=${userId}`);
+    },
+    ClearAll: (userId) => {
+        return apiInstance.delete(`/wish/clearMyWish?userId=${userId}`);
+    },
+
+    SearchProduct:(product)=>{
+        return apiInstance.get(`product/search?query=${product}`); 
+
     }
 
 }

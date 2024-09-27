@@ -47,6 +47,7 @@ function App() {
           {/* <Route path="/Wishlist" element={<Wishlist setLoading={setLoading} />} /> */}
           <Route path="/Wishlist" element={<Wishlist setLoading={setLoading} />} />
           <Route path="/Search" element={<SearchProduct setLoading={setLoading} />} />
+          <Route path="/trackOrder" element={<TrackMyOrder setLoading={setLoading} />} />
 
           {/* <Route path="/dashboard" element={<Dashboard setLoading={setLoading} />} /> */}
           <Route path="/invoice" element={<InVoice setLoading={setLoading} />} />

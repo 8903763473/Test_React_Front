@@ -4,14 +4,92 @@ import { Footer } from '../Footer/Footer';
 import api from '../../ApiService/apiService';
 import { useLocation } from 'react-router-dom';
 import NotificationCenter from '../../CommonModule/Notification/Notification';
-
+import './SearchProduct.scss'; 
 const SearchProduct = ({ setLoading }) => {
-   
+    const [SearchData, setSearchProduct] = useState([]);
+    const [loading, setLoad] = useState(false);
 
+    
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const productCategory = searchParams.get('query');
+    // console.log(productCategory);
 
+    const notificationRef = useRef();
+    const triggerNotification = (type, title, subtitle, button, path) => {
+        if (notificationRef.current) {
+            notificationRef.current.spawnNotification(type, title, subtitle, button, path);
+        }
+    };
+
+const getSearcProduct=()=>{
+    api.SearchProduct(productCategory).then(res=>{
+        // console.log(res.data)
+        setSearchProduct(res.data)
+        })
+        .catch(err=>{
+        // console.log(err)
+        }
+    )
+}
+
+const addCart = (data) => {
+    console.log(data);
+    const isLogged = localStorage.getItem('login')
+    if (isLogged == 'success') {
+        console.log('Cart Added');
+
+        let post = {
+            "productId": data._id,
+            "quantity": data.productQuantity,
+            "userId": localStorage.getItem('userId')
+        }
+        api.AddToCart(post)
+            .then(response => {
+                setLoad(true);
+    setTimeout(() => {
+        setLoad(false);
+    }, 3000);
+                console.log(response.data);
+                triggerNotification('success', 'Success', 'Successfully Added in cart', 'x', null)
+            }).catch(error => {
+                console.log(error.response.data.message);
+                triggerNotification('error', 'Error', error.response.data.message, 'x', null)
+            })
+    } else {
+        console.log('Kindly Loggin');
+        triggerNotification('warning', 'Warning', 'Login to continue !', null, 'login')
+    }
+};
+ 
+
+const addToWishlist = (Category) => {
+    console.log("Adding to wishlist:", Category);
+    let post = {
+        "productId": Category._id,
+      "quantity": Category.productQuantity,            
+      "userId": localStorage.getItem('userId') 
+    };
+    api.AddwishList(post)
+      .then((res) => {
+        console.log('Wishlist response:', res);
+        triggerNotification('success', 'Success', 'Successfully Added in Wishlist', 'x', null)
+
+      })
+      .catch((error) => {
+        console.error('Error adding to wishlist:', error);
+        triggerNotification('error', 'Error', error.response.data.message, 'x', null)
+
+      });
+  };
+  
+
+useEffect=()=>{
+    getSearcProduct()
+}
     return (
         <div>
-             {/* <NotificationCenter ref={notificationRef} /> */}
+             <NotificationCenter ref={notificationRef} />
 
 
 
@@ -234,214 +312,145 @@ const SearchProduct = ({ setLoading }) => {
                     <div class="tab-content" id="myTabContent">
                         <div class="product-area-wrapper-shopgrid-list mt--20 tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
                             <div class="row g-4">
-                                <div class="col-lg-20 col-lg-4 col-md-6 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="shop-details.html" class="thumbnail-preview">
-                                                <div class="badge">
-                                                    <span>25% <br/> 
-                                                        Off
-                                                    </span>
-                                                    <i class="fa-solid fa-bookmark"></i>
-                                                </div>
-                                                <img src="assets/images/grocery/01.jpg" alt="grocery"/>
-                                            </a>
-                                            <div class="action-share-option">
-                                                <div class="single-action openuptip message-show-action" data-flow="up" title="Add To Wishlist">
-                                                    <i class="fa-light fa-heart"></i>
-                                                </div>
-                                                <div class="single-action openuptip" data-flow="up" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                    <i class="fa-solid fa-arrows-retweet"></i>
-                                                </div>
-                                                <div class="single-action openuptip cta-quickview product-details-popup-btn" data-flow="up" title="Quick View">
-                                                    <i class="fa-regular fa-eye"></i>
-                                                </div>
-                                            </div>
-                                        </div>
+                            {SearchData.map((category) => (
+                                            <div class="col-lg-20 col-lg-4 col-md-6 col-sm-6 col-12">
+                                                <div class="single-shopping-card-one" style={{ height: 'auto' }}>
+                                                    <div class="image-and-action-area-wrapper" style={{ minHeight: '140px', maxHeight: '140px' }}>
+                                                        <a href="shop-details.html" class="thumbnail-preview">
+                                                            <div class="badge">
+                                                                <span>25% <br />
+                                                                    Off
+                                                                </span>
+                                                                <i class="fa-solid fa-bookmark"></i>
+                                                            </div>
+                                                            <img src={category.productImage} alt="grocery" style={{ width: '100%', height: '140px',objectFit: 'contain' }} />
+                                                        </a>
+                                                        <div class="action-share-option">
+                                                        <div class="single-action openuptip message-show-action" 
+     data-flow="up" 
+     title="Add To Wishlist" 
+     onClick={() => addToWishlist(category)}>
+  <i class="fa-light fa-heart"></i>
+</div>
+                                                            <div class="single-action openuptip" data-flow="up" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                                <i class="fa-solid fa-arrows-retweet"></i>
+                                                            </div>
+                                                            <div class="single-action openuptip cta-quickview product-details-popup-btn" data-flow="up" title="Quick View">
+                                                                <i class="fa-regular fa-eye"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="body-content" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'center', flexDirection: 'column' }}>
 
-                                        <div class="body-content">
-
-                                            <a href="shop-details.html">
-                                                <h4 class="title">Best Cerelac Mixed Fruits &amp;
-                                                    Wheat with Milk</h4>
-                                            </a>
-                                            <span class="availability">500g Pack</span>
-                                            <div class="price-area">
-                                                <span class="current">$36.00</span>
-                                                <div class="previous">$36.00</div>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <div class="quantity-edit">
-                                                    <input type="text" class="input" value="1"/>
-                                                    <div class="button-wrapper-action">
-                                                        <button class="button"><i class="fa-regular fa-chevron-down"></i></button>
-                                                        <button class="button plus">+<i class="fa-regular fa-chevron-up"></i></button>
+                                                        <a href="shop-details.html">
+                                                            <h4 class="title">{category.productName}</h4>
+                                                        </a>
+                                                        <span class="availability">500g Pack</span>
+                                                        <div class="price-area">
+                                                            <span class="current">₹{category.productCurrentRate}</span>
+                                                            <div class="previous">₹{category.productOriginalRate}</div>
+                                                        </div>
+                                                        <div class="cart-counter-action">
+                                                            <div class="quantity-edit" style={{ display: 'flex', alignItems: 'space-around', justifyContent: 'center' }}>
+                                                                <input type="text" class="input" value={category.productQuantity} />
+                                                                <div class="button-wrapper-action">
+                                                                    <button class="button"><i class="fa-regular fa-chevron-down"></i></button>
+                                                                    <button class="button plus">+<i class="fa-regular fa-chevron-up"></i></button>
+                                                                </div>
+                                                            </div>
+                                                            <a  class="rts-btn btn-primary radious-sm with-icon" style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                                <div class="btn-text"  onClick={() => addCart(category)} style={{cursor:'pointer'}}>
+                                                                    Add To Cart
+                                                                </div>
+                                                                <div class="arrow-icon">
+                                                                    <i class="fa-regular fa-cart-shopping"></i>
+                                                                </div>
+                                                                <div class="arrow-icon">
+                                                                    <i class="fa-regular fa-cart-shopping"></i>
+                                                                </div>
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                        Add To Cart
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                        ))}
                                
                             </div>
                         </div>
                         <div class="product-area-wrapper-shopgrid-list with-list mt--20 tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="single-shopping-card-one discount-offer">
-                                        <a href="shop-details.html" class="thumbnail-preview">
-                                            <div class="badge">
-                                                <span>25% <br/> 
-                                                    Off
-                                                </span>
-                                                <i class="fa-solid fa-bookmark"></i>
-                                            </div>
-                                            <img src="assets/images/grocery/03.jpg" alt="grocery"/>
-                                        </a>
-                                        <div class="body-content">
-                                            <div class="title-area-left">
-                                                <a href="shop-details.html">
-                                                    <h4 class="title">Nestle Cerelac Mixed Fruits &amp;
-                                                        Wheat with Milk</h4>
-                                                </a>
-                                                <span class="availability">500g Pack</span>
-                                                <div class="price-area">
-                                                    <span class="current">$36.00</span>
-                                                    <div class="previous">$36.00</div>
-                                                </div>
-                                                <div class="cart-counter-action">
-                                                    <div class="quantity-edit">
-                                                        <input type="text" class="input" value="1"/>
-                                                        <div class="button-wrapper-action">
-                                                            <button class="button"><i class="fa-regular fa-chevron-down"></i></button>
-                                                            <button class="button plus">+<i class="fa-regular fa-chevron-up"></i></button>
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                        <div class="btn-text">
-                                                            Add To Cart
-                                                        </div>
-                                                        <div class="arrow-icon">
-                                                            <i class="fa-regular fa-cart-shopping"></i>
-                                                        </div>
-                                                        <div class="arrow-icon">
-                                                            <i class="fa-regular fa-cart-shopping"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="natural-value">
-                                                <h6 class="title">
-                                                    Nutritional Values
-                                                </h6>
-                                                <div class="single">
-                                                    <span>Energy(kcal):</span>
-                                                    <span>211</span>
-                                                </div>
-                                                <div class="single">
-                                                    <span>Protein(g):</span>
-                                                    <span>211</span>
-                                                </div>
-                                                <div class="single">
-                                                    <span>magnetiam(kcal):</span>
-                                                    <span>211</span>
-                                                </div>
-                                                <div class="single">
-                                                    <span>Calory(kcal):</span>
-                                                    <span>211</span>
-                                                </div>
-                                                <div class="single">
-                                                    <span>Vitamine(kcal):</span>
-                                                    <span>211</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                  
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="single-shopping-card-one discount-offer">
-                                        <a href="shop-details.html" class="thumbnail-preview">
-                                            <div class="badge">
-                                                <span>25% <br/> 
-                                                    Off
-                                                </span>
-                                                <i class="fa-solid fa-bookmark"></i>
-                                            </div>
-                                            <img src="assets/images/grocery/03.jpg" alt="grocery"/>
-                                        </a>
-                                        <div class="body-content">
-                                            <div class="title-area-left">
-                                                <a href="shop-details.html">
-                                                    <h4 class="title">Nestle Cerelac Mixed Fruits &amp;
-                                                        Wheat with Milk</h4>
-                                                </a>
-                                                <span class="availability">500g Pack</span>
-                                                <div class="price-area">
-                                                    <span class="current">$36.00</span>
-                                                    <div class="previous">$36.00</div>
-                                                </div>
-                                                <div class="cart-counter-action">
-                                                    <div class="quantity-edit">
-                                                        <input type="text" class="input" value="1"/>
-                                                        <div class="button-wrapper-action">
-                                                            <button class="button"><i class="fa-regular fa-chevron-down"></i></button>
-                                                            <button class="button plus">+<i class="fa-regular fa-chevron-up"></i></button>
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                        <div class="btn-text">
-                                                            Add To Cart
-                                                        </div>
-                                                        <div class="arrow-icon">
-                                                            <i class="fa-regular fa-cart-shopping"></i>
-                                                        </div>
-                                                        <div class="arrow-icon">
-                                                            <i class="fa-regular fa-cart-shopping"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="natural-value">
-                                                <h6 class="title">
-                                                    Nutritional Values
-                                                </h6>
-                                                <div class="single">
-                                                    <span>Energy(kcal):</span>
-                                                    <span>211</span>
-                                                </div>
-                                                <div class="single">
-                                                    <span>Protein(g):</span>
-                                                    <span>211</span>
-                                                </div>
-                                                <div class="single">
-                                                    <span>magnetiam(kcal):</span>
-                                                    <span>211</span>
-                                                </div>
-                                                <div class="single">
-                                                    <span>Calory(kcal):</span>
-                                                    <span>211</span>
-                                                </div>
-                                                <div class="single">
-                                                    <span>Vitamine(kcal):</span>
-                                                    <span>211</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                  
-                                </div>
+                            {SearchData.map((category) => (
+                                 <div class="col-lg-6">
+                                 <div class="single-shopping-card-one discount-offer">
+                                     <a  class="thumbnail-preview" >
+                                         <div class="badge">
+                                             <span>25% <br />
+                                                 Off
+                                             </span>
+                                             <i class="fa-solid fa-bookmark"></i>
+                                         </div>
+                                         <img src={category.productImage} alt="grocery" style={{width: '69%',objectFit: 'contain'}} />
+                                     </a>
+                                     <div class="body-content">
+                                         <div class="title-area-left">
+                                             <a href="shop-details.html">
+                                                 <h4 class="title">{category.productName}</h4>
+                                             </a>
+                                             <span class="availability">500g Pack</span>
+                                             <div class="price-area">
+                                                 <span class="current">₹{category.productCurrentRate}</span>
+                                                 <div class="previous">₹{category.productOriginalRate}</div>
+                                             </div>
+                                             <div class="cart-counter-action">
+                                                 <div class="quantity-edit">
+                                                     <input type="text" class="input" value={category.productQuantity} />
+                                                     <div class="button-wrapper-action">
+                                                         <button class="button"><i class="fa-regular fa-chevron-down"></i></button>
+                                                         <button class="button plus">+<i class="fa-regular fa-chevron-up"></i></button>
+                                                     </div>
+                                                 </div>
+                                                 <a  class="rts-btn btn-primary radious-sm with-icon"  onClick={() => addCart(category)} style={{cursor:'pointer'}}>
+                                                     <div class="btn-text" >
+                                                         Add To Cart
+                                                     </div>
+                                                     <div class="arrow-icon">
+                                                         <i class="fa-regular fa-cart-shopping"></i>
+                                                     </div>
+                                                     <div class="arrow-icon">
+                                                         <i class="fa-regular fa-cart-shopping"></i>
+                                                     </div>
+                                                 </a>
+                                             </div>
+                                         </div>
+                                         {/* <div class="natural-value">
+                                 <h6 class="title">
+                                     Nutritional Values
+                                 </h6>
+                                 <div class="single">
+                                     <span>Energy(kcal):</span>
+                                     <span>211</span>
+                                 </div>
+                                 <div class="single">
+                                     <span>Protein(g):</span>
+                                     <span>211</span>
+                                 </div>
+                                 <div class="single">
+                                     <span>magnetiam(kcal):</span>
+                                     <span>211</span>
+                                 </div>
+                                 <div class="single">
+                                     <span>Calory(kcal):</span>
+                                     <span>211</span>
+                                 </div>
+                                 <div class="single">
+                                     <span>Vitamine(kcal):</span>
+                                     <span>211</span>
+                                 </div>
+                             </div> */}
+                                     </div>
+                                 </div>
+                             </div>
+                            ))}
                             </div>
                         </div>
                     </div>

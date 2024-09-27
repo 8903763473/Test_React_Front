@@ -22,7 +22,7 @@ export const Wishlist = ({ setLoading }) => {
             console.log('Cart Added');
 
             let post = {
-                "productId": data._id,
+                "productId": data.productId,
                 "quantity": data.productQuantity,
                 "userId": localStorage.getItem('userId')
             }
@@ -58,6 +58,31 @@ const getwishlist = () => {
         });
 };
 
+const Removewishlist = (data) => {
+    const userId = localStorage.getItem('userId'); 
+    api.RemoveWishlist(data.productId, userId)
+        .then((res) => {
+            getwishlist()
+            console.log('Item removed successfully:', res.data);
+        })
+        .catch((error) => {
+            console.error('Error removing wishlist item:', error);
+        });
+};
+
+const ClearAll=()=>{
+    const userId = localStorage.getItem('userId'); 
+api.ClearAll(userId)
+.then(res=>{
+    console.log(res);
+    getwishlist()
+    
+})
+.catch((error) => {
+    console.error('Error removing All wishlist item:', error);
+});
+}
+    
 useEffect(() => {
     getwishlist();
 }, []);
@@ -67,74 +92,86 @@ useEffect(() => {
         <div>
              <NotificationCenter ref={notificationRef} />
 <Header/>
-<div class="rts-cart-area rts-section-gap bg_light-1">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-12">
-                    <div class="rts-cart-list-area wishlist">
-                        <div class="single-cart-area-list head">
-                            <div class="product-main">
-                                <p>Products</p>
+<div className="rts-cart-area rts-section-gap bg_light-1">
+    <div className="container">
+        <div className="row g-5">
+            <div className="col-lg-12">
+                <div className="rts-cart-list-area wishlist">
+                    <div className="single-cart-area-list head">
+                        <div className="product-main">
+                            <p>Products</p>
+                        </div>
+                        <div className="price">
+                            <p>Price</p>
+                        </div>
+                        <div className="quantity">
+                            <p>Quantity</p>
+                        </div>
+                        <div className="subtotal">
+                            <p>SubTotal</p>
+                        </div>
+                        <div className="button-area">
+                            <div className="button-area">
+                                <a className="rts-btn btn-primary radious-sm with-icon" onClick={() => ClearAll()} style={{cursor:'pointer'}}>
+                                    <div className="btn-text">
+                                        Clear All
+                                    </div>
+                                </a>
                             </div>
-                            <div class="price">
-                                <p>Price</p>
-                            </div>
-                            <div class="quantity">
-                                <p>Quantity</p>
-                            </div>
-                            <div class="subtotal">
-                                <p>SubTotal</p>
-                            </div>
-                            <div class="button-area">
+                        </div>
+                    </div>
 
+                    {wishlistItems.length > 0 ? (
+                        wishlistItems.map((Wishlist) => (
+                            <div className="single-cart-area-list main item-parent" key={Wishlist.productId}>
+                                <div className="product-main-cart">
+                                    <div className="close section-activation">
+                                        <img src="images/shop/01.png" alt="shop" onClick={() => Removewishlist(Wishlist)} />
+                                    </div>
+                                    <div className="thumbnail">
+                                        <img src={Wishlist.productImage} alt={Wishlist.productName} />
+                                    </div>
+                                    <div className="information">
+                                        <h6 className="title">{Wishlist.productName}</h6>
+                                        <span>{Wishlist.productCategory}</span>
+                                    </div>
+                                </div>
+                                <div className="price">
+                                    <p>₹{Wishlist.productOriginalRate || 'N/A'}</p>
+                                </div>
+                                <div className="quantity">
+                                    <div className="quantity-edit">
+                                        <input type="text" className="input" value={Wishlist.quantity || 1} readOnly />
+                                        <div className="button-wrapper-action">
+                                            <button className="button"><i className="fa-regular fa-chevron-down"></i></button>
+                                            <button className="button plus">+<i className="fa-regular fa-chevron-up"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="subtotal">
+                                    <p>₹{Wishlist.productCurrentRate ? Wishlist.productCurrentRate * Wishlist.quantity : 'N/A'}</p>
+                                </div>
+                                <div className="button-area">
+                                    <a className="rts-btn btn-primary radious-sm with-icon" onClick={() => addCart(Wishlist)} style={{cursor:'pointer'}}>
+                                        <div className="btn-text">
+                                            Add To Cart
+                                        </div>
+                                        <div className="arrow-icon">
+                                            <i className="fa-regular fa-cart-shopping"></i>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        {wishlistItems.map((Wishlist) => (
-            <div className="single-cart-area-list main item-parent" key={Wishlist.productId}>
-                <div className="product-main-cart">
-                    <div className="close section-activation">
-                        <img src="images/shop/01.png" alt="shop" />
-                    </div>
-                    <div className="thumbnail">
-                        <img src={Wishlist.productImage} alt={Wishlist.productName} />
-                    </div>
-                    <div className="information">
-                        <h6 className="title">{Wishlist.productName}</h6>
-                        <span>{Wishlist.productCategory}</span> {/* You can use productId if SKU is the product ID */}
-                    </div>
-                </div>
-                <div className="price">
-                    <p>₹{Wishlist.productOriginalRate || 'N/A'}</p> {/* Adjust as needed for your price */}
-                </div>
-                <div className="quantity">
-                    <div className="quantity-edit">
-                        <input type="text" className="input" value={Wishlist.quantity || 1} readOnly />
-                        <div className="button-wrapper-action">
-                            <button className="button"><i className="fa-regular fa-chevron-down"></i></button>
-                            <button className="button plus">+<i className="fa-regular fa-chevron-up"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <div className="subtotal">
-                    <p>₹{Wishlist.productCurrentRate ? Wishlist.productCurrentRate * Wishlist.quantity : 'N/A'}</p>
-                </div>
-                <div className="button-area">
-                    <a className="rts-btn btn-primary radious-sm with-icon" onClick={() => addCart(Wishlist)} style={{cursor:'pointer'}}>
-                        <div className="btn-text">
-                            Add To Cart
-                        </div>
-                        <div className="arrow-icon">
-                            <i className="fa-regular fa-cart-shopping"></i>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        ))}
-                    </div>
+                        ))
+                    ) : (
+                        <p style={{ fontSize:'20px',padding:'22px 20px',display: 'block',fontWeight: '600',color: '#629d23'}}>No Wishlist Item</p>
+                    )}
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 
 
     <div class="rts-shorts-service-area rts-section-gap bg_primary">

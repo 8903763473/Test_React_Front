@@ -34,6 +34,31 @@ export const ProductDetail = ({ setLoading }) => {
                 console.log(err);
             })
     }
+
+
+
+    const addToWishlist = (Category) => {
+        console.log("Adding to wishlist:", Category);
+        let post = {
+            "productId": Category._id,
+          "quantity": Category.productQuantity,            
+          "userId": localStorage.getItem('userId') 
+        };
+        api.AddwishList(post)
+          .then((res) => {
+            console.log('Wishlist response:', res);
+            triggerNotification('success', 'Success', 'Successfully Added in Wishlist', 'x', null)
+
+          })
+          .catch((error) => {
+            console.error('Error adding to wishlist:', error);
+            triggerNotification('error', 'Error', error.response.data.message, 'x', null)
+
+          });
+      };
+      
+
+
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const productId = searchParams.get('productId');
@@ -77,10 +102,7 @@ export const ProductDetail = ({ setLoading }) => {
     }
 
 
-    const addToWishlist=(data)=>{
-        console.log(data);
-        
-    }
+   
     useEffect(() => {
         // setselectedId(localStorage.getItem('SelectedProdId'))
         getProdById(productId)
@@ -169,7 +191,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                                 <i className="fa-regular fa-cart-shopping"></i>
                                                             </div>
                                                         </a>
-                                                        <a  className="rts-btn btn-primary ml--20"  ><i className="fa-light fa-heart"></i></a>
+                                                        {/* <a  className="rts-btn btn-primary ml--20"  ><i className="fa-light fa-heart"></i></a> */}
                                                     </div>
                                                     <div className="product-uniques" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'center', flexDirection: 'column' }}>
                                                         <span className="sku product-unipue mb--10"><span className='prodDetailText'>Status: </span> {prodDetail.productStatus}</span>
@@ -180,7 +202,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                         <span className="tags product-unipue mb--10"><span className='prodDetailText'>Category: </span> {prodDetail.productCategory}</span>
                                                     </div>
                                                     <div className="share-option-shop-details">
-                                                        <div className="single-share-option" onClick={() => addToWishlist(prodDetail)}>
+                                                        <div className="single-share-option"  onClick={() => addToWishlist(prodDetail)}>
                                                             <div className="icon"  >
                                                                 <i className="fa-regular fa-heart"></i>
                                                             </div>
@@ -524,7 +546,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                                 <img src={res.productImage} alt={res.productName}  style={{width: '50%'}}/>
                                                             </a>
                                                             <div className="action-share-option">
-                                                                <div className="single-action openuptip message-show-action" data-flow="up" title="Add To Wishlist" onClick={() => addToWishlist(prodDetail)}>
+                                                                <div className="single-action openuptip message-show-action" data-flow="up" title="Add To Wishlist" onClick={() => addToWishlist(res)}>
                                                                     <i className="fa-light fa-heart"></i>
                                                                 </div>
                                                                 <div className="single-action openuptip" data-flow="up" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal">
