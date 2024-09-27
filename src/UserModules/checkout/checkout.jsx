@@ -12,37 +12,16 @@ const Checkout = ({ setLoading }) => {
     const [showPopup, setShowPopup] = useState(true);
     const [myCart, setMyCart] = useState([]);
     const [Total, setTotal] = useState(0);
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
     const [feedback, setFeedback] = useState('');
-    const [rating, setRating] = useState(0);
+    // const [name, setName] = useState('');
+    // const [email, setEmail] = useState('');
+    // const [rating, setRating] = useState(0);
 
-    const handleNameChange = (e) => setName(e.target.value);
-    const handleEmailChange = (e) => setEmail(e.target.value);
-    const handleFeedbackChange = (e) => setFeedback(e.target.value);
+    // const handleNameChange = (e) => setName(e.target.value);
+    // const handleEmailChange = (e) => setEmail(e.target.value);
+    // const handleFeedbackChange = (e) => setFeedback(e.target.value);
 
-    const handleRatingClick = (value) => setRating(value);
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('User Input:', { name, email, feedback, rating });
-        let post = {
-            "customerName": name,
-            "email": email,
-            "feedbackText": feedback,
-            "rating": rating
-        }
-        api.Feedback(post)
-            .then(res => {
-                console.log(res);
-                console.log(checkoutId);
-
-                navigate('/invoice?orderId=' + checkoutId);
-
-            })
-
-    };
-
+    // const handleRatingClick = (value) => setRating(value);
 
     const [formData, setFormData] = useState({
         firstName: '',
@@ -197,9 +176,6 @@ const Checkout = ({ setLoading }) => {
         }
     }
 
-    // const Feedbacksubmit=()=>{
-
-    // }
     const handleInputChange = (e) => {
         const { id, value } = e.target;
         setFormData((prevData) => ({
@@ -208,6 +184,37 @@ const Checkout = ({ setLoading }) => {
         }));
     };
 
+
+    const [selectedRating, setSelectedRating] = useState(0);
+    const ratings = [1, 2, 3, 4, 5];
+
+    const handleFeebackSubmit = (e) => {
+        e.preventDefault();
+        // console.log('User Input:', { name, email, feedback, rating });
+        let post = {
+            "customerName": localStorage.getItem('name'),
+            "email": localStorage.getItem('email'),
+            "feedbackText": feedback,
+            "rating": selectedRating
+        }
+        api.Feedback(post)
+            .then(res => {
+                console.log(res);
+                console.log(checkoutId);
+                navigate('/invoice?orderId=' + checkoutId);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    };
+
+    const handleFeedbackChange = (event) => {
+        setFeedback(event.target.value);
+    };
+
+    const selectRating = (rating) => {
+        setSelectedRating(rating);
+    };
 
     return (
         <div>
@@ -386,48 +393,84 @@ const Checkout = ({ setLoading }) => {
 
             {/* popup */}
             {showPopup && (
-                <div className="feedbackpopup">
-                    <div className="popupfullpage">
+                // <div className="feedbackpopup">
+                //     <div className="popupfullpage">
 
-                        <div className="content">
-                            <h1 className='text'>Feedback</h1>
+                //         <div className="content">
+                //             <h1 className='text'>Feedback</h1>
 
-                            <form onSubmit={handleSubmit}>
-                                <div className="fields">
-                                    <label>Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
-                                    <input type="text" value={name} onChange={handleNameChange} />
-                                </div>
+                //             <form onSubmit={handleSubmit}>
+                //                 <div className="fields">
+                //                     <label>Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
+                //                     <input type="text" value={name} onChange={handleNameChange} />
+                //                 </div>
 
-                                <div className="fields">
-                                    <label>Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
-                                    <input type="email" value={email} onChange={handleEmailChange} />
-                                </div>
+                //                 <div className="fields">
+                //                     <label>Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
+                //                     <input type="email" value={email} onChange={handleEmailChange} />
+                //                 </div>
 
-                                <div className="fields">
-                                    <label>Feedback&nbsp;&nbsp;:</label>
-                                    <textarea value={feedback} onChange={handleFeedbackChange}></textarea>
-                                </div>
+                //                 <div className="fields">
+                //                     <label>Feedback&nbsp;&nbsp;:</label>
+                //                     <textarea value={feedback} onChange={handleFeedbackChange}></textarea>
+                //                 </div>
 
-                                <div className="rating">
-                                    {Array.from({ length: 5 }, (_, index) => (
-                                        <i
-                                            key={index}
-                                            className={`fa fa-star ${index < rating ? 'selected' : ''}`}
-                                            onClick={() => handleRatingClick(index + 1)} // Set rating on click
-                                            style={{ cursor: 'pointer', color: index < rating ? 'yellow' : 'gray' }} // Set color based on rating
-                                        ></i>
-                                    ))}
-                                </div>
+                //                 <div className="rating">
+                //                     {Array.from({ length: 5 }, (_, index) => (
+                //                         <i
+                //                             key={index}
+                //                             className={`fa fa-star ${index < rating ? 'selected' : ''}`}
+                //                             onClick={() => handleRatingClick(index + 1)} // Set rating on click
+                //                             style={{ cursor: 'pointer', color: index < rating ? 'yellow' : 'gray' }} // Set color based on rating
+                //                         ></i>
+                //                     ))}
+                //                 </div>
 
-                                <div className="btn">
-                                    <button type="submit">Submit</button>
-                                </div>
-                            </form>
+                //                 <div className="btn">
+                //                     <button type="submit">Submit</button>
+                //                 </div>
+                //             </form>
+                //         </div>
+
+
+                //     </div>
+                // </div>
+
+                <main className='bg-overlay'>
+                    <div className="rating-card">
+                        <div className="rating-card__front">
+                            <div className="rating-card__img">
+                                <img src="https://rvs-interactive-rating-component.vercel.app/images/icon-star.svg" alt="" />
+                            </div>
+                            <div className="rating-card__content">
+                                <h2>How did we do?</h2>
+                                <p>We value your feedback to help us enhance our services and offerings. Please share your thoughts!</p>
+                            </div>
+                            <div className="rating-card__ratings">
+                                {ratings.map((rating) => (
+                                    <button
+                                        key={rating}
+                                        onClick={() => selectRating(rating)}
+                                        className={selectedRating === rating ? 'active' : ''}
+                                    >
+                                        {rating}
+                                    </button>
+                                ))}
+                            </div>
+                            <textarea
+                                value={feedback}
+                                onChange={handleFeedbackChange}
+                                placeholder="Your feedback..."
+                                rows="4"
+                                className="feedback-textarea"
+                            />
+                            <button className="rating-card__btn" onClick={handleFeebackSubmit}>
+                                Submit
+                            </button>
                         </div>
-
-
                     </div>
-                </div>
+                </main>
+
             )};
             <Footer />
         </div>
