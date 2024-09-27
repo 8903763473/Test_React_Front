@@ -71,8 +71,8 @@ const api = {
         return apiInstance.get("/checkout/getCheckoutById/" + id);
     },
 
-    trackOrder: (data) => {
-        return apiInstance.post("/checkout/trackOrder", data);
+    TrackOrder: (data) => {
+        return apiInstance.get("/checkout/TrackOrder/" + data);
     },
 
     Feedback: (data) => {
@@ -83,6 +83,9 @@ const api = {
     },
     GetwishList: (userId) => {
         return apiInstance.post("/wish/getmyWish", userId);
+    },
+    GetAccountDetail: (userId) => {
+        return apiInstance.get("/user/getUserById/" + userId);
     }
 
 }
