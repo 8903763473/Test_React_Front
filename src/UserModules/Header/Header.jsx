@@ -654,7 +654,7 @@ export const Header = () => {
                                     </div>
                                     <div className="main-wrapper-action-2 d-flex">
                                         <div className="accont-wishlist-cart-area-header">
-                                            <a href="account.html" className="btn-border-only account">
+                                            <a className="btn-border-only account" onClick={() => routeCart('account')}>
                                                 <i className="fa-light fa-user"></i>
                                                 Account
                                             </a>

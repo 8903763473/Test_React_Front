@@ -115,6 +115,10 @@ const UserDashboard = ({ setLoading }) => {
         setviewOrderId(0);
     }
 
+    const TrackOrder = (OrderId) => {
+        navigate('/TrackMyOrder?orderId=' + OrderId)
+    }
+
 
     return (
         <div >
@@ -209,17 +213,17 @@ const UserDashboard = ({ setLoading }) => {
                                     <div className="tracing-order-account">
                                         <h2 className="title">Orders tracking</h2>
                                         <p>
-                                            To keep up with the status of your order, kindly input your Order ID and Billing email in the fields below and click the "Track" button.
+                                            To keep up with the status of your order, kindly copy your Order ID paste in the fields below and click the "Track" button to track your Order.
                                         </p>
                                         <form className="order-tracking">
                                             <div className="single-input">
                                                 <label htmlFor="order-id">Order Id</label>
-                                                <input type="text" placeholder="Found in your order confirmation email" required />
+                                                <input type="text" placeholder="Paste Order Id" required />
                                             </div>
-                                            <div className="single-input">
+                                            {/* <div className="single-input">
                                                 <label htmlFor="billing-email">Billing email</label>
                                                 <input type="text" placeholder="Email you used during checkout" />
-                                            </div>
+                                            </div> */}
                                             <button className="rts-btn btn-primary" onClick={trackOrder}>Track</button>
                                         </form>
                                     </div>
@@ -231,25 +235,25 @@ const UserDashboard = ({ setLoading }) => {
                                     <div className="shipping-address-billing-address-account">
                                         <div className="half">
                                             <h2 className="title">Billing Address</h2>
-                                            <p className="address">
+                                            <p className="address start">
                                                 3522 Interstate <br />
                                                 75 Business Spur, <br />
                                                 Sault Ste. <br />
                                                 Marie, MI 49783 <br />
                                                 New York
                                             </p>
-                                            <a href="#">Edit</a>
+                                            <a className='start d-flex width-100'>Edit</a>
                                         </div>
                                         <div className="half">
                                             <h2 className="title">Shipping Address</h2>
-                                            <p className="address">
+                                            <p className="address start">
                                                 3522 Interstate <br />
                                                 75 Business Spur, <br />
                                                 Sault Ste. <br />
                                                 Marie, MI 49783 <br />
                                                 New York
                                             </p>
-                                            <a href="#">Edit</a>
+                                            <a className='start d-flex width-100'>Edit</a>
                                         </div>
                                     </div>
                                 </div>
@@ -268,9 +272,9 @@ const UserDashboard = ({ setLoading }) => {
                                             </div>
                                         </div> */}
 
-                                        <input type="text" placeholder="Display Name" required value={AccountDetails.name} />
-                                        <input type="email" placeholder="Email Address *" required value={AccountDetails.email} />
-                                        <input type="number" placeholder="Mobile Number *" required value={AccountDetails.mobile} />
+                                        <input type="text" placeholder="Display Name" required value={AccountDetails.name} readonly />
+                                        <input type="email" placeholder="Email Address *" required value={AccountDetails.email} readonly />
+                                        <input type="number" placeholder="Mobile Number *" required value={AccountDetails.mobile} readonly />
                                         {/* <input type="password" placeholder="New Password *" />
                                         <input type="password" placeholder="Confirm Password *" /> */}
                                         <button className="rts-btn btn-primary">Save Change</button>
@@ -283,11 +287,6 @@ const UserDashboard = ({ setLoading }) => {
             </div>
 
             {/* *****************************************VIEW ORDER***************************** */}
-
-
-            {/* {viewOrderId != 0 &&
-                
-            } */}
 
             <div className={`ViewOrderInfo ${viewOrderId !== 0 ? 'd-block' : 'd-none'}`}>
                 <div className={`order-detail ${viewOrderId !== 0 ? 'left-shown' : 'left-hidden'}`}>
@@ -306,15 +305,15 @@ const UserDashboard = ({ setLoading }) => {
                                     <p className="order-title">{res.productId.productName}</p>
                                     <span>|</span>
                                     <p className="order-size">{res.productId.productCategory}</p> {/* Update this if needed */}
-                                    <span className="minus">-</span>
+                                    {/* <span className="minus">-</span> */}
                                     <div className="order-quantity">
-                                        <p>{res.quantity}</p>
+                                        <p>{res.quantity} Qty</p>
                                     </div>
-                                    <span className="plus">+</span>
+                                    {/* <span className="plus">+</span> */}
                                     <p className="order-price">₹ {res.price}</p>
-                                    <div className="remove-order">
+                                    {/* <div className="remove-order">
                                         <i className="fa-solid fa-x"></i>
-                                    </div>
+                                    </div> */}
                                 </div>
                             ))
                         }
@@ -334,7 +333,7 @@ const UserDashboard = ({ setLoading }) => {
                                 <p className='font-bold'>₹ {totalAmount + 40}</p>
                             </div>
                         </div>
-                        <div class="checkout-button">Track Order</div>
+                        <div class="checkout-button" onClick={() => TrackOrder(viewOrderId)}>Track Order</div>
                     </div>
                 </div>
             </div>

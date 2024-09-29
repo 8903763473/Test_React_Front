@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const Checkout = ({ setLoading }) => {
     const navigate = useNavigate()
     const [checkoutId, setcheckoutId] = useState(0)
-    const [showPopup, setShowPopup] = useState(true);
+    const [showPopup, setShowPopup] = useState(false);
     const [myCart, setMyCart] = useState([]);
     const [Total, setTotal] = useState(0);
     const [feedback, setFeedback] = useState('');
@@ -153,6 +153,7 @@ const Checkout = ({ setLoading }) => {
             zipCode: formData.zipCode,
             phone: formData.phone,
             orderNotes: formData.orderNotes,
+            orderStatus: 'Confirmed',
             products: myCart.map((item) => ({
                 productId: item.productId,
                 quantity: item.quantity,
