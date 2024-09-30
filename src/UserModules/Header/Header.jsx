@@ -84,11 +84,7 @@ export const Header = () => {
 
     const getSearchproduct = (data) => {
         console.log(data);
-        // api.SearchProduct(data).then(res=>{
-        //     console.log(res);
         navigate('/Search?query=' + data)
-
-        // })
     }
 
 
@@ -97,8 +93,8 @@ export const Header = () => {
     };
 
     const handleSubmit = (event) => {
-        event.preventDefault(); // Prevents the form from reloading the page
-        getSearchproduct(searchTerm); // Call your search function
+        event.preventDefault(); 
+        getSearchproduct(searchTerm); 
     };
 
 
@@ -172,7 +168,6 @@ export const Header = () => {
                     <div className="container">
                         <section>
                             <div className="loader loader-20" style={{ fontsize: '40px' }}>
-                                {/* <div className="css-diamond"></div> */}
                             </div>
                         </section>
 

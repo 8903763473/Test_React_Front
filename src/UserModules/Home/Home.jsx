@@ -638,11 +638,11 @@ const HomePage = ({ setLoading }) => {
                         }
                     }'>
                                     <div className="swiper-wrapper">
-                                        <div className="swiper-slide">
+                                        <div className="swiper-slide custom-swiper-slide">
                                             <div className="single-shopping-card-one">
 
                                                 <div className="image-and-action-area-wrapper">
-                                                    <a href="shop-details.html" className="thumbnail-preview">
+                                                    <a href="shop-details.html" className="thumbnail-preview width-100">
                                                         <div className="badge">
                                                             <span>21%   <br />
                                                                 Off
@@ -668,13 +668,13 @@ const HomePage = ({ setLoading }) => {
                                                 <div className="body-content">
 
                                                     <a href="shop-details.html">
-                                                        <h4 className="title">Nestle Cerelac Mixed Fruits &
+                                                        <h4 className="title start">Nestle Cerelac Mixed Fruits &
                                                             Wheat with Milk</h4>
                                                     </a>
-                                                    <span className="availability">500g Pack</span>
-                                                    <div className="price-area">
-                                                        <span className="current">$36.00</span>
-                                                        <div className="previous">$36.00</div>
+                                                    <span className="availability width-100 d-flex start">500g Pack</span>
+                                                    <div className="price-area justify-content-flex-start">
+                                                        <span className="current start">$36.00</span>
+                                                        <div className="previous start">$36.00</div>
                                                     </div>
                                                     <div className="cart-counter-action">
                                                         <div className="quantity-edit">
@@ -700,11 +700,11 @@ const HomePage = ({ setLoading }) => {
                                             </div>
                                         </div>
 
-                                        <div className="swiper-slide">
+                                        <div className="swiper-slide custom-swiper-slide">
                                             <div className="single-shopping-card-one">
 
                                                 <div className="image-and-action-area-wrapper">
-                                                    <a href="shop-details.html" className="thumbnail-preview">
+                                                    <a href="shop-details.html" className="thumbnail-preview width-100">
                                                         <div className="badge">
                                                             <span>25%   <br />
                                                                 Off
@@ -729,12 +729,12 @@ const HomePage = ({ setLoading }) => {
                                                 <div className="body-content">
 
                                                     <a href="shop-details.html">
-                                                        <h4 className="title">Peysan Full Fat Fresh Cottage Cheese</h4>
+                                                        <h4 className="title start">Peysan Full Fat Fresh Cottage Cheese</h4>
                                                     </a>
-                                                    <span className="availability">500g Pack</span>
-                                                    <div className="price-area">
-                                                        <span className="current">$36.00</span>
-                                                        <div className="previous">$36.00</div>
+                                                    <span className="availability width-100 d-flex start">500g Pack</span>
+                                                    <div className="price-area justify-content-flex-start">
+                                                        <span className="current start">$36.00</span>
+                                                        <div className="previous start">$36.00</div>
                                                     </div>
                                                     <div className="cart-counter-action">
                                                         <div className="quantity-edit">
@@ -760,11 +760,11 @@ const HomePage = ({ setLoading }) => {
                                             </div>
                                         </div>
 
-                                        <div className="swiper-slide">
+                                        <div className="swiper-slide custom-swiper-slide">
                                             <div className="single-shopping-card-one">
 
                                                 <div className="image-and-action-area-wrapper">
-                                                    <a href="shop-details.html" className="thumbnail-preview">
+                                                    <a href="shop-details.html" className="thumbnail-preview width-100">
                                                         <div className="badge">
                                                             <span>25%   <br />
                                                                 Off
@@ -789,12 +789,12 @@ const HomePage = ({ setLoading }) => {
                                                 <div className="body-content">
 
                                                     <a href="shop-details.html">
-                                                        <h4 className="title">Aptamil Gold+ ProNutra Biotik Stage...</h4>
+                                                        <h4 className="title start">Aptamil Gold+ ProNutra Biotik Stage...</h4>
                                                     </a>
-                                                    <span className="availability">500g Pack</span>
-                                                    <div className="price-area">
-                                                        <span className="current">$36.00</span>
-                                                        <div className="previous">$36.00</div>
+                                                    <span className="availability width-100 d-flex start">500g Pack</span>
+                                                    <div className="price-area justify-content-flex-start">
+                                                        <span className="current start">$36.00</span>
+                                                        <div className="previous start">$36.00</div>
                                                     </div>
                                                     <div className="cart-counter-action">
                                                         <div className="quantity-edit">
@@ -820,11 +820,11 @@ const HomePage = ({ setLoading }) => {
                                             </div>
                                         </div>
 
-                                        <div className="swiper-slide">
+                                        <div className="swiper-slide custom-swiper-slide">
                                             <div className="single-shopping-card-one">
 
                                                 <div className="image-and-action-area-wrapper">
-                                                    <a href="shop-details.html" className="thumbnail-preview">
+                                                    <a href="shop-details.html" className="thumbnail-preview width-100">
                                                         <div className="badge">
                                                             <span>25%   <br />
                                                                 Off
@@ -849,12 +849,12 @@ const HomePage = ({ setLoading }) => {
                                                 <div className="body-content">
 
                                                     <a href="shop-details.html">
-                                                        <h4 className="title">Abbott Pediasure Chocolate Refill Pack</h4>
+                                                        <h4 className="title start">Abbott Pediasure Chocolate Refill Pack</h4>
                                                     </a>
-                                                    <span className="availability">500g Pack</span>
-                                                    <div className="price-area">
-                                                        <span className="current">$36.00</span>
-                                                        <div className="previous">$36.00</div>
+                                                    <span className="availability width-100 d-flex start">500g Pack</span>
+                                                    <div className="price-area justify-content-flex-start">
+                                                        <span className="current start">$36.00</span>
+                                                        <div className="previous start">$36.00</div>
                                                     </div>
                                                     <div className="cart-counter-action">
                                                         <div className="quantity-edit">
@@ -880,11 +880,11 @@ const HomePage = ({ setLoading }) => {
                                             </div>
                                         </div>
 
-                                        <div className="swiper-slide">
+                                        <div className="swiper-slide custom-swiper-slide">
                                             <div className="single-shopping-card-one">
 
                                                 <div className="image-and-action-area-wrapper">
-                                                    <a href="shop-details.html" className="thumbnail-preview">
+                                                    <a href="shop-details.html" className="thumbnail-preview width-100">
                                                         <div className="badge">
                                                             <span>25%   <br />
                                                                 Off
@@ -909,12 +909,12 @@ const HomePage = ({ setLoading }) => {
                                                 <div className="body-content">
 
                                                     <a href="shop-details.html">
-                                                        <h4 className="title">Pastine Mellin Filid Angelo 100% Di Grano Tenero</h4>
+                                                        <h4 className="title start">Pastine Mellin Filid Angelo 100% Di Grano Tenero</h4>
                                                     </a>
-                                                    <span className="availability">500g Pack</span>
-                                                    <div className="price-area">
-                                                        <span className="current">$36.00</span>
-                                                        <div className="previous">$36.00</div>
+                                                    <span className="availability width-100 d-flex start">500g Pack</span>
+                                                    <div className="price-area justify-content-flex-start">
+                                                        <span className="current start">$36.00</span>
+                                                        <div className="previous start">$36.00</div>
                                                     </div>
                                                     <div className="cart-counter-action">
                                                         <div className="quantity-edit">
@@ -940,11 +940,11 @@ const HomePage = ({ setLoading }) => {
                                             </div>
                                         </div>
 
-                                        <div className="swiper-slide">
+                                        <div className="swiper-slide custom-swiper-slide">
                                             <div className="single-shopping-card-one">
 
                                                 <div className="image-and-action-area-wrapper">
-                                                    <a href="shop-details.html" className="thumbnail-preview">
+                                                    <a href="shop-details.html" className="thumbnail-preview width-100">
                                                         <div className="badge">
                                                             <span>25%   <br />
                                                                 Off
@@ -969,12 +969,12 @@ const HomePage = ({ setLoading }) => {
                                                 <div className="body-content">
 
                                                     <a href="shop-details.html">
-                                                        <h4 className="title">Aussie Bubs Goat Milk Infant Formula Stage 1,</h4>
+                                                        <h4 className="title start">Aussie Bubs Goat Milk Infant Formula Stage 1,</h4>
                                                     </a>
-                                                    <span className="availability">500g Pack</span>
-                                                    <div className="price-area">
-                                                        <span className="current">$36.00</span>
-                                                        <div className="previous">$36.00</div>
+                                                    <span className="availability width-100 d-flex start">500g Pack</span>
+                                                    <div className="price-area justify-content-flex-start">
+                                                        <span className="current start">$36.00</span>
+                                                        <div className="previous start">$36.00</div>
                                                     </div>
                                                     <div className="cart-counter-action">
                                                         <div className="quantity-edit">
@@ -1000,11 +1000,11 @@ const HomePage = ({ setLoading }) => {
                                             </div>
                                         </div>
 
-                                        <div className="swiper-slide">
+                                        <div className="swiper-slide custom-swiper-slide">
                                             <div className="single-shopping-card-one">
 
                                                 <div className="image-and-action-area-wrapper">
-                                                    <a href="shop-details.html" className="thumbnail-preview">
+                                                    <a href="shop-details.html" className="thumbnail-preview width-100">
                                                         <div className="badge">
                                                             <span>25%   <br />
                                                                 Off
@@ -1029,13 +1029,13 @@ const HomePage = ({ setLoading }) => {
                                                 <div className="body-content">
 
                                                     <a href="shop-details.html">
-                                                        <h4 className="title">Nestle Cerelac Mixed Fruits &
+                                                        <h4 className="title start">Nestle Cerelac Mixed Fruits &
                                                             Wheat with Milk</h4>
                                                     </a>
-                                                    <span className="availability">500g Pack</span>
-                                                    <div className="price-area">
-                                                        <span className="current">$36.00</span>
-                                                        <div className="previous">$36.00</div>
+                                                    <span className="availability width-100 d-flex start">500g Pack</span>
+                                                    <div className="price-area justify-content-flex-start">
+                                                        <span className="current start">$36.00</span>
+                                                        <div className="previous start">$36.00</div>
                                                     </div>
                                                     <div className="cart-counter-action">
                                                         <div className="quantity-edit">
@@ -1129,7 +1129,7 @@ const HomePage = ({ setLoading }) => {
                                                                 <h4 className="title d-flex">{product.productName}</h4>
                                                             </a>
                                                             <span className="availability d-flex">{product.productQuantity} {product.productUnit} Pack</span>
-                                                            <div className="price-area">
+                                                            <div className="price-area justify-content-flex-start">
                                                                 <span className="current">${product.productCurrentRate}</span>
                                                                 <div className="previous">${product.productOriginalRate}</div>
                                                             </div>
