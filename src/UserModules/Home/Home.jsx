@@ -17,7 +17,7 @@ const HomePage = ({ setLoading }) => {
 
     const ProductDetail = (data) => {
         console.log(data);
-        navigate('/productDetail/' + data);
+        navigate('/productDetail?productId=' + data);
     };
 
     const ProductId = (data) => {
@@ -637,7 +637,7 @@ const HomePage = ({ setLoading }) => {
                             "spaceBetween":16}
                         }
                     }'>
-                                    <div className="swiper-wrapper">
+                                    <div className="swiper-wrapper gap-15">
                                         <div className="swiper-slide custom-swiper-slide">
                                             <div className="single-shopping-card-one">
 
@@ -4166,7 +4166,7 @@ const HomePage = ({ setLoading }) => {
                                                         <span>{product.productDiscount}% <br /> Off</span>
                                                         <i className="fa-solid fa-bookmark"></i>
                                                     </div>
-                                                    <img src={product.productImage} alt={product.productName} className='min-width-100 min-height-100' />
+                                                    <img src={product.productImage} alt={product.productName} className='min-width-100 min-height-100 trandProdImage' />
                                                 </a>
                                                 <div className="body-content">
                                                     <a >

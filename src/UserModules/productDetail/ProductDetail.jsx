@@ -10,6 +10,17 @@ export const ProductDetail = ({ setLoading }) => {
     const [prodDetail, setprodDetail] = useState([]);
     const [loading, setLoad] = useState(false);
     const [RelatedProduct, setRelatedProduct] = useState([]);
+    const [quantity, setQuantity] = useState(1);
+
+    const increaseQuantity = () => {
+        setQuantity(prev => prev + 1);
+    };
+
+    const decreaseQuantity = () => {
+        if (quantity > 1) {
+            setQuantity(prev => prev - 1);
+        }
+    };
 
 
     const GetProductByCategory = (category) => {
@@ -41,22 +52,22 @@ export const ProductDetail = ({ setLoading }) => {
         console.log("Adding to wishlist:", Category);
         let post = {
             "productId": Category._id,
-          "quantity": Category.productQuantity,            
-          "userId": localStorage.getItem('userId') 
+            "quantity": Category.productQuantity,
+            "userId": localStorage.getItem('userId')
         };
         api.AddwishList(post)
-          .then((res) => {
-            console.log('Wishlist response:', res);
-            triggerNotification('success', 'Success', 'Successfully Added in Wishlist', 'x', null)
+            .then((res) => {
+                console.log('Wishlist response:', res);
+                triggerNotification('success', 'Success', 'Successfully Added in Wishlist', 'x', null)
 
-          })
-          .catch((error) => {
-            console.error('Error adding to wishlist:', error);
-            triggerNotification('error', 'Error', error.response.data.message, 'x', null)
+            })
+            .catch((error) => {
+                console.error('Error adding to wishlist:', error);
+                triggerNotification('error', 'Error', error.response.data.message, 'x', null)
 
-          });
-      };
-      
+            });
+    };
+
 
 
     const location = useLocation();
@@ -102,7 +113,7 @@ export const ProductDetail = ({ setLoading }) => {
     }
 
 
-   
+
     useEffect(() => {
         // setselectedId(localStorage.getItem('SelectedProdId'))
         getProdById(productId)
@@ -112,7 +123,7 @@ export const ProductDetail = ({ setLoading }) => {
 
     return (
         <div>
-             <NotificationCenter ref={notificationRef} />
+            <NotificationCenter ref={notificationRef} />
 
 
 
@@ -171,17 +182,26 @@ export const ProductDetail = ({ setLoading }) => {
                                                     <p className="mt--20 mb--20 d-flex text-justify">
                                                         {prodDetail.productDescription}
                                                     </p>
-                                                    <span className="product-price mb--15 d-block text-justify" style={{ color: '#DC2626', fontWeight: 600 }}> ₹ {prodDetail.productCurrentRate}<span className="old-price ml--15">₹ {prodDetail.productOriginalRate}</span></span>
+                                                    <span className="product-price mb--15 d-block text-justify" style={{ color: '#DC2626', fontWeight: 600 }}> ₹ {quantity * prodDetail.productCurrentRate}<span className="old-price ml--15">₹ {prodDetail.productOriginalRate}</span></span>
                                                     <div className="product-bottom-action">
                                                         <div className="cart-edits">
                                                             <div className="quantity-edit action-item" style={{ width: 'auto' }}>
-                                                                <button className="button"><i className="fal fa-minus minus"></i></button>
-                                                                <input type="text" className="input" value="1" />
-                                                                <button className="button plus">+<i className="fal fa-plus plus"></i></button>
+                                                                <button className="button" onClick={decreaseQuantity}>
+                                                                    <i className="fal fa-minus minus"></i>
+                                                                </button>
+                                                                <input
+                                                                    type="text"
+                                                                    className="input"
+                                                                    value={quantity}
+                                                                    readOnly
+                                                                />
+                                                                <button className="button plus" onClick={increaseQuantity}>
+                                                                    +<i className="fal fa-plus plus"></i>
+                                                                </button>
                                                             </div>
                                                         </div>
-                                                        <a className="rts-btn btn-primary radious-sm with-icon" onClick={() => addCart(prodDetail)} style={{cursor:'pointer'}}>
-                                                            <div className="btn-text" > 
+                                                        <a className="rts-btn btn-primary radious-sm with-icon" onClick={() => addCart(prodDetail)} style={{ cursor: 'pointer' }}>
+                                                            <div className="btn-text" >
                                                                 Add To Cart
                                                             </div>
                                                             <div className="arrow-icon">
@@ -196,13 +216,13 @@ export const ProductDetail = ({ setLoading }) => {
                                                     <div className="product-uniques" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'center', flexDirection: 'column' }}>
                                                         <span className="sku product-unipue mb--10"><span className='prodDetailText'>Status: </span> {prodDetail.productStatus}</span>
                                                         {/* <span className="catagorys product-unipue mb--10"><span className='prodDetailText'>Categories: </span> {prodDetail.productCategory}</span> */}
-                                                        <span className="tags product-unipue mb--10"><span className='prodDetailText'>Tags: </span> fashion, t-shirts, Men</span>
+                                                        {/* <span className="tags product-unipue mb--10"><span className='prodDetailText'>Tags: </span> fashion, t-shirts, Men</span> */}
                                                         <span className="tags product-unipue mb--10"><span className='prodDetailText'>Unit: </span> {prodDetail.productQuantity} {prodDetail.productUnit}</span>
-                                                        <span className="tags product-unipue mb--10"><span className='prodDetailText'>Type: </span> original</span>
+                                                        {/* <span className="tags product-unipue mb--10"><span className='prodDetailText'>Type: </span> original</span> */}
                                                         <span className="tags product-unipue mb--10"><span className='prodDetailText'>Category: </span> {prodDetail.productCategory}</span>
                                                     </div>
                                                     <div className="share-option-shop-details">
-                                                        <div className="single-share-option"  onClick={() => addToWishlist(prodDetail)}>
+                                                        <div className="single-share-option" onClick={() => addToWishlist(prodDetail)}>
                                                             <div className="icon"  >
                                                                 <i className="fa-regular fa-heart"></i>
                                                             </div>
@@ -543,7 +563,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                                     <span>25% <br /> Off</span>
                                                                     <i className="fa-solid fa-bookmark"></i>
                                                                 </div>
-                                                                <img src={res.productImage} alt={res.productName}  style={{width: '50%'}}/>
+                                                                <img src={res.productImage} alt={res.productName} style={{ width: '50%' }} />
                                                             </a>
                                                             <div className="action-share-option">
                                                                 <div className="single-action openuptip message-show-action" data-flow="up" title="Add To Wishlist" onClick={() => addToWishlist(res)}>
@@ -579,7 +599,7 @@ export const ProductDetail = ({ setLoading }) => {
                                                                         <button className="button plus">+<i className="fa-regular fa-chevron-up"></i></button>
                                                                     </div>
                                                                 </div>
-                                                                <a className="rts-btn btn-primary radious-sm with-icon"  onClick={() => addCart(res)} style={{cursor:'pointer'}}>
+                                                                <a className="rts-btn btn-primary radious-sm with-icon" onClick={() => addCart(res)} style={{ cursor: 'pointer' }}>
                                                                     <div className="btn-text">
                                                                         Add To Cart
                                                                     </div>
