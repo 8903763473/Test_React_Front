@@ -93,8 +93,8 @@ export const Header = () => {
     };
 
     const handleSubmit = (event) => {
-        event.preventDefault(); 
-        getSearchproduct(searchTerm); 
+        event.preventDefault();
+        getSearchproduct(searchTerm);
     };
 
 
@@ -177,92 +177,7 @@ export const Header = () => {
 
 
             <div className="rts-header-one-area-one">
-                {/* <div className="header-top-area">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-12">
-                                <div className="bwtween-area-header-top">
-                                    <div className="discount-area">
-                                        <p className="disc">FREE delivery & 40% Discount for next 3 orders! Place your 1st order in.</p>
-                                        <div className="countdown">
-                                            <div className="countDown">10/05/2025 10:20:00</div>
-                                        </div>
-                                    </div>
-                                    <div className="contact-number-area">
-                                        <p>Need help? Call Us:
-                                            <a href="tel:+4733378901">+258 3268 21485</a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="header-mid-one-wrapper">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-12">
-                                <div className="header-mid-wrapper-between">
-                                    <div className="nav-sm-left">
-                                        <ul className="nav-h_top">
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="account.html">My Account</a></li>
-                                            <li><a href="wishlist.html">Wishlist</a></li>
-                                        </ul>
-                                        <p className="para">We deliver to your everyday from 7:00 to 22:00</p>
-                                    </div>
-                                    <div className="nav-sm-left">
-                                        <ul className="nav-h_top language">
-                                            <li className="category-hover-header language-hover">
-                                                <a href="http://google.com">English</a>
-                                                <ul className="category-sub-menu">
-                                                    <li>
-                                                        <a href="http://google.com" className="menu-item">
-                                                            <span>Italian</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="http://google.com" className="menu-item">
-                                                            <span>Russian</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="http://google.com" className="menu-item">
-                                                            <span>Chinian</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li className="category-hover-header language-hover">
-                                                <a href="http://google.com">
-                                                    USD
-                                                </a>
-                                                <ul className="category-sub-menu">
-                                                    <li>
-                                                        <a href="http://google.com" className="menu-item">
-                                                            <span>Rubol</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="http://google.com" className="menu-item">
-                                                            <span>Rupi</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="http://google.com" className="menu-item">
-                                                            <span>Euro</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="trackorder.html">Track Order</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
+
                 <div className="search-header-area-main">
                     <div className="container">
                         <div className="row">
@@ -280,7 +195,7 @@ export const Header = () => {
                                                     const categoryExists = acc.find(item => item.productCategory === curr.productCategory);
 
                                                     if (!categoryExists) {
-                                                        acc.push(curr); // Add unique categories to the accumulator
+                                                        acc.push(curr);
                                                     }
 
                                                     return acc;
@@ -291,12 +206,11 @@ export const Header = () => {
                                                             <span>{res.productCategory}</span>
                                                             <i
                                                                 className={`fa-regular fa-${openCategories[res.productCategory] ? 'minus' : 'plus'}`}
-                                                                onClick={() => toggleCategory(res.productCategory)} // Toggle dropdown on click
+                                                                onClick={() => toggleCategory(res.productCategory)}
                                                                 style={{ cursor: 'pointer' }}
                                                             ></i>
                                                         </a>
 
-                                                        {/* Show or hide submenu based on the state of the clicked category */}
                                                         {openCategories[res.productCategory] && (
                                                             <ul className="submenu mm-collapse">
                                                                 {FilterData.filter(item => item.productCategory === res.productCategory)
@@ -311,20 +225,7 @@ export const Header = () => {
                                                 ))}
                                             </ul>
 
-                                            {/* <ul className="category-sub-menu" id="category-active-four">
-                                            {FilterData.map((res, index) => (
-                                                <li key={index}>
-                                                    <a href="http://google.com" className="menu-item">
-                                                        <img src="images/icons/01.svg" alt="icons" />
-                                                        <span>{res.productCategory}</span>
-                                                        <i className="fa-regular fa-plus"></i>
-                                                    </a>
-                                                    <ul className="submenu mm-collapse">
-                                                        <li><a className="mobile-menu-link" > {res.productName}</a></li>
-                                                    </ul>
-                                                </li>
-                                                 ))}
-                                            </ul> */}
+
 
                                         </div>
                                         <form className="search-header" onSubmit={handleSubmit}>
@@ -373,6 +274,8 @@ export const Header = () => {
                                             <span className="text">Wishlist</span>
                                             <span className="number">{wishlistItems.length}</span>
                                         </a>
+
+
 
                                         <div className="btn-border-only cart category-hover-header">
                                             <i className="fa-sharp fa-regular fa-cart-shopping"></i>
@@ -423,6 +326,14 @@ export const Header = () => {
                                             </div>
                                         </div>
 
+                                        <a className="btn-border-only wishlist" style={{ cursor: 'pointer' }} onClick={() => triggerNotification('warning', 'Warning', 'Sure to Logout', 'Sure', 'logout')}>
+                                            <i className="fa fa-sign-in" aria-hidden="true"></i>
+                                            <span className="text">
+                                                {isLogged === 'success' ? 'Logout' : 'Register / Login'}
+                                            </span>
+                                        </a>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -434,18 +345,12 @@ export const Header = () => {
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="nav-and-btn-wrapper">
-                                    <div className="nav-area">
+                                    {/* <div className="nav-area">
                                         <nav>
                                             <ul className="parent-nav">
                                                 <li className="parent has-dropdown">
                                                     <a className="pointer" onClick={() => RouteTo('home')}>Home</a>
-                                                    {/* <ul className="submenu">
-                                                        <li><a className="sub-b" href="index-2.html">Home One</a></li>
-                                                        <li><a className="sub-b" href="index-two.html">Home Two</a></li>
-                                                        <li><a className="sub-b" href="index-three.html">Home Three</a></li>
-                                                        <li><a className="sub-b" href="index-four.html">Home Four</a></li>
-                                                        <li><a className="sub-b" href="index-five.html">Home Five</a></li>
-                                                    </ul> */}
+                                                  
                                                 </li>
                                                 <li className="parent"><a className='pointer' onClick={() => RouteTo('about')}>About</a></li>
                                                 <li className="parent with-megamenu">
@@ -546,7 +451,7 @@ export const Header = () => {
                                                 <li className="parent" onClick={() => triggerNotification('warning', 'Warning', 'Sure to Logout', 'Sure', 'logout')}><a className='pointer'>{isLogged == 'success' ? 'Logout' : 'Login'}</a></li>
                                             </ul>
                                         </nav>
-                                    </div>
+                                    </div> */}
                                     <div className="right-btn-area">
                                         <a href="http://google.com" className="btn-narrow">Trending Products</a>
                                         <button className="rts-btn btn-primary">

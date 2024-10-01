@@ -113,228 +113,7 @@ const HomePage = ({ setLoading }) => {
             <NotificationCenter ref={notificationRef} />
 
             <Header />
-            {/* <section className="shop-main-h">  */}
-
-            <div id="side-bar" className="side-bar header-two">
-                <button className="close-icon-menu"><i className="far fa-times"></i></button>
-
-
-                <form action="#" className="search-input-area-menu mt--30">
-                    <input type="text" placeholder="Search..." required />
-                    <button><i className="fa-light fa-magnifying-glass"></i></button>
-                </form>
-
-                <div className="mobile-menu-nav-area tab-nav-btn mt--20">
-
-                    <nav>
-                        <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                            <button className="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Menu</button>
-                            <button className="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Category</button>
-                        </div>
-                    </nav>
-
-                    <div className="tab-content" id="nav-tabContent">
-                        <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabIndex="0">
-
-                            <div className="mobile-menu-main">
-                                <nav className="nav-main mainmenu-nav mt--30">
-                                    <ul className="mainmenu metismenu" id="mobile-menu-active">
-                                        <li className="has-droupdown">
-                                            <a href="http://google.com" className="main">Home</a>
-                                            <ul className="submenu mm-collapse">
-                                                <li><a className="mobile-menu-link" href="index-2.html">Home One</a></li>
-                                                <li><a className="mobile-menu-link" href="index-two.html">Home Two</a></li>
-                                                <li><a className="mobile-menu-link" href="index-three.html">Home Three</a></li>
-                                                <li><a className="mobile-menu-link" href="index-four.html">Home Four</a></li>
-                                                <li><a className="mobile-menu-link" href="index-five.html"> Home Five</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="about.html" className="main">About</a>
-                                        </li>
-                                        <li className="has-droupdown">
-                                            <a href="http://google.com" className="main">Pages</a>
-                                            <ul className="submenu mm-collapse">
-                                                <li><a className="mobile-menu-link" href="about.html">About</a></li>
-                                                <li><a className="mobile-menu-link" href="faq.html">Faq's</a></li>
-                                                <li><a className="mobile-menu-link" href="invoice.html">Invoice</a></li>
-                                                <li><a className="mobile-menu-link" href="contact.html">Contact</a></li>
-                                                <li><a className="mobile-menu-link" href="register.html">Register</a></li>
-                                                <li><a className="mobile-menu-link" href="login.html">Login</a></li>
-                                                <li><a className="mobile-menu-link" href="privacy-policy.html">Privacy Policy</a></li>
-                                                <li><a className="mobile-menu-link" href="cookies-policy.html">Cookies Policy</a></li>
-                                                <li><a className="mobile-menu-link" href="terms-condition.html">Terms Condition</a></li>
-                                                <li><a className="mobile-menu-link" href="404.html">Error Page</a></li>
-                                            </ul>
-                                        </li>
-                                        <li className="has-droupdown">
-                                            <a href="http://google.com" className="main">Shop</a>
-                                            <ul className="submenu mm-collapse">
-                                                <li className="has-droupdown third-lvl">
-                                                    <a className="main" href="http://google.com">Shop Layout</a>
-                                                    <ul className="submenu-third-lvl mm-collapse">
-                                                        <li><a>SHOP GRID SLIDEBAR</a>Shop Grid Sidebar</li>
-                                                        <li><a>SHOP LIST SILDEBAR</a>Shop List Sidebar</li>
-                                                        <li><a >SHOP GRID TOP FILTER</a>Shop Grid Top Filter</li>
-                                                        <li><a >SHOP LIST TOP FILTER</a>Shop List Top Filter</li>
-                                                    </ul>
-                                                </li>
-                                                <li className="has-droupdown third-lvl">
-                                                    <a className="main" href="http://google.com">Shop Details</a>
-                                                    <ul className="submenu-third-lvl mm-collapse">
-                                                        <li><a href="shop-details.html">SHOP DETAILS</a>Shop Details</li>
-                                                        <li><a href="shop-details-2.html">SHOP DETAILS 2</a>Shop Details 2</li>
-                                                        <li><a href="shop-grid-top-filter.html">SHOP GRID TOP FILTER</a>Shop Grid Top Filter</li>
-                                                        <li><a href="shop-list-top-filter.html">SHOP LIST TOP FILTER</a>Shop List Top Filter</li>
-                                                    </ul>
-                                                </li>
-                                                <li className="has-droupdown third-lvl">
-                                                    <a className="main" href="http://google.com">Product Feature</a>
-                                                    <ul className="submenu-third-lvl mm-collapse">
-                                                        <li><a href="shop-details-variable.html">SHOP DETAILS VARIABLE</a>Shop Details Variable</li>
-                                                        <li><a href="shop-details-affiliats.html">SHOP DETAILS AFFILIATS</a>Shop Details Affiliats</li>
-                                                        <li><a href="shop-details-group.html">SHOP DETAILS GROUP</a>Shop Details Group</li>
-                                                        <li><a href="shop-compare.html">SHOP COMPARE</a>Shop Compare</li>
-                                                    </ul>
-                                                </li>
-                                                <li className="has-droupdown third-lvl">
-                                                    <a className="main" href="http://google.com">Shop Others</a>
-                                                    <ul className="submenu-third-lvl mm-collapse">
-                                                        <li><a href="cart.html">CART</a>Cart</li>
-                                                        <li><a href="checkout.html">CHECKOUT</a>Checkout</li>
-                                                        <li><a href="trackorder.html">TRACK ORDER</a>Trackorder</li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li className="has-droupdown">
-                                            <a href="http://google.com" className="main">Blog</a>
-                                            <ul className="submenu mm-collapse">
-                                                <li><a className="mobile-menu-link" href="blog.html">Blog</a></li>
-                                                <li><a className="mobile-menu-link" href="blog-list-left-sidebar.html">Blog Left Sidebar</a></li>
-                                                <li><a className="mobile-menu-link" href="blog-list-right-sidebar.html">Blog List Right Sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="contact.html" className="main">Contact Us</a>
-                                        </li>
-                                    </ul>
-                                </nav>
-
-                            </div>
-                        </div>
-                        <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabIndex="0">
-                            <div className="category-btn category-hover-header menu-category">
-                                <ul className="category-sub-menu" id="category-active-menu">
-                                    <li>
-                                        <a href="http://google.com" className="menu-item">
-                                            <img src="images/icons/01.svg" alt="icons" />
-                                            <span>Breakfast &amp; Dairy</span>
-                                            <i className="fa-regular fa-plus"></i>
-                                        </a>
-                                        <ul className="submenu mm-collapse">
-                                            <li><a className="mobile-menu-link" href="http://google.com">Breakfast</a></li>
-                                            <li><a className="mobile-menu-link" href="http://google.com">Dinner</a></li>
-                                            <li><a className="mobile-menu-link" href="http://google.com"> Pumking</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="http://google.com" className="menu-item">
-                                            <img src="images/icons/02.svg" alt="icons" />
-                                            <span>Meats &amp; Seafood</span>
-                                            <i className="fa-regular fa-plus"></i>
-                                        </a>
-                                        <ul className="submenu mm-collapse">
-                                            <li><a className="mobile-menu-link" href="http://google.com">Breakfast</a></li>
-                                            <li><a className="mobile-menu-link" href="http://google.com">Dinner</a></li>
-                                            <li><a className="mobile-menu-link" href="http://google.com"> Pumking</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="http://google.com" className="menu-item">
-                                            <img src="images/icons/03.svg" alt="icons" />
-                                            <span>Breads &amp; Bakery</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="http://google.com" className="menu-item">
-                                            <img src="images/icons/04.svg" alt="icons" />
-                                            <span>Chips &amp; Snacks</span>
-                                            <i className="fa-regular fa-plus"></i>
-                                        </a>
-                                        <ul className="submenu mm-collapse">
-                                            <li><a className="mobile-menu-link" href="http://google.com">Breakfast</a></li>
-                                            <li><a className="mobile-menu-link" href="http://google.com">Dinner</a></li>
-                                            <li><a className="mobile-menu-link" href="http://google.com"> Pumking</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="http://google.com" className="menu-item">
-                                            <img src="images/icons/05.svg" alt="icons" />
-                                            <span>Medical Healthcare</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="http://google.com" className="menu-item">
-                                            <img src="images/icons/06.svg" alt="icons" />
-                                            <span>Breads &amp; Bakery</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="http://google.com" className="menu-item">
-                                            <img src="images/icons/07.svg" alt="icons" />
-                                            <span>Biscuits &amp; Snacks</span>
-                                            <i className="fa-regular fa-plus"></i>
-                                        </a>
-                                        <ul className="submenu mm-collapse">
-                                            <li><a className="mobile-menu-link" href="http://google.com">Breakfast</a></li>
-                                            <li><a className="mobile-menu-link" href="http://google.com">Dinner</a></li>
-                                            <li><a className="mobile-menu-link" href="http://google.com"> Pumking</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="http://google.com" className="menu-item">
-                                            <img src="images/icons/08.svg" alt="icons" />
-                                            <span>Frozen Foods</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="http://google.com" className="menu-item">
-                                            <img src="images/icons/09.svg" alt="icons" />
-                                            <span>Grocery &amp; Staples</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="http://google.com" className="menu-item">
-                                            <img src="images/icons/10.svg" alt="icons" />
-                                            <span>Other Items</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div className="button-area-main-wrapper-menuy-sidebar mt--50">
-                    <div className="contact-area">
-                        <div className="phone">
-                            <i className="fa-light fa-headset"></i>
-                            <a href="http://google.com">02345697871</a>
-                        </div>
-                        <div className="phone">
-                            <i className="fa-light fa-envelope"></i>
-                            <a href="http://google.com">02345697871</a>
-                        </div>
-                    </div>
-                    <div className="buton-area-bottom">
-                        <a href="login.html" className="rts-btn btn-primary">Sign In</a>
-                        <a href="register.html" className="rts-btn btn-primary">Sign Up</a>
-                    </div>
-                </div>
-
-            </div>
+        
 
             <div className="background-light-gray-color rts-section-gap bg_light-1 pt_sm--20">
                 <div className="rts-banner-area-one mb--30">
@@ -431,7 +210,7 @@ const HomePage = ({ setLoading }) => {
                     </div>
                 </div>
 
-                <div className="rts-caregory-area-one ">
+                {/* <div className="rts-caregory-area-one ">
                     <div className="container">
                         <div className="row">
 
@@ -484,11 +263,11 @@ const HomePage = ({ setLoading }) => {
 
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
 
 
-            <div className="rts-feature-area rts-section-gap">
+            {/* <div className="rts-feature-area rts-section-gap">
                 <div className="container">
                     <div className="row g-4">
                         <div className="col-xl-20 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -579,9 +358,9 @@ const HomePage = ({ setLoading }) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
-            <div className="rts-grocery-feature-area rts-section-gapBottom">
+            {/* <div className="rts-grocery-feature-area rts-section-gapBottom">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
@@ -1066,9 +845,9 @@ const HomePage = ({ setLoading }) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
-            <div className="rts-grocery-feature-area rts-section-gapBottom">
+            {/* <div className="rts-grocery-feature-area rts-section-gapBottom">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
@@ -1162,7 +941,7 @@ const HomePage = ({ setLoading }) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             <div className="weekly-best-selling-area rts-section-gap bg_light-1">
                 <div className="container">
@@ -1170,7 +949,7 @@ const HomePage = ({ setLoading }) => {
                         <div className="col-lg-12">
                             <div className="title-area-between">
                                 <h2 className="title-left">
-                                    Weekly Best Selling Groceries
+                                Featured Grocery
                                 </h2>
                                 <ul className="nav nav-tabs best-selling-grocery" id="myTab" role="tablist">
                                     <li className="nav-item" role="presentation">
@@ -4057,7 +3836,7 @@ const HomePage = ({ setLoading }) => {
                     </div>
                 </div>
             </div>
-            <div className="category-feature-area rts-section-gapTop">
+            {/* <div className="category-feature-area rts-section-gapTop">
                 <div className="container">
                     <div className="row g-4">
                         <div className="col-lg-3 col-md-6 col-sm-12 col-12">
@@ -4142,8 +3921,8 @@ const HomePage = ({ setLoading }) => {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="top-tranding-product rts-section-gap">
+            </div> */}
+            {/* <div className="top-tranding-product rts-section-gap">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
@@ -4187,8 +3966,8 @@ const HomePage = ({ setLoading }) => {
                     </div>
 
                 </div>
-            </div>
-            <div className="blog-area-start rts-section-gapBottom">
+            </div> */}
+            {/* <div className="blog-area-start rts-section-gapBottom">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
@@ -4344,7 +4123,7 @@ const HomePage = ({ setLoading }) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
 
 

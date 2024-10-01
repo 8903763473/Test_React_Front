@@ -2,3 +2,10 @@
     max-height: 560px;
     overflow: scroll;
 }
+
+.nav-and-btn-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    position: relative;
+}

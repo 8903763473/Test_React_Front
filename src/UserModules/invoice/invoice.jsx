@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Footer } from '../Footer/Footer';
 import { Header } from '../Header/Header';
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import api from '../../ApiService/apiService';
 import html2pdf from 'html2pdf.js';
 
@@ -64,6 +64,12 @@ const InVoice = ({ setLoading }) => {
             .from(element)
             .save();
     }
+
+    const navigate = useNavigate();
+
+    const Gohome = () => {
+        navigate('/home');
+    };
 
     return (
 
@@ -160,6 +166,20 @@ const InVoice = ({ setLoading }) => {
                                         <i className="fa-thin fa-download"></i>
                                     </div>
                                 </a>
+
+                                <a className="rts-btn btn-primary radious-sm with-icon" onClick={Gohome}>
+                                <div className="arrow-icon">
+                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                                                        </div>
+                                    <div className="arrow-icon">
+                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                                                        </div>
+                                    <div className="btn-text">
+                                        Go Back
+                                    </div>
+                                   
+                                </a>
+
                             </div>
                         </div>
                     </div>

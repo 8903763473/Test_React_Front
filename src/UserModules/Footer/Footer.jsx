@@ -3,6 +3,8 @@ import React from 'react'
 export const Footer = () => {
     return (
         <div>
+
+           
             <div className="rts-footer-area pt--80 bg_light-1">
                 <div className="container">
                     <div className="row">
@@ -67,7 +69,7 @@ export const Footer = () => {
                                         </ul>
                                     </div>
                                 </div>
-                                <div className="single-footer-wized">
+                                {/* <div className="single-footer-wized">
                                     <h3 className="footer-title d-flex">Our Newsletter</h3>
                                     <p className="disc-news-letter d-flex text-align-start">
                                         Subscribe to the mailing list to receive updates one   <br /> the new arrivals and other discounts
@@ -80,7 +82,7 @@ export const Footer = () => {
                                     <p className="dsic d-flex">
                                         I would like to receive news and special offer
                                     </p>
-                                </div>
+                                </div> */}
                             </div>
                             <div className="social-and-payment-area-wrapper">
                                 <div className="social-one-wrapper">
@@ -103,7 +105,7 @@ export const Footer = () => {
                 </div>
             </div>
             <div className="rts-copyright-area">
-                <div className="container">
+                {/* <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="copyright-between-1">
@@ -118,7 +120,7 @@ export const Footer = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 {/* <!-- <div id="myModal-1" className="modal fade" role="dialog">
                         <div className="modal-dialog bg_image">
