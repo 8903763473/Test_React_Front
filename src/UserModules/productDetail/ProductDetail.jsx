@@ -91,7 +91,7 @@ export const ProductDetail = ({ setLoading }) => {
 
             let post = {
                 "productId": data._id,
-                "quantity": data.productQuantity,
+                "quantity": quantity,
                 "userId": localStorage.getItem('userId')
             }
             api.AddToCart(post)
