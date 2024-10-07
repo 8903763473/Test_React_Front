@@ -35,9 +35,9 @@ const ProductCategory = ({ setLoading }) => {
             api.AddToCart(post)
                 .then(response => {
                     setLoad(true);
-        setTimeout(() => {
-            setLoad(false);
-        }, 3000);
+                    setTimeout(() => {
+                        setLoad(false);
+                    }, 3000);
                     console.log(response.data);
                     triggerNotification('success', 'Success', 'Successfully Added in cart', 'x', null)
                 }).catch(error => {
@@ -53,23 +53,23 @@ const ProductCategory = ({ setLoading }) => {
         console.log("Adding to wishlist:", Category);
         let post = {
             "productId": Category._id,
-          "quantity": Category.productQuantity,            
-          "userId": localStorage.getItem('userId') 
+            "quantity": Category.productQuantity,
+            "userId": localStorage.getItem('userId')
         };
         api.AddwishList(post)
-          .then((res) => {
-            console.log('Wishlist response:', res);
-            triggerNotification('success', 'Success', 'Successfully Added in Wishlist', 'x', null)
+            .then((res) => {
+                console.log('Wishlist response:', res);
+                triggerNotification('success', 'Success', 'Successfully Added in Wishlist', 'x', null)
 
-          })
-          .catch((error) => {
-            console.error('Error adding to wishlist:', error);
-            triggerNotification('error', 'Error', error.response.data.message, 'x', null)
+            })
+            .catch((error) => {
+                console.error('Error adding to wishlist:', error);
+                triggerNotification('error', 'Error', error.response.data.message, 'x', null)
 
-          });
-      };
-      
-  
+            });
+    };
+
+
 
     useEffect(() => {
         if (productCategory) {
@@ -98,7 +98,7 @@ const ProductCategory = ({ setLoading }) => {
 
     return (
         <div>
-             <NotificationCenter ref={notificationRef} />
+            <NotificationCenter ref={notificationRef} />
 
 
 
@@ -325,20 +325,20 @@ const ProductCategory = ({ setLoading }) => {
                                                     <div class="image-and-action-area-wrapper" style={{ minHeight: '140px', maxHeight: '140px' }}>
                                                         <a href="shop-details.html" class="thumbnail-preview">
                                                             <div class="badge">
-                                                                <span>25% <br />
+                                                                <span>{category.productDiscount} % <br />
                                                                     Off
                                                                 </span>
                                                                 <i class="fa-solid fa-bookmark"></i>
                                                             </div>
-                                                            <img src={category.productImage} alt="grocery" style={{ width: '100%', height: '140px',objectFit: 'contain' }} />
+                                                            <img src={category.productImage} alt="grocery" style={{ width: '100%', height: '140px', objectFit: 'contain' }} />
                                                         </a>
                                                         <div class="action-share-option">
-                                                        <div class="single-action openuptip message-show-action" 
-     data-flow="up" 
-     title="Add To Wishlist" 
-     onClick={() => addToWishlist(category)}>
-  <i class="fa-light fa-heart"></i>
-</div>
+                                                            <div class="single-action openuptip message-show-action"
+                                                                data-flow="up"
+                                                                title="Add To Wishlist"
+                                                                onClick={() => addToWishlist(category)}>
+                                                                <i class="fa-light fa-heart"></i>
+                                                            </div>
                                                             <div class="single-action openuptip" data-flow="up" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                                 <i class="fa-solid fa-arrows-retweet"></i>
                                                             </div>
@@ -365,8 +365,8 @@ const ProductCategory = ({ setLoading }) => {
                                                                     <button class="button plus">+<i class="fa-regular fa-chevron-up"></i></button>
                                                                 </div>
                                                             </div>
-                                                            <a  class="rts-btn btn-primary radious-sm with-icon" style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                                                <div class="btn-text"  onClick={() => addCart(category)} style={{cursor:'pointer'}}>
+                                                            <a class="rts-btn btn-primary radious-sm with-icon" style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                                <div class="btn-text" onClick={() => addCart(category)} style={{ cursor: 'pointer' }}>
                                                                     Add To Cart
                                                                 </div>
                                                                 <div class="arrow-icon">
@@ -388,14 +388,14 @@ const ProductCategory = ({ setLoading }) => {
                                         {ProductCategories.map((category) => (
                                             <div class="col-lg-6">
                                                 <div class="single-shopping-card-one discount-offer">
-                                                    <a  class="thumbnail-preview" >
+                                                    <a class="thumbnail-preview" >
                                                         <div class="badge">
-                                                            <span>25% <br />
+                                                            <span>{category.productDiscount} % <br />
                                                                 Off
                                                             </span>
                                                             <i class="fa-solid fa-bookmark"></i>
                                                         </div>
-                                                        <img src={category.productImage} alt="grocery" style={{width: '69%',objectFit: 'contain'}} />
+                                                        <img src={category.productImage} alt="grocery" style={{ width: '69%', objectFit: 'contain' }} />
                                                     </a>
                                                     <div class="body-content">
                                                         <div class="title-area-left">
@@ -415,7 +415,7 @@ const ProductCategory = ({ setLoading }) => {
                                                                         <button class="button plus">+<i class="fa-regular fa-chevron-up"></i></button>
                                                                     </div>
                                                                 </div>
-                                                                <a  class="rts-btn btn-primary radious-sm with-icon"  onClick={() => addCart(category)} style={{cursor:'pointer'}}>
+                                                                <a class="rts-btn btn-primary radious-sm with-icon" onClick={() => addCart(category)} style={{ cursor: 'pointer' }}>
                                                                     <div class="btn-text" >
                                                                         Add To Cart
                                                                     </div>

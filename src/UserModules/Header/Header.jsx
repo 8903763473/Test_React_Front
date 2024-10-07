@@ -25,7 +25,6 @@ export const Header = () => {
             .then(res => {
                 console.log(res.data);
                 setFilterData(res.data)
-
             })
     }
 
@@ -106,6 +105,7 @@ export const Header = () => {
         api.removecart(post)
             .then(res => {
                 console.log(res);
+                setmyCart([])
                 getcartdata();
 
             }).catch(err => {
@@ -158,6 +158,16 @@ export const Header = () => {
         }
     };
 
+    const productByCategory = (data) => {
+        const formattedCategory = encodeURIComponent(data.productCategory.trim())
+        navigate('/ProductCategory?category=' + formattedCategory);
+    }
+
+    const ProductDetail = (data) => {
+        console.log(data);
+        navigate('/productDetail?productId=' + data);
+    };
+
     return (
         <div>
 
@@ -177,17 +187,16 @@ export const Header = () => {
 
 
             <div className="rts-header-one-area-one">
-
                 <div className="search-header-area-main">
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="logo-search-category-wrapper">
-                                    <a href="index-2.html" className="logo-area">
+                                    <a href="" className="logo-area">
                                         <img src="images/logo/logo-01.svg" alt="logo-main" className="logo" style={{ width: '260px', borderRadius: '10px' }} />
                                     </a>
                                     <div className="category-search-wrapper">
-                                        <div className="category-btn category-hover-header">
+                                        <div className="category-btn category-hover-header filterCategory">
                                             <img className="parent" src="images/icons/bar-1.svg" alt="icons" />
                                             <span>Categories</span>
                                             <ul className="category-sub-menu" id="category-active-four">
@@ -200,27 +209,29 @@ export const Header = () => {
 
                                                     return acc;
                                                 }, []).map((res, index) => (
-                                                    <li key={index}>
+                                                    <li key={index} onClick={() => productByCategory(res)}>
                                                         <a className="menu-item">
                                                             <img src="images/icons/01.svg" alt="icons" />
                                                             <span>{res.productCategory}</span>
-                                                            <i
+                                                            {/* <i
                                                                 className={`fa-regular fa-${openCategories[res.productCategory] ? 'minus' : 'plus'}`}
                                                                 onClick={() => toggleCategory(res.productCategory)}
                                                                 style={{ cursor: 'pointer' }}
-                                                            ></i>
+                                                            ></i> */}
+
+                                                            <i class="bi bi-chevron-right pointer" onClick={() => toggleCategory(res.productCategory)}></i>
                                                         </a>
 
-                                                        {openCategories[res.productCategory] && (
+                                                        {/* {openCategories[res.productCategory] && (
                                                             <ul className="submenu mm-collapse">
                                                                 {FilterData.filter(item => item.productCategory === res.productCategory)
                                                                     .map((filteredProduct, i) => (
                                                                         <li key={i}>
-                                                                            <a className="mobile-menu-link">{filteredProduct.productName}</a>
+                                                                            <a className="mobile-menu-link" onClick={() => ProductDetail(res._id)}>{filteredProduct.productName}</a>
                                                                         </li>
                                                                     ))}
                                                             </ul>
-                                                        )}
+                                                        )} */}
                                                     </li>
                                                 ))}
                                             </ul>
@@ -282,24 +293,24 @@ export const Header = () => {
                                             <span className="text">Cart</span>
                                             <span className="number">{cartDataLength}</span>
                                             <div className="category-sub-menu card-number-show">
-                                                <h5 className="shopping-cart-number">Shopping Cart ({cartDataLength})</h5>
+                                                <h5 className="shopping-cart-number">Shopping Cart ({cartDataLength} {cartDataLength > 1 ? 'items' : 'item'})</h5>
                                                 {cartData.map((cart) => (
-                                                    <div className="cart-item-1 border-top" key={cart.productName}>
+                                                    <div className="cart-item-1 border-top" key={cart.productId.productName}>
                                                         <div className="img-name">
                                                             <div className="thumbanil">
-                                                                <img src={cart.productImage} alt="" />
+                                                                <img src={cart.productId.productImage} alt="" />
                                                             </div>
                                                             <div className="details">
                                                                 <a href="shop-details.html">
-                                                                    <h5 className="title">{cart.productName}</h5>
+                                                                    <h5 className="title">{cart.productId.productName}</h5>
                                                                 </a>
                                                                 <div className="number">
                                                                     {cart.quantity}<i className="fa-regular fa-x"></i>
-                                                                    <span>₹{cart.productCurrentRate}</span>
+                                                                    <span>₹{cart.productId.productCurrentRate}</span>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div className="close-c1" onClick={() => RemoveCart(cart.productId)}>
+                                                        <div className="close-c1" onClick={() => RemoveCart(cart.productId._id)}>
                                                             <i className="fa-regular fa-x"></i>
                                                         </div>
                                                     </div>
@@ -309,14 +320,14 @@ export const Header = () => {
                                                         <div className="top">
                                                             <span>Sub Total:</span>
                                                             {/* Subtotal Calculation */}
-                                                            <span className="number-c">₹{cartData.reduce((total, cart) => total + (cart.productCurrentRate * cart.quantity), 0)}</span>
+                                                            <span className="number-c">₹{cartData.reduce((total, cart) => total + (cart.productId.productCurrentRate * cart.quantity), 0)}</span>
                                                         </div>
                                                         <div className="single-progress-area-incard">
                                                             <div className="progress">
                                                                 <div className="progress-bar wow fadeInLeft" role="progressbar" style={{ width: '80%' }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                                             </div>
                                                         </div>
-                                                        <p>Spend More <span>₹125.00</span> to reach <span>Free Shipping</span></p>
+                                                        <p>Spend <span>₹ 1000.00</span> above to reach <span>Free Shipping</span></p>
                                                     </div>
                                                     <div className="button-wrapper d-flex align-items-center justify-content-between">
                                                         <a className="rts-btn btn-primary " onClick={() => routeCart('1')}>View Cart</a>
@@ -329,7 +340,7 @@ export const Header = () => {
                                         <a className="btn-border-only wishlist" style={{ cursor: 'pointer' }} onClick={() => triggerNotification('warning', 'Warning', 'Sure to Logout', 'Sure', 'logout')}>
                                             <i className="fa fa-sign-in" aria-hidden="true"></i>
                                             <span className="text">
-                                                {isLogged === 'success' ? 'Logout' : 'Register / Login'}
+                                                {isLogged === 'success' ? 'Logout' : 'Login'}
                                             </span>
                                         </a>
 
@@ -452,13 +463,15 @@ export const Header = () => {
                                             </ul>
                                         </nav>
                                     </div> */}
-                                    <div className="right-btn-area">
+
+                                    {/* <div className="right-btn-area">
                                         <a href="http://google.com" className="btn-narrow">Trending Products</a>
                                         <button className="rts-btn btn-primary">
                                             Get 30% Discount Now
                                             <span>Sale</span>
                                         </button>
-                                    </div>
+                                    </div> */}
+
                                 </div>
                             </div>
                             <div className="col-lg-12">

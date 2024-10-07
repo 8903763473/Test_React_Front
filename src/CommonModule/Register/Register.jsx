@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import api from '../../ApiService/apiService';
 import { useNavigate } from 'react-router-dom';
+import NotificationCenter from '../../CommonModule/Notification/Notification';
 
 
 export const Register = () => {
@@ -14,32 +15,53 @@ export const Register = () => {
 
     const doRegister = async (event) => {
         event.preventDefault();
-
-        // Form validation
         if (password !== confirmPassword) {
-            alert("Passwords do not match!");
+            // alert("Passwords do not match!");
+            triggerNotification('error', 'Invalid', "Passwords doesn't match!", 'x', null)
             return;
         }
-
         const post = {
             name: firstName,
             email: email,
             mobile: phone,
             password: password,
         };
-        const response = await api.Register(post);
-        console.log(response);
+        const response = await api.Register(post)
+            .then(res => {
+                triggerNotification('success', 'Success', 'Register Successful', 'x', null)
+                setFirstName('');
+                setEmail('');
+                setPhone('');
+                setPassword('');
+                setTimeout(() => {
+                    navigate('/login')
+                }, 3000)
+            })
+            .catch(err => {
+                console.log(err);
+                triggerNotification('error', 'Error', err.response.data.message, 'x', null)
+            })
+    };
 
+    const notificationRef = useRef();
+    const triggerNotification = (type, title, subtitle, button, path) => {
+        console.log(type, title, subtitle, button, path);
+        if (notificationRef.current) {
+            console.log(notificationRef.current);
+
+            notificationRef.current.spawnNotification(type, title, subtitle, button, path);
+        }
     };
 
 
     return (
         <>
-            {showAlert && (
+            <NotificationCenter ref={notificationRef} />
+            {/* {showAlert && (
                 <div className="alert">
                     <p>Registration successful!</p>
                 </div>
-            )}
+            )} */}
 
             <div className="rts-register-area rts-section-gap bg_light-1">
                 <div className="container">

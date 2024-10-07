@@ -78,10 +78,10 @@ const Cartpage = ({ setLoading }) => {
                 .catch(error => {
                     console.error('Error updating cart:', error);
                 });
-        } else if(myCart.length==0) {
+        } else if (myCart.length == 0) {
             triggerNotification('warning', 'Warning', 'No Cart data !', null, 'Add cart')
         }
-        else{
+        else {
             navigate('/checkout');
         }
     };
@@ -92,7 +92,7 @@ const Cartpage = ({ setLoading }) => {
             notificationRef.current.spawnNotification(type, title, subtitle, button, path);
         }
     };
-    
+
     const RemoveCart = (productId) => {
         let post = {
             "userId": localStorage.getItem("userId"),
@@ -120,16 +120,16 @@ const Cartpage = ({ setLoading }) => {
                 console.log(err);
             });
     };
-    
 
 
-   
+
+
 
     return (
         <div>
-             <NotificationCenter ref={notificationRef} />
+            <NotificationCenter ref={notificationRef} />
             <Header />
-           
+
             <div className="rts-cart-area rts-section-gap bg_light-1">
                 <div className="container">
                     <div className="row g-5">
@@ -152,21 +152,22 @@ const Cartpage = ({ setLoading }) => {
 
                                 {/* Render cart items */}
                                 {myCart.map((cart, index) => (
-                                    <div className="single-cart-area-list main item-parent" key={cart.productId}>
+                                    console.log(cart),
+                                    <div className="single-cart-area-list main item-parent" key={cart._id}>
                                         <div className="product-main-cart">
-                                            <div className="close section-activation" onClick={() => RemoveCart(cart.productId)}>
+                                            <div className="close section-activation" onClick={() => RemoveCart(cart._id)}>
                                                 <i className="fa-regular fa-x"></i>
                                             </div>
                                             <div className="thumbnail">
-                                                <img src={cart.productImage} alt="shop" />
+                                                <img src={cart.productId.productImage} alt="shop" />
                                             </div>
                                             <div className="information">
-                                                <h6 className="title">{cart.productCategory}</h6>
-                                                <span>{cart.productCategory}</span>
+                                                <h6 className="title">{cart.productId.productName}</h6>
+                                                <span>{cart.productId.productCategory}</span>
                                             </div>
                                         </div>
                                         <div className="price">
-                                            <p>₹ {cart.productCurrentRate}</p>
+                                            <p>₹ {cart.productId.productCurrentRate}</p>
                                         </div>
                                         <div className="quantity">
                                             <div className="quantity-edit">
@@ -193,7 +194,7 @@ const Cartpage = ({ setLoading }) => {
                                             </div>
                                         </div>
                                         <div className="subtotal">
-                                            <p>₹{cart.productCurrentRate * cart.quantity}</p>
+                                            <p>₹ {cart.productId.productCurrentRate * cart.quantity}</p>
                                         </div>
                                     </div>
                                 ))}
@@ -213,24 +214,24 @@ const Cartpage = ({ setLoading }) => {
                                 <h5 className="title">Cart Totals</h5>
                                 <div className="subtotal">
                                     <span>Subtotal</span>
-                                    <h6 className="price">₹{myCart.reduce((total, item) => total + item.productCurrentRate * item.quantity, 0)}</h6>
+                                    <h6 className="price">₹ {myCart.reduce((total, item) => total + item.productId.productCurrentRate * item.quantity, 0)}</h6>
                                 </div>
                                 <div className="shipping">
                                     <span>Shipping</span>
                                     <ul>
-                                        <li>
+                                        <li className='d-flex'>
                                             <input type="radio" id="f-option" name="selector" />
                                             <label htmlFor="f-option">Free Shipping</label>
                                             <div className="check"></div>
                                         </li>
-                                        <li>
+                                        <li className='d-flex'>
                                             <input type="radio" id="s-option" name="selector" />
                                             <label htmlFor="s-option">Flat Rate</label>
                                             <div className="check">
                                                 <div className="inside"></div>
                                             </div>
                                         </li>
-                                        <li>
+                                        <li className='d-flex'>
                                             <input type="radio" id="t-option" name="selector" />
                                             <label htmlFor="t-option">Local Pickup</label>
                                             <div className="check">
@@ -242,7 +243,7 @@ const Cartpage = ({ setLoading }) => {
                                 <div className="bottom">
                                     <div className="wrapper">
                                         <span>Subtotal</span>
-                                        <h6 className="price">₹{myCart.reduce((total, item) => total + item.productCurrentRate * item.quantity, 0)}</h6>
+                                        <h6 className="price">₹ {myCart.reduce((total, item) => total + item.productId.productCurrentRate * item.quantity, 0)}</h6>
                                     </div>
                                     <div className="button-area">
                                         {hasQuantityChanged ? (

@@ -51,7 +51,7 @@ const Checkout = ({ setLoading }) => {
 
     useEffect(() => {
         const totalAmount = myCart.reduce((total, item) => {
-            return total + (item.productCurrentRate * item.quantity);
+            return total + (item.productId.productCurrentRate * item.quantity);
         }, 0);
         setTotal(totalAmount);
     }, [myCart]);
@@ -77,7 +77,7 @@ const Checkout = ({ setLoading }) => {
             return;
         }
 
-        const amount = 1 * 100;
+        const amount = (Total + 50) * 100;
         const currency = 'INR';
         const phone = '8903763473';
         const email = 'ramyastella08@gmail.com';
@@ -155,9 +155,9 @@ const Checkout = ({ setLoading }) => {
             orderNotes: formData.orderNotes,
             orderStatus: 'Confirmed',
             products: myCart.map((item) => ({
-                productId: item.productId,
+                productId: item.productId._id,
                 quantity: item.quantity,
-                price: item.productCurrentRate,
+                price: item.productId.productCurrentRate,
             })),
         };
 
@@ -331,11 +331,11 @@ const Checkout = ({ setLoading }) => {
                                             <div className="single-shop-list" key={res._id}> {/* Ensure unique key for each item */}
                                                 <div className="left-area">
                                                     <a className="thumbnail">
-                                                        <img src={res.productImage} alt={res.productImage} />
+                                                        <img src={res.productId.productImage} alt={res.productId.productImage} />
                                                     </a>
-                                                    <a className="title">{res.productName}</a>
+                                                    <a className="title">{res.productId.productName}</a>
                                                 </div>
-                                                <span className="price">₹ {res.productCurrentRate * res.quantity}.00</span>
+                                                <span className="price">₹ {res.productId.productCurrentRate * res.quantity}.00</span>
                                             </div>
                                         ))
                                     ) : (

@@ -14,7 +14,6 @@ const Login = () => {
         console.log(type, title, subtitle, button, path);
         if (notificationRef.current) {
             console.log(notificationRef.current);
-
             notificationRef.current.spawnNotification(type, title, subtitle, button, path);
         }
     };
@@ -38,8 +37,8 @@ const Login = () => {
             localStorage.setItem('login', "success");
             triggerNotification('success', 'Success', 'Login Successful', 'x', null)
             setTimeout(() => {
-                // navigate('/home');
-                navigate('/dashboard');
+                navigate('/home');
+                // navigate('/dashboard');
             }, 2000)
         } catch (error) {
             console.error('Login Error:', error.response.data.message);
