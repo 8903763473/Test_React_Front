@@ -53,8 +53,9 @@ export const Wishlist = ({ setLoading }) => {
     };
 
     const Removewishlist = (data) => {
+        console.log(data);
         const userId = localStorage.getItem('userId');
-        api.RemoveWishlist(data._id, userId)
+        api.RemoveWishlist(data.productId._id, userId)
             .then((res) => {
                 setWishlistItems([])
                 getwishlist()

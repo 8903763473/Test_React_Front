@@ -143,7 +143,7 @@ const InVoice = ({ setLoading }) => {
                                 </div>
                             </div>
 
-                            <div className="buttons-area-invoice no-print mb--30">
+                            <div className="buttons-area-invoice no-print mb--30 pointer">
                                 <a href="javascript:window.print()" className="rts-btn btn-primary radious-sm with-icon">
                                     <div className="btn-text">
                                         Print Now
@@ -155,7 +155,7 @@ const InVoice = ({ setLoading }) => {
                                         <i className="fa-regular fa-print"></i>
                                     </div>
                                 </a>
-                                <a className="rts-btn btn-primary radious-sm with-icon" onClick={downloadInvoice}>
+                                <a className="rts-btn btn-primary radious-sm with-icon pointer" onClick={downloadInvoice}>
                                     <div className="btn-text">
                                         Download
                                     </div>
@@ -167,7 +167,7 @@ const InVoice = ({ setLoading }) => {
                                     </div>
                                 </a>
 
-                                <a className="rts-btn btn-primary radious-sm with-icon" onClick={Gohome}>
+                                <a className="rts-btn btn-primary radious-sm with-icon pointer" onClick={Gohome}>
                                 <div className="arrow-icon">
                                     <i class="fa fa-arrow-left" aria-hidden="true"></i>
                                                                         </div>

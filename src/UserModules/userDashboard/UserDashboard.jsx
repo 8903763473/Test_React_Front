@@ -303,17 +303,12 @@ const UserDashboard = ({ setLoading }) => {
                             orderTrackedData.map(res => (
                                 <div className="order-item" key={res._id}>
                                     <p className="order-title">{res.productId.productName}</p>
-                                    <span>|</span>
-                                    <p className="order-size">{res.productId.productCategory}</p> {/* Update this if needed */}
-                                    {/* <span className="minus">-</span> */}
+                                    {/* <span>|</span> */}
+                                    <p className="order-size">{res.productId.productCategory}</p>
                                     <div className="order-quantity">
                                         <p>{res.quantity} Qty</p>
                                     </div>
-                                    {/* <span className="plus">+</span> */}
                                     <p className="order-price">₹ {res.price}</p>
-                                    {/* <div className="remove-order">
-                                        <i className="fa-solid fa-x"></i>
-                                    </div> */}
                                 </div>
                             ))
                         }

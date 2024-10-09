@@ -66,11 +66,12 @@ $hover-bg-color: #f0f0f0;
 
         .order-item {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
             font-size: 14px;
             color: #000;
             margin-bottom: 1.5rem;
+            gap: 28px;
 
             p {
                 margin: 0 !important;
@@ -78,6 +79,18 @@ $hover-bg-color: #f0f0f0;
 
             .order-title {
                 font-weight: 600;
+                min-width: 105px;
+                max-width: 105px;
+                text-align: justify;
+                border-right: 1px solid grey;
+            }
+
+            .order-size {
+                font-weight: 600;
+                min-width: 85px;
+                max-width: 85px;
+                text-align: justify;
+                font-size: 12px;
             }
 
             span {
@@ -147,11 +160,11 @@ $hover-bg-color: #f0f0f0;
         }
 
         .billing-summary {
-            background-color: $hover-bg-color;
+            background-color: #f0f0f0;
             color: #333;
             display: flex;
             justify-content: space-between;
-            padding: .5rem;
+            padding: 0.5rem 10px;
             border-radius: 6px;
             line-height: 1.4;
             margin-top: 20px;
