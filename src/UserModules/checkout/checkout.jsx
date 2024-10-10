@@ -393,50 +393,7 @@ const Checkout = ({ setLoading }) => {
 
 
             {/* popup */}
-            {showPopup && (
-                // <div className="feedbackpopup">
-                //     <div className="popupfullpage">
-
-                //         <div className="content">
-                //             <h1 className='text'>Feedback</h1>
-
-                //             <form onSubmit={handleSubmit}>
-                //                 <div className="fields">
-                //                     <label>Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
-                //                     <input type="text" value={name} onChange={handleNameChange} />
-                //                 </div>
-
-                //                 <div className="fields">
-                //                     <label>Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
-                //                     <input type="email" value={email} onChange={handleEmailChange} />
-                //                 </div>
-
-                //                 <div className="fields">
-                //                     <label>Feedback&nbsp;&nbsp;:</label>
-                //                     <textarea value={feedback} onChange={handleFeedbackChange}></textarea>
-                //                 </div>
-
-                //                 <div className="rating">
-                //                     {Array.from({ length: 5 }, (_, index) => (
-                //                         <i
-                //                             key={index}
-                //                             className={`fa fa-star ${index < rating ? 'selected' : ''}`}
-                //                             onClick={() => handleRatingClick(index + 1)} // Set rating on click
-                //                             style={{ cursor: 'pointer', color: index < rating ? 'yellow' : 'gray' }} // Set color based on rating
-                //                         ></i>
-                //                     ))}
-                //                 </div>
-
-                //                 <div className="btn">
-                //                     <button type="submit">Submit</button>
-                //                 </div>
-                //             </form>
-                //         </div>
-
-
-                //     </div>
-                // </div>
-
+            {/* {showPopup && (
                 <main className='bg-overlay'>
                     <div className="rating-card">
                         <div className="rating-card__front">
@@ -472,7 +429,7 @@ const Checkout = ({ setLoading }) => {
                     </div>
                 </main>
 
-            )};
+            )}; */}
             <Footer />
         </div>
     );

@@ -143,7 +143,8 @@ const InVoice = ({ setLoading }) => {
                                 </div>
                             </div>
 
-                            <div className="buttons-area-invoice no-print mb--30 pointer">
+                            <div className="buttons-area-invoice no-print mb--30 pointer" style={{display:'flex',alignContent:'center',justifyContent:'center',flexWrap:'wrap'}}>    
+ 
                                 <a href="javascript:window.print()" className="rts-btn btn-primary radious-sm with-icon">
                                     <div className="btn-text">
                                         Print Now
