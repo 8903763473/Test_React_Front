@@ -1,3 +1,43 @@
 .single-cart-area-list.main .quantity-edit input::placeholder {
     color: black; 
 }
+
+@media only screen and (max-width: 767px) {
+    .single-cart-area-list.main {
+        justify-content: space-around;
+        gap: 30px;
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.single-cart-area-list.head p {
+    min-width: 100px;
+}
+
+@media only screen and (max-width: 767px) {
+    .single-cart-area-list.main .product-main-cart {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+
+.single-cart-area-list.main .product-main-cart .close i {
+    height: 22px;
+    width: 22px;
+    font-size: 13px;}
+
+    @media only screen and (max-width: 767px) {
+        .single-cart-area-list.main .product-main-cart {
+            flex-direction: row;
+            align-items: center;
+        }}
+
+        @media only screen and (max-width: 767px) {
+            .bottom-cupon-code-cart-area {
+                flex-direction: row;
+                align-items: flex-start;
+                gap: 16px;
+
+            }}

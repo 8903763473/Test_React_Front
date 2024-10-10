@@ -65,7 +65,7 @@ const Contact = ({ setLoading }) => {
                     <button><i className="fa-light fa-magnifying-glass"></i></button>
                 </form>
 
-                <div className="mobile-menu-nav-area tab-nav-btn mt--20">
+                {/* <div className="mobile-menu-nav-area tab-nav-btn mt--20">
 
                     <nav>
                         <div className="nav nav-tabs" id="nav-tab" role="tablist">
@@ -80,51 +80,51 @@ const Contact = ({ setLoading }) => {
                                 <nav className="nav-main mainmenu-nav mt--30">
                                     <ul className="mainmenu metismenu" id="mobile-menu-active">
                                         <li className="has-droupdown">
-                                            <a href="#" className="main">Home</a>
+                                            <a  className="main">Home</a>
                                             <ul className="submenu mm-collapse">
-                                                <li><a className="mobile-menu-link" href="index.html">Home One</a></li>
-                                                <li><a className="mobile-menu-link" href="index-two.html">Home Two</a></li>
-                                                <li><a className="mobile-menu-link" href="index-three.html">Home Three</a></li>
-                                                <li><a className="mobile-menu-link" href="index-four.html">Home Four</a></li>
-                                                <li><a className="mobile-menu-link" href="index-five.html"> Home Five</a></li>
+                                                <li><a className="mobile-menu-link" >Home One</a></li>
+                                                <li><a className="mobile-menu-link">Home Two</a></li>
+                                                <li><a className="mobile-menu-link" >Home Three</a></li>
+                                                <li><a className="mobile-menu-link" >Home Four</a></li>
+                                                <li><a className="mobile-menu-link"> Home Five</a></li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="about.html" className="main">About</a>
+                                            <a className="main">About</a>
                                         </li>
                                         <li className="has-droupdown">
-                                            <a href="#" className="main">Pages</a>
+                                            <a className="main">Pages</a>
                                             <ul className="submenu mm-collapse">
-                                                <li><a className="mobile-menu-link" href="about.html">About</a></li>
-                                                <li><a className="mobile-menu-link" href="faq.html">Faq's</a></li>
-                                                <li><a className="mobile-menu-link" href="invoice.html">Invoice</a></li>
-                                                <li><a className="mobile-menu-link" href="contact.html">Contact</a></li>
-                                                <li><a className="mobile-menu-link" href="register.html">Register</a></li>
-                                                <li><a className="mobile-menu-link" href="login.html">Login</a></li>
-                                                <li><a className="mobile-menu-link" href="privacy-policy.html">Privacy Policy</a></li>
-                                                <li><a className="mobile-menu-link" href="cookies-policy.html">Cookies Policy</a></li>
-                                                <li><a className="mobile-menu-link" href="terms-condition.html">Terms Condition</a></li>
-                                                <li><a className="mobile-menu-link" href="404.html">Error Page</a></li>
+                                                <li><a className="mobile-menu-link">About</a></li>
+                                                <li><a className="mobile-menu-link" >Faq's</a></li>
+                                                <li><a className="mobile-menu-link" >Invoice</a></li>
+                                                <li><a className="mobile-menu-link">Contact</a></li>
+                                                <li><a className="mobile-menu-link" >Register</a></li>
+                                                <li><a className="mobile-menu-link" >Login</a></li>
+                                                <li><a className="mobile-menu-link" >Privacy Policy</a></li>
+                                                <li><a className="mobile-menu-link">Cookies Policy</a></li>
+                                                <li><a className="mobile-menu-link" >Terms Condition</a></li>
+                                                <li><a className="mobile-menu-link" >Error Page</a></li>
                                             </ul>
                                         </li>
                                         <li className="has-droupdown">
-                                            <a href="#" className="main">Shop</a>
+                                            <a  className="main">Shop</a>
                                             <ul className="submenu mm-collapse">
                                                 <li className="has-droupdown third-lvl">
-                                                    <a className="main" href="#">Shop Layout</a>
+                                                    <a className="main">Shop Layout</a>
                                                     <ul className="submenu-third-lvl mm-collapse">
-                                                        <li><a href="shop-grid-sidebar.html"></a>Shop Grid Sidebar</li>
-                                                        <li><a href="shop-list-sidebar.html"></a>Shop List Sidebar</li>
-                                                        <li><a href="shop-grid-top-filter.html"></a>Shop Grid Top Filter</li>
-                                                        <li><a href="shop-list-top-filter.html"></a>Shop List Top Filter</li>
+                                                        <li><a></a>Shop Grid Sidebar</li>
+                                                        <li><a></a>Shop List Sidebar</li>
+                                                        <li><a></a>Shop Grid Top Filter</li>
+                                                        <li><a></a>Shop List Top Filter</li>
                                                     </ul>
                                                 </li>
                                                 <li className="has-droupdown third-lvl">
                                                     <a className="main" href="#">Shop Details</a>
                                                     <ul className="submenu-third-lvl mm-collapse">
-                                                        <li><a href="shop-details.html"></a>Shop Details</li>
-                                                        <li><a href="shop-details-2.html"></a>Shop Details 2</li>
-                                                        <li><a href="shop-grid-top-filter.html"></a>Shop Grid Top Filter</li>
+                                                        <li><a ></a>Shop Details</li>
+                                                        <li><a ></a>Shop Details 2</li>
+                                                        <li><a ></a>Shop Grid Top Filter</li>
                                                         <li><a href="shop-list-top-filter.html"></a>Shop List Top Filter</li>
                                                     </ul>
                                                 </li>
@@ -255,7 +255,7 @@ const Contact = ({ setLoading }) => {
                         </div>
                     </div>
 
-                </div>
+                </div> */}
                 <div className="button-area-main-wrapper-menuy-sidebar mt--50">
                     <div className="contact-area">
                         <div className="phone">

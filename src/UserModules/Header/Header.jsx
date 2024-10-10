@@ -12,7 +12,12 @@ export const Header = () => {
     const [loading, setLoading] = useState(false);
     const [isLogged, setisLogged] = useState('');
     const [FilterData, setFilterData] = useState([]);
+    const [menuOpen, setMenuOpen] = useState(false);
 
+    // Function to toggle the sidebar
+    const toggleMenu = () => {
+      setMenuOpen(!menuOpen);
+    };
 
     const navigate = useNavigate();
 
@@ -265,7 +270,7 @@ export const Header = () => {
                                             </svg>
 
                                         </div>
-                                        <div className="menu-btn" id="menu-btn">
+                                        <div className="menu-btn" id="menu-btn"  onClick={toggleMenu}>
 
                                             <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <rect y="14" width="20" height="2" fill="#1F1F25"></rect>
@@ -274,6 +279,9 @@ export const Header = () => {
                                             </svg>
 
                                         </div>
+
+
+                                        
                                     </div>
                                     <div className="accont-wishlist-cart-area-header">
                                         <a className="btn-border-only account" onClick={() => routeCart('account')} style={{ cursor: 'pointer' }}>
@@ -301,7 +309,7 @@ export const Header = () => {
                                                                 <img src={cart.productId.productImage} alt="" />
                                                             </div>
                                                             <div className="details">
-                                                                <a href="shop-details.html">
+                                                                <a >
                                                                     <h5 className="title">{cart.productId.productName}</h5>
                                                                 </a>
                                                                 <div className="number">
@@ -385,7 +393,7 @@ export const Header = () => {
 
                                                                         <div className="single-megamenu-wrapper">
                                                                             <p className="title">Shop Details</p>
-                                                                            <ul>
+                                                                            <ul>    
                                                                                 <li><a className="sub-b" href="shop-details.html">Shop Details</a></li>
                                                                                 <li><a className="sub-b" href="shop-details-2.html">Shop Details V2</a></li>
                                                                                 <li><a className="sub-b" href="shop-details-right-sidebar.html">Shop Details V3</a></li>
@@ -474,9 +482,9 @@ export const Header = () => {
 
                                 </div>
                             </div>
-                            <div className="col-lg-12">
+                            <div className="col-lg-12 " >
                                 <div className="logo-search-category-wrapper after-md-device-header">
-                                    <a href="index-2.html" className="logo-area">
+                                    <a  className="logo-area">
                                         <img src="images/logo/logo-01.svg" alt="logo-main" className="logo" style={{ width: '260px', borderRadius: '10px' }} />
                                     </a>
                                     <div className="category-search-wrapper">
@@ -579,64 +587,28 @@ export const Header = () => {
                                                 <i className="fa-sharp fa-regular fa-cart-shopping"></i>
                                                 <span className="text">Cart</span>
                                                 <div className="category-sub-menu card-number-show">
-                                                    <h5 className="shopping-cart-number">Shopping Cart (03)</h5>
-                                                    <div className="cart-item-1 border-top">
+                                                <h5 className="shopping-cart-number">Shopping Cart ({cartDataLength} {cartDataLength > 1 ? 'items' : 'item'})</h5>
+                                                    {cartData.map((cart) => (
+                                                    <div className="cart-item-1 border-top" key={cart.productId.productName}>
                                                         <div className="img-name">
                                                             <div className="thumbanil">
-                                                                <img src="images/shop/cart-1.png" alt="" />
+                                                                <img src={cart.productId.productImage} alt="" />
                                                             </div>
                                                             <div className="details">
-                                                                <a href="shop-details.html">
-                                                                    <h5 className="title">Foster Farms Breast Nuggets Shaped Chicken</h5>
+                                                                <a >
+                                                                    <h5 className="title">{cart.productId.productName}</h5>
                                                                 </a>
                                                                 <div className="number">
-                                                                    1 <i className="fa-regular fa-x"></i>
-                                                                    <span>$36.00</span>
+                                                                    {cart.quantity}<i className="fa-regular fa-x"></i>
+                                                                    <span>₹{cart.productId.productCurrentRate}</span>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div className="close-c1">
+                                                        <div className="close-c1" onClick={() => RemoveCart(cart.productId._id)}>
                                                             <i className="fa-regular fa-x"></i>
                                                         </div>
                                                     </div>
-                                                    <div className="cart-item-1">
-                                                        <div className="img-name">
-                                                            <div className="thumbanil">
-                                                                <img src="images/shop/05.png" alt="" />
-                                                            </div>
-                                                            <div className="details">
-                                                                <a href="shop-details.html">
-                                                                    <h5 className="title">Foster Farms Breast Nuggets Shaped Chicken</h5>
-                                                                </a>
-                                                                <div className="number">
-                                                                    1 <i className="fa-regular fa-x"></i>
-                                                                    <span>$36.00</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="close-c1">
-                                                            <i className="fa-regular fa-x"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div className="cart-item-1">
-                                                        <div className="img-name">
-                                                            <div className="thumbanil">
-                                                                <img src="images/shop/04.png" alt="" />
-                                                            </div>
-                                                            <div className="details">
-                                                                <a href="shop-details.html">
-                                                                    <h5 className="title">Foster Farms Breast Nuggets Shaped Chicken</h5>
-                                                                </a>
-                                                                <div className="number">
-                                                                    1 <i className="fa-regular fa-x"></i>
-                                                                    <span>$36.00</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="close-c1">
-                                                            <i className="fa-regular fa-x"></i>
-                                                        </div>
-                                                    </div>
+                                                ))}
                                                     <div className="sub-total-cart-balance">
                                                         <div className="bottom-content-deals mt--10">
                                                             <div className="top">
@@ -651,12 +623,12 @@ export const Header = () => {
                                                             <p>Spend More <span>$125.00</span> to reach <span>Free Shipping</span></p>
                                                         </div>
                                                         <div className="button-wrapper d-flex align-items-center justify-content-between">
-                                                            <a href="cart.html" className="rts-btn btn-primary ">View Cart</a>
-                                                            <a href="checkout.html" className="rts-btn btn-primary border-only">CheckOut</a>
+                                                        <a className="rts-btn btn-primary " onClick={() => routeCart('1')}>View Cart</a>
+                                                        <a className="rts-btn btn-primary border-only" onClick={() => routeCart('2')}>CheckOut</a>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <a href="cart.html" className="over_link"></a>
+                                                <a  className="over_link"></a>
                                             </div>
                                         </div>
                                         <div className="actions-area">
@@ -667,7 +639,7 @@ export const Header = () => {
                                                 </svg>
 
                                             </div>
-                                            <div className="menu-btn">
+                                            <div className="menu-btn" onClick={toggleMenu}>
 
                                                 <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <rect y="14" width="20" height="2" fill="#1F1F25"></rect>
@@ -684,6 +656,196 @@ export const Header = () => {
                     </div>
                 </div>
             </div>
+
+
+
+            <div className={`side-bar header-two ${menuOpen ? 'show' : ''}`}>
+        {/* Close Button */}
+        <button className="close-icon-menu" onClick={toggleMenu}>
+          <i className="far fa-times"></i>
+        </button>
+
+        {/* Search Form */}
+        <form action="#" className="search-input-area-menu mt--30">
+          <input type="text" placeholder="Search..." required="" />
+          <button><i className="fa-light fa-magnifying-glass"></i></button>
+        </form>
+
+        {/* Navigation Menu */}
+        <div className="mobile-menu-nav-area tab-nav-btn mt--20">
+          <nav>
+            <div className="nav nav-tabs" id="nav-tab" role="tablist">
+              <button className="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Menu</button>
+              <button className="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Category</button>
+            </div>
+          </nav>
+
+          <div className="tab-content" id="nav-tabContent">
+            <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabIndex="0">
+              <div className="mobile-menu-main">
+                <nav className="nav-main mainmenu-nav mt--30">
+                  <ul className="mainmenu metismenu" id="mobile-menu-active" style={{    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    flexDirection: 'column'}}>
+                    <li className="">
+                      <a href="#" className="main">Home</a>
+                      {/* <ul className="submenu mm-collapse">
+                        <li><a className="mobile-menu-link" href="index-2.html">Home One</a></li>
+                        <li><a className="mobile-menu-link" href="index-two.html">Home Two</a></li>
+                        <li><a className="mobile-menu-link" href="index-three.html">Home Three</a></li>
+                        <li><a className="mobile-menu-link" href="index-four.html">Home Four</a></li>
+                        <li><a className="mobile-menu-link"> Home Five</a></li>
+                      </ul> */}
+                    </li>
+                    <li>
+                      <a  className="main">About</a>
+                    </li>
+                    {/* <li className="has-droupdown">
+                      <a href="#" className="main">Pages</a>
+                      <ul className="submenu mm-collapse">
+                        <li><a className="mobile-menu-link">About</a></li>
+                        <li><a className="mobile-menu-link" >Faq's</a></li>
+                        <li><a className="mobile-menu-link">Invoice</a></li>
+                        <li><a className="mobile-menu-link" >Contact</a></li>
+                        <li><a className="mobile-menu-link" >Register</a></li>
+                        <li><a className="mobile-menu-link" >Login</a></li>
+                        <li><a className="mobile-menu-link" >Privacy Policy</a></li>
+                        <li><a className="mobile-menu-link" >Cookies Policy</a></li>
+                        <li><a className="mobile-menu-link" >Terms Condition</a></li>
+                        <li><a className="mobile-menu-link" >Error Page</a></li>
+                      </ul>
+                    </li> */}
+                    <li className="">
+                      <a href="#" className="main">Shop</a>
+                      {/* <ul className="submenu mm-collapse">
+                        <li className="has-droupdown third-lvl">
+                          <a className="main" href="#">Shop Layout</a>
+                          <ul className="submenu-third-lvl mm-collapse">
+                            <li><a></a>Shop Grid Sidebar</li>
+                            <li><a></a>Shop List Sidebar</li>
+                            <li><a ></a>Shop Grid Top Filter</li>
+                            <li><a ></a>Shop List Top Filter</li>
+                          </ul>
+                        </li>
+                        <li className="has-droupdown third-lvl">
+                          <a className="main" href="#">Shop Details</a>
+                          <ul className="submenu-third-lvl mm-collapse">
+                            <li><a></a>Shop Details</li>
+                            <li><a></a>Shop Details 2</li>
+                          </ul>
+                        </li>
+                        <li className="has-droupdown third-lvl">
+                          <a className="main" href="#">Product Feature</a>
+                          <ul className="submenu-third-lvl mm-collapse">
+                            <li><a ></a>Shop Details Variable</li>
+                            <li><a ></a>Shop Details Affiliats</li>
+                            <li><a ></a>Shop Details Group</li>
+                            <li><a ></a>Shop Compare</li>
+                          </ul>
+                        </li>
+                        <li className="has-droupdown third-lvl">
+                          <a className="main" href="#">Shop Others</a>
+                          <ul className="submenu-third-lvl mm-collapse">
+                            <li><a ></a>Cart</li>
+                            <li><a ></a>Checkout</li>
+                            <li><a ></a>Trackorder</li>
+                          </ul>
+                        </li>
+                      </ul> */}
+                    </li>
+                    {/* <li className="has-droupdown">
+                      <a href="#" className="main">Blog</a>
+                      <ul className="submenu mm-collapse">
+                        <li><a className="mobile-menu-link" >Blog</a></li>
+                        <li><a className="mobile-menu-link" >Blog Left Sidebar</a></li>
+                        <li><a className="mobile-menu-link" >Blog Right Sidebar</a></li>
+                      </ul>
+                    </li> */}
+                    <li>
+                      <a  className="main">Contact Us</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+
+            <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabIndex="0">
+              <div className="category-btn category-hover-header menu-category">
+              <ul className="category-sub-menu" id="category-active-four">
+                                                {FilterData.reduce((acc, curr) => {
+                                                    const categoryExists = acc.find(item => item.productCategory === curr.productCategory);
+
+                                                    if (!categoryExists) {
+                                                        acc.push(curr);
+                                                    }
+
+                                                    return acc;
+                                                }, []).map((res, index) => (
+                                                    <li key={index} onClick={() => productByCategory(res)}>
+                                                        <a className="menu-item">
+                                                            <img src="images/icons/01.svg" alt="icons" />
+                                                            <span>{res.productCategory}</span>
+                                                            {/* <i
+                                                                className={`fa-regular fa-${openCategories[res.productCategory] ? 'minus' : 'plus'}`}
+                                                                onClick={() => toggleCategory(res.productCategory)}
+                                                                style={{ cursor: 'pointer' }}
+                                                            ></i> */}
+
+                                                            <i class="bi bi-chevron-right pointer" onClick={() => toggleCategory(res.productCategory)}></i>
+                                                        </a>
+
+                                                        {/* {openCategories[res.productCategory] && (
+                                                            <ul className="submenu mm-collapse">
+                                                                {FilterData.filter(item => item.productCategory === res.productCategory)
+                                                                    .map((filteredProduct, i) => (
+                                                                        <li key={i}>
+                                                                            <a className="mobile-menu-link" onClick={() => ProductDetail(res._id)}>{filteredProduct.productName}</a>
+                                                                        </li>
+                                                                    ))}
+                                                            </ul>
+                                                        )} */}
+                                                    </li>
+                                                ))}
+                                            </ul>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <div className="button-area-main-wrapper-menuy-sidebar mt--50">
+         
+        <div class="contact-area">
+                <div class="phone">
+                    <i class="fa-light fa-headset"></i>
+                    <a href="#">02345697871</a>
+                </div>
+                <div class="phone">
+                    <i class="fa-light fa-envelope"></i>
+                    <a href="#">02345697871</a>
+                </div>
+            </div>
+            <div class="buton-area-bottom">
+                <a  class="rts-btn btn-primary" style={{ cursor: 'pointer' }} onClick={() => triggerNotification('warning', 'Warning', 'Sure to Logout', 'Sure', 'logout')}>
+                    
+                    <span className="text">
+                                                {isLogged === 'success' ? 'Logout' : 'Login'}
+                                            </span></a>
+
+
+              
+                <a  class="rts-btn btn-primary" onClick={() => routeCart('account')} style={{ cursor: 'pointer' }}>Account</a>
+                <a  class="rts-btn btn-primary" onClick={() => routeCart('wishlist')}>Wishlist</a>
+            </div>
+        
+        </div>
+      </div>
+      
+
+        </div>
+
+
+
+
     )
 }

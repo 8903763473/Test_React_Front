@@ -320,7 +320,7 @@ const ProductCategory = ({ setLoading }) => {
                                 <div class="product-area-wrapper-shopgrid-list mt--20 tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
                                     <div class="row g-4">
                                         {ProductCategories.map((category) => (
-                                            <div class="col-lg-20 col-lg-4 col-md-6 col-sm-6 col-12">
+                                            <div class="col-lg48 col-lg-4 col-md-6 col-sm-6 col-12">
                                                 <div class="single-shopping-card-one" style={{ height: 'auto' }}>
                                                     <div class="image-and-action-area-wrapper" style={{ minHeight: '140px', maxHeight: '140px' }}>
                                                         <a href="shop-details.html" class="thumbnail-preview">

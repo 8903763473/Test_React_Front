@@ -17,7 +17,7 @@ export const About = ({ setLoading }) => {
                         <p class="disc">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pretium mollis ex, vel interdum augue faucibus sit amet. Proin tempor purus ac suscipit sagittis. Nunc finibus euismod enim, eu finibus nunc ullamcorper et.
                         </p>
-                        <a href="#" class="rts-btn btn-primary">Contact Us</a>
+                        <a class="rts-btn btn-primary">Contact Us</a>
                     </div>
                 </div>
             </div>
@@ -128,7 +128,7 @@ export const About = ({ setLoading }) => {
             <div class="row g-5 mt--40">
                 <div class="col-lg-3 col-md-6 col-sm-12 col-12">
                     <div class="single-team-style-one">
-                        <a href="#" class="thumbnail">
+                        <a  class="thumbnail">
                             <img src="images/team/01.jpg" alt="team_single"/>
                         </a>
                         <div class="bottom-content-area">
@@ -139,7 +139,7 @@ export const About = ({ setLoading }) => {
                                 <span class="designation">Design Director</span>
                             </div>
                             <div class="bottom">
-                                <a href="#" class="number">
+                                <a  class="number">
                                     <i class="fa-solid fa-phone-rotary"></i>
                                     +25896 3158 3228
                                 </a>
@@ -149,7 +149,7 @@ export const About = ({ setLoading }) => {
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 col-12">
                     <div class="single-team-style-one">
-                        <a href="#" class="thumbnail">
+                        <a class="thumbnail">
                             <img src="images/team/02.jpg" alt="team_single"/>
                         </a>
                         <div class="bottom-content-area">
@@ -160,7 +160,7 @@ export const About = ({ setLoading }) => {
                                 <span class="designation">Design Director</span>
                             </div>
                             <div class="bottom">
-                                <a href="#" class="number">
+                                <a  class="number">
                                     <i class="fa-solid fa-phone-rotary"></i>
                                     +25896 3158 3228
                                 </a>
@@ -170,7 +170,7 @@ export const About = ({ setLoading }) => {
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 col-12">
                     <div class="single-team-style-one">
-                        <a href="#" class="thumbnail">
+                        <a class="thumbnail">
                             <img src="images/team/03.jpg" alt="team_single"/>
                         </a>
                         <div class="bottom-content-area">
@@ -181,7 +181,7 @@ export const About = ({ setLoading }) => {
                                 <span class="designation">Design Director</span>
                             </div>
                             <div class="bottom">
-                                <a href="#" class="number">
+                                <a  class="number">
                                     <i class="fa-solid fa-phone-rotary"></i>
                                     +25896 3158 3228
                                 </a>
@@ -191,7 +191,7 @@ export const About = ({ setLoading }) => {
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 col-12">
                     <div class="single-team-style-one">
-                        <a href="#" class="thumbnail">
+                        <a  class="thumbnail">
                             <img src="images/team/04.jpg" alt="team_single"/>
                         </a>
                         <div class="bottom-content-area">
@@ -202,7 +202,7 @@ export const About = ({ setLoading }) => {
                                 <span class="designation">Design Director</span>
                             </div>
                             <div class="bottom">
-                                <a href="#" class="number">
+                                <a  class="number">
                                     <i class="fa-solid fa-phone-rotary"></i>
                                     +25896 3158 3228
                                 </a>

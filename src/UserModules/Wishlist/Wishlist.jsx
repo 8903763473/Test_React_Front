@@ -186,7 +186,7 @@ export const Wishlist = ({ setLoading }) => {
 
             <div class="rts-shorts-service-area rts-section-gap bg_primary">
                 <div class="container">
-                    <div class="row g-5">
+                    <div class="row g-5" style={{gap: '44px'}}>
                         <div class="col-lg-3 col-md-6 col-sm-12 col-12">
                             <div class="single-short-service-area-start">
                                 <div class="icon-area">
