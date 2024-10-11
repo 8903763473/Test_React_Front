@@ -16,7 +16,7 @@ export const Header = () => {
 
     // Function to toggle the sidebar
     const toggleMenu = () => {
-      setMenuOpen(!menuOpen);
+        setMenuOpen(!menuOpen);
     };
 
     const navigate = useNavigate();
@@ -65,6 +65,10 @@ export const Header = () => {
             setLoading(false);
         }, 3000);
     };
+
+    const Route = (data) => {
+        navigate('/' + data);
+    }
 
 
     const routeCart = (data) => {
@@ -270,7 +274,7 @@ export const Header = () => {
                                             </svg>
 
                                         </div>
-                                        <div className="menu-btn" id="menu-btn"  onClick={toggleMenu}>
+                                        <div className="menu-btn" id="menu-btn" onClick={toggleMenu}>
 
                                             <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <rect y="14" width="20" height="2" fill="#1F1F25"></rect>
@@ -281,7 +285,7 @@ export const Header = () => {
                                         </div>
 
 
-                                        
+
                                     </div>
                                     <div className="accont-wishlist-cart-area-header">
                                         <a className="btn-border-only account" onClick={() => routeCart('account')} style={{ cursor: 'pointer' }}>
@@ -484,7 +488,7 @@ export const Header = () => {
                             </div>
                             <div className="col-lg-12 " >
                                 <div className="logo-search-category-wrapper after-md-device-header">
-                                    <a  className="logo-area">
+                                    <a className="logo-area">
                                         <img src="images/logo/logo-01.svg" alt="logo-main" className="logo" style={{ width: '260px', borderRadius: '10px' }} />
                                     </a>
                                     <div className="category-search-wrapper">
@@ -587,48 +591,48 @@ export const Header = () => {
                                                 <i className="fa-sharp fa-regular fa-cart-shopping"></i>
                                                 <span className="text">Cart</span>
                                                 <div className="category-sub-menu card-number-show">
-                                                <h5 className="shopping-cart-number">Shopping Cart ({cartDataLength} {cartDataLength > 1 ? 'items' : 'item'})</h5>
+                                                    <h5 className="shopping-cart-number">Shopping Cart ({cartDataLength} {cartDataLength > 1 ? 'items' : 'item'})</h5>
                                                     {cartData.map((cart) => (
-                                                    <div className="cart-item-1 border-top" key={cart.productId.productName}>
-                                                        <div className="img-name">
-                                                            <div className="thumbanil">
-                                                                <img src={cart.productId.productImage} alt="" />
-                                                            </div>
-                                                            <div className="details">
-                                                                <a >
-                                                                    <h5 className="title">{cart.productId.productName}</h5>
-                                                                </a>
-                                                                <div className="number">
-                                                                    {cart.quantity}<i className="fa-regular fa-x"></i>
-                                                                    <span>₹{cart.productId.productCurrentRate}</span>
+                                                        <div className="cart-item-1 border-top" key={cart.productId.productName}>
+                                                            <div className="img-name">
+                                                                <div className="thumbanil">
+                                                                    <img src={cart.productId.productImage} alt="" />
+                                                                </div>
+                                                                <div className="details">
+                                                                    <a >
+                                                                        <h5 className="title">{cart.productId.productName}</h5>
+                                                                    </a>
+                                                                    <div className="number">
+                                                                        {cart.quantity}<i className="fa-regular fa-x"></i>
+                                                                        <span>₹{cart.productId.productCurrentRate}</span>
+                                                                    </div>
                                                                 </div>
                                                             </div>
+                                                            <div className="close-c1" onClick={() => RemoveCart(cart.productId._id)}>
+                                                                <i className="fa-regular fa-x"></i>
+                                                            </div>
                                                         </div>
-                                                        <div className="close-c1" onClick={() => RemoveCart(cart.productId._id)}>
-                                                            <i className="fa-regular fa-x"></i>
-                                                        </div>
-                                                    </div>
-                                                ))}
+                                                    ))}
                                                     <div className="sub-total-cart-balance">
                                                         <div className="bottom-content-deals mt--10">
                                                             <div className="top">
                                                                 <span>Sub Total:</span>
-                                                                <span className="number-c">$108.00</span>
+                                                                <span className="number-c">₹{cartData.reduce((total, cart) => total + (cart.productId.productCurrentRate * cart.quantity), 0)}</span>
                                                             </div>
                                                             <div className="single-progress-area-incard">
                                                                 <div className="progress">
                                                                     <div className="progress-bar wow fadeInLeft" role="progressbar" style={{ width: '80%' }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                                                 </div>
                                                             </div>
-                                                            <p>Spend More <span>$125.00</span> to reach <span>Free Shipping</span></p>
+                                                            <p>Spend More <span>₹ 1000.00</span> to reach <span>Free Shipping</span></p>
                                                         </div>
                                                         <div className="button-wrapper d-flex align-items-center justify-content-between">
-                                                        <a className="rts-btn btn-primary " onClick={() => routeCart('1')}>View Cart</a>
-                                                        <a className="rts-btn btn-primary border-only" onClick={() => routeCart('2')}>CheckOut</a>
+                                                            <a className="rts-btn btn-primary " onClick={() => routeCart('1')}>View Cart</a>
+                                                            <a className="rts-btn btn-primary border-only" onClick={() => routeCart('2')}>CheckOut</a>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <a  className="over_link"></a>
+                                                <a className="over_link"></a>
                                             </div>
                                         </div>
                                         <div className="actions-area">
@@ -657,51 +661,66 @@ export const Header = () => {
                 </div>
             </div>
 
+            <div className="search-input-area">
+                <div className="container">
+                    <div className="search-input-inner">
+                        <div className="input-div">
+                            <input id="searchInput1" className="search-input" type="text" placeholder="Search"
+                                value={searchTerm}
+                                onChange={handleInputChange} />
+                            <button onClick={() => getSearchproduct(searchTerm)}><i className="far fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div id="close" className="search-close-icon"><i className="far fa-times"></i></div>
+            </div>
 
 
             <div className={`side-bar header-two ${menuOpen ? 'show' : ''}`}>
-        {/* Close Button */}
-        <button className="close-icon-menu" onClick={toggleMenu}>
-          <i className="far fa-times"></i>
-        </button>
+                {/* Close Button */}
+                <button className="close-icon-menu" onClick={toggleMenu}>
+                    <i className="far fa-times"></i>
+                </button>
 
-        {/* Search Form */}
-        <form action="#" className="search-input-area-menu mt--30">
-          <input type="text" placeholder="Search..." required="" />
-          <button><i className="fa-light fa-magnifying-glass"></i></button>
-        </form>
+                {/* Search Form */}
+                <form className="search-input-area-menu mt--30">
+                    <input type="text" placeholder="Search..." required="" />
+                    <button><i className="fa-light fa-magnifying-glass"></i></button>
+                </form>
 
-        {/* Navigation Menu */}
-        <div className="mobile-menu-nav-area tab-nav-btn mt--20">
-          <nav>
-            <div className="nav nav-tabs" id="nav-tab" role="tablist">
-              <button className="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Menu</button>
-              <button className="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Category</button>
-            </div>
-          </nav>
+                {/* Navigation Menu */}
+                <div className="mobile-menu-nav-area tab-nav-btn mt--20">
+                    <nav>
+                        <div className="nav nav-tabs" id="nav-tab" role="tablist">
+                            <button className="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Menu</button>
+                            <button className="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Category</button>
+                        </div>
+                    </nav>
 
-          <div className="tab-content" id="nav-tabContent">
-            <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabIndex="0">
-              <div className="mobile-menu-main">
-                <nav className="nav-main mainmenu-nav mt--30">
-                  <ul className="mainmenu metismenu" id="mobile-menu-active" style={{    display: 'flex',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    flexDirection: 'column'}}>
-                    <li className="">
-                      <a href="#" className="main">Home</a>
-                      {/* <ul className="submenu mm-collapse">
+                    <div className="tab-content" id="nav-tabContent">
+                        <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabIndex="0">
+                            <div className="mobile-menu-main">
+                                <nav className="nav-main mainmenu-nav mt--30">
+                                    <ul className="mainmenu metismenu" id="mobile-menu-active" style={{
+                                        display: 'flex',
+                                        alignItems: 'flex-start',
+                                        justifyContent: 'flex-start',
+                                        flexDirection: 'column'
+                                    }}>
+                                        <li className="" onClick={() => Route('home')}>
+                                            <a className="main">Home</a>
+                                            {/* <ul className="submenu mm-collapse">
                         <li><a className="mobile-menu-link" href="index-2.html">Home One</a></li>
                         <li><a className="mobile-menu-link" href="index-two.html">Home Two</a></li>
                         <li><a className="mobile-menu-link" href="index-three.html">Home Three</a></li>
                         <li><a className="mobile-menu-link" href="index-four.html">Home Four</a></li>
                         <li><a className="mobile-menu-link"> Home Five</a></li>
                       </ul> */}
-                    </li>
-                    <li>
-                      <a  className="main">About</a>
-                    </li>
-                    {/* <li className="has-droupdown">
+                                        </li>
+                                        <li onClick={() => Route('about')}>
+                                            <a className="main">About</a>
+                                        </li>
+                                        {/* <li className="has-droupdown">
                       <a href="#" className="main">Pages</a>
                       <ul className="submenu mm-collapse">
                         <li><a className="mobile-menu-link">About</a></li>
@@ -716,9 +735,9 @@ export const Header = () => {
                         <li><a className="mobile-menu-link" >Error Page</a></li>
                       </ul>
                     </li> */}
-                    <li className="">
-                      <a href="#" className="main">Shop</a>
-                      {/* <ul className="submenu mm-collapse">
+                                        <li className="" onClick={() => Route('Dashboard')}>
+                                            <a className="main">Account</a>
+                                            {/* <ul className="submenu mm-collapse">
                         <li className="has-droupdown third-lvl">
                           <a className="main" href="#">Shop Layout</a>
                           <ul className="submenu-third-lvl mm-collapse">
@@ -753,8 +772,8 @@ export const Header = () => {
                           </ul>
                         </li>
                       </ul> */}
-                    </li>
-                    {/* <li className="has-droupdown">
+                                        </li>
+                                        {/* <li className="has-droupdown">
                       <a href="#" className="main">Blog</a>
                       <ul className="submenu mm-collapse">
                         <li><a className="mobile-menu-link" >Blog</a></li>
@@ -762,40 +781,40 @@ export const Header = () => {
                         <li><a className="mobile-menu-link" >Blog Right Sidebar</a></li>
                       </ul>
                     </li> */}
-                    <li>
-                      <a  className="main">Contact Us</a>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            </div>
+                                        <li onClick={() => Route('contact')}>
+                                            <a className="main">Contact Us</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
 
-            <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabIndex="0">
-              <div className="category-btn category-hover-header menu-category">
-              <ul className="category-sub-menu" id="category-active-four">
-                                                {FilterData.reduce((acc, curr) => {
-                                                    const categoryExists = acc.find(item => item.productCategory === curr.productCategory);
+                        <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabIndex="0">
+                            <div className="category-btn category-hover-header menu-category">
+                                <ul className="category-sub-menu" id="category-active-four">
+                                    {FilterData.reduce((acc, curr) => {
+                                        const categoryExists = acc.find(item => item.productCategory === curr.productCategory);
 
-                                                    if (!categoryExists) {
-                                                        acc.push(curr);
-                                                    }
+                                        if (!categoryExists) {
+                                            acc.push(curr);
+                                        }
 
-                                                    return acc;
-                                                }, []).map((res, index) => (
-                                                    <li key={index} onClick={() => productByCategory(res)}>
-                                                        <a className="menu-item">
-                                                            <img src="images/icons/01.svg" alt="icons" />
-                                                            <span>{res.productCategory}</span>
-                                                            {/* <i
+                                        return acc;
+                                    }, []).map((res, index) => (
+                                        <li key={index} onClick={() => productByCategory(res)}>
+                                            <a className="menu-item">
+                                                <img src="images/icons/01.svg" alt="icons" />
+                                                <span>{res.productCategory}</span>
+                                                {/* <i
                                                                 className={`fa-regular fa-${openCategories[res.productCategory] ? 'minus' : 'plus'}`}
                                                                 onClick={() => toggleCategory(res.productCategory)}
                                                                 style={{ cursor: 'pointer' }}
                                                             ></i> */}
 
-                                                            <i class="bi bi-chevron-right pointer" onClick={() => toggleCategory(res.productCategory)}></i>
-                                                        </a>
+                                                <i class="bi bi-chevron-right pointer" onClick={() => toggleCategory(res.productCategory)}></i>
+                                            </a>
 
-                                                        {/* {openCategories[res.productCategory] && (
+                                            {/* {openCategories[res.productCategory] && (
                                                             <ul className="submenu mm-collapse">
                                                                 {FilterData.filter(item => item.productCategory === res.productCategory)
                                                                     .map((filteredProduct, i) => (
@@ -805,42 +824,42 @@ export const Header = () => {
                                                                     ))}
                                                             </ul>
                                                         )} */}
-                                                    </li>
-                                                ))}
-                                            </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="button-area-main-wrapper-menuy-sidebar mt--50">
-         
-        <div class="contact-area">
-                <div class="phone">
-                    <i class="fa-light fa-headset"></i>
-                    <a href="#">02345697871</a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="phone">
-                    <i class="fa-light fa-envelope"></i>
-                    <a href="#">02345697871</a>
-                </div>
-            </div>
-            <div class="buton-area-bottom">
-                <a  class="rts-btn btn-primary" style={{ cursor: 'pointer' }} onClick={() => triggerNotification('warning', 'Warning', 'Sure to Logout', 'Sure', 'logout')}>
-                    
-                    <span className="text">
-                                                {isLogged === 'success' ? 'Logout' : 'Login'}
-                                            </span></a>
+
+                {/* <div className="button-area-main-wrapper-menuy-sidebar mt--50">
+
+                    <div class="contact-area">
+                        <div class="phone">
+                            <i class="fa-light fa-headset"></i>
+                            <a href="#">02345697871</a>
+                        </div>
+                        <div class="phone">
+                            <i class="fa-light fa-envelope"></i>
+                            <a href="#">02345697871</a>
+                        </div>
+                    </div>
+                    <div class="buton-area-bottom">
+                        <a class="rts-btn btn-primary" style={{ cursor: 'pointer' }} onClick={() => triggerNotification('warning', 'Warning', 'Sure to Logout', 'Sure', 'logout')}>
+
+                            <span className="text">
+                                {isLogged === 'success' ? 'Logout' : 'Login'}
+                            </span></a>
 
 
-              
-                <a  class="rts-btn btn-primary" onClick={() => routeCart('account')} style={{ cursor: 'pointer' }}>Account</a>
-                <a  class="rts-btn btn-primary" onClick={() => routeCart('wishlist')}>Wishlist</a>
+
+                        <a class="rts-btn btn-primary" onClick={() => routeCart('account')} style={{ cursor: 'pointer' }}>Account</a>
+                        <a class="rts-btn btn-primary" onClick={() => routeCart('wishlist')}>Wishlist</a>
+                    </div>
+
+                </div> */}
             </div>
-        
-        </div>
-      </div>
-      
+
 
         </div>
 

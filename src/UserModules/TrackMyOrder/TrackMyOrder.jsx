@@ -50,18 +50,18 @@ export const TrackMyOrder = ({ setLoading }) => {
                     <div className="card-body">
                         <h6 className='start'>Order ID: OD45345345435</h6>
                         <article className="card">
-                            <div className="card-body row">
+                            <div className="card-body row" style={{ gap: '10px' }}>
                                 <div className="col">
-                                    <strong>Estimated Delivery time:</strong> <br />29 nov 2019
+                                    <strong>Delivered at:</strong> <br />29 nov 2019
                                 </div>
                                 <div className="col">
-                                    <strong>Shipping BY:</strong> <br /> BLUEDART, | <i className="fa fa-phone"></i> +1598675986
+                                    <strong>Tracking #:</strong> <br /> {OrderId.slice(0, 10)}
                                 </div>
                                 <div className="col">
                                     <strong>Status:</strong> <br /> {OrderedData.orderStatus}
                                 </div>
                                 <div className="col">
-                                    <strong>Tracking #:</strong> <br /> BD045903594059
+                                    <strong>Shipping BY:</strong> <br /> BLUEDART, | <i className="fa fa-phone"></i> +1598675986
                                 </div>
                             </div>
                         </article>

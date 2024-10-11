@@ -56,7 +56,7 @@ const Contact = ({ setLoading }) => {
 
             <Header />
 
-            <div id="side-bar" className="side-bar header-two">
+            {/* <div id="side-bar" className="side-bar header-two">
                 <button className="close-icon-menu"><i className="far fa-times"></i></button>
 
 
@@ -65,7 +65,7 @@ const Contact = ({ setLoading }) => {
                     <button><i className="fa-light fa-magnifying-glass"></i></button>
                 </form>
 
-                {/* <div className="mobile-menu-nav-area tab-nav-btn mt--20">
+                <div className="mobile-menu-nav-area tab-nav-btn mt--20">
 
                     <nav>
                         <div className="nav nav-tabs" id="nav-tab" role="tablist">
@@ -255,7 +255,8 @@ const Contact = ({ setLoading }) => {
                         </div>
                     </div>
 
-                </div> */}
+                </div>
+
                 <div className="button-area-main-wrapper-menuy-sidebar mt--50">
                     <div className="contact-area">
                         <div className="phone">
@@ -273,7 +274,8 @@ const Contact = ({ setLoading }) => {
                     </div>
                 </div>
 
-            </div>
+            </div> */}
+
             <div className="rts-contact-main-wrapper-banner bg_image">
                 <div className="container">
                     <div className="row">

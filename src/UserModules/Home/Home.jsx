@@ -1699,7 +1699,7 @@ const HomePage = ({ setLoading }) => {
 
 
 
-            <div className="search-input-area">
+            {/* <div className="search-input-area">
                 <div className="container">
                     <div className="search-input-inner">
                         <div className="input-div">
@@ -1709,7 +1709,7 @@ const HomePage = ({ setLoading }) => {
                     </div>
                 </div>
                 <div id="close" className="search-close-icon"><i className="far fa-times"></i></div>
-            </div>
+            </div> */}
             <div id="anywhere-home" className="anywere"></div>
             <div className="progress-wrap">
                 <svg className="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
