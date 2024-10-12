@@ -16,6 +16,8 @@ import { TrackMyOrder } from './UserModules/TrackMyOrder/TrackMyOrder';
 import ProductCategory from './UserModules/ProductByCategory/ProductByCategory';
 import Wishlist from './UserModules/Wishlist/Wishlist';
 import SearchProduct from './UserModules/SearchProduct/SearchProduct';
+import Admindashboard from './AdminModules/AdminDashboard/admindashboard';
+import ViewOrder from './AdminModules/ViewOrder/vieworder';
 
 
 function App() {
@@ -52,8 +54,10 @@ function App() {
           {/* <Route path="/dashboard" element={<Dashboard setLoading={setLoading} />} /> */}
           <Route path="/invoice" element={<InVoice setLoading={setLoading} />} />
           <Route path="/TrackMyOrder" element={<TrackMyOrder setLoading={setLoading} />} />
+          <Route path="/Admindashboard" element={<Admindashboard setLoading={setLoading} />} />
+          <Route path="/ViewOrder" element={<ViewOrder setLoading={setLoading} />} />
 
-
+          
         </Routes>
       </div>
     </Router>

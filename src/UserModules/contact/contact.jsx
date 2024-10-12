@@ -11,6 +11,9 @@ const Contact = ({ setLoading }) => {
     const [email, setEmail] = useState('');
     const [mobile, setMobile] = useState('');
     const [message, setMessage] = useState('');
+    const [lastname, setlastname] = useState('');
+
+    
     const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
@@ -29,6 +32,7 @@ const Contact = ({ setLoading }) => {
             setEmail('');
             setMobile('');
             setMessage('');
+            setlastname('');
             triggerNotification('success', 'Success', 'Submitted successfully !', 'x', null);
             setTimeout(() => {
                 navigate('/');
@@ -357,11 +361,19 @@ const Contact = ({ setLoading }) => {
                                                     <div className="single">
                                                         <input
                                                             type="text"
+                                                            placeholder="LastName"
+                                                            value={lastname}
+                                                            onChange={(e) => setlastname(e.target.value)} // Capture email input
+                                                        />
+                                                    </div>
+                                                    {/* <div className="single">
+                                                        <input
+                                                            type="text"
                                                             placeholder="Email*"
                                                             value={email}
                                                             onChange={(e) => setEmail(e.target.value)} // Capture email input
                                                         />
-                                                    </div>
+                                                    </div> */}
                                                 </div>
                                                 <div className="single-select">
                                                     <input
@@ -370,7 +382,17 @@ const Contact = ({ setLoading }) => {
                                                         value={mobile}
                                                         onChange={(e) => setMobile(e.target.value)} // Capture name input
                                                     />
-                                                </div>
+                                                </div>&nbsp;
+
+                                                <div className="single-select">
+                                                        <input
+                                                            type="text"
+                                                            placeholder="Email*"
+                                                            value={email}
+                                                            onChange={(e) => setEmail(e.target.value)} // Capture email input
+                                                        />
+                                                    </div>
+
                                                 <textarea
                                                     name="message"
                                                     placeholder="Write Message Here"

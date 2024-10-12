@@ -100,7 +100,14 @@ const api = {
     SearchProduct: (product) => {
         return apiInstance.get(`product/search?query=${product}`);
 
-    }
+    },
+
+    getAllOrders:()=>{
+        return apiInstance.get(`/checkout/getOverAllOrders`);
+    },
+    getOrderId: (id) => {
+        return apiInstance.get("checkout/TrackOrder/"+id);
+      }
 
 }
 

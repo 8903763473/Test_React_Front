@@ -9,6 +9,7 @@ export const Register = () => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
+    const [Address, setAddress] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [showAlert, SetShowAlert] = useState(false);
     const navigate = useNavigate();
@@ -103,6 +104,17 @@ export const Register = () => {
                                             required
                                         />
                                     </div>
+                                    <div className="input-wrapper">
+                                        <label htmlFor="mobile">Address*</label>
+                                        <textarea
+                                            type="number"
+                                            id="mobile"
+                                            value={phone}
+                                            onChange={(e) => setAddress(e.target.value)}
+                                            required
+                                        ></textarea>
+                                    </div>
+
                                     <div className="input-wrapper">
                                         <label htmlFor="password">Password*</label>
                                         <input
