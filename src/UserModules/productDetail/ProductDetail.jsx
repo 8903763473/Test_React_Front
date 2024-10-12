@@ -6,7 +6,6 @@ import { useLocation } from 'react-router-dom';
 import NotificationCenter from '../../CommonModule/Notification/Notification';
 import './productDetail.scss';
 export const ProductDetail = ({ setLoading }) => {
-    // const [selectedId, setselectedId] = useState('');
     const [prodDetail, setprodDetail] = useState([]);
     const [loading, setLoad] = useState(false);
     const [RelatedProduct, setRelatedProduct] = useState([]);
@@ -22,31 +21,30 @@ export const ProductDetail = ({ setLoading }) => {
         }
     };
 
-
     const GetProductByCategory = (category) => {
         api.getProductbyCategory(category)
             .then(res => {
-                console.log(res.data);
                 setRelatedProduct(res.data);
+                setLoad(false)
             })
             .catch(err => {
-                console.error(err); // Handle errors here if needed
+                setLoad(false)
+                console.error(err);
             });
     };
 
     const getProdById = (selectedId) => {
+        setLoad(true)
         api.getProductsById(selectedId)
             .then(res => {
                 setprodDetail(res.data)
-                console.log(res);
                 GetProductByCategory(res.data.productCategory)
             })
             .catch(err => {
+                setLoad(false)
                 console.log(err);
             })
     }
-
-
 
     const addToWishlist = (Category) => {
         console.log("Adding to wishlist:", Category);
@@ -68,13 +66,9 @@ export const ProductDetail = ({ setLoading }) => {
             });
     };
 
-
-
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const productId = searchParams.get('productId');
-    console.log("profuct Id", productId);
-
 
 
     const notificationRef = useRef();
@@ -83,12 +77,10 @@ export const ProductDetail = ({ setLoading }) => {
             notificationRef.current.spawnNotification(type, title, subtitle, button, path);
         }
     };
+
     const addCart = (data) => {
-        console.log(data);
         const isLogged = localStorage.getItem('login')
         if (isLogged == 'success') {
-            console.log('Cart Added');
-
             let post = {
                 "productId": data._id,
                 "quantity": quantity,
@@ -100,32 +92,23 @@ export const ProductDetail = ({ setLoading }) => {
                     setTimeout(() => {
                         setLoad(false);
                     }, 3000);
-                    console.log(response.data);
                     triggerNotification('success', 'Success', 'Successfully Added in cart', 'x', null)
                 }).catch(error => {
                     console.log(error.response.data.message);
                     triggerNotification('error', 'Error', error.response.data.message, 'x', null)
                 })
         } else {
-            console.log('Kindly Loggin');
             triggerNotification('warning', 'Warning', 'Login to continue !', null, 'login')
         }
     }
 
-
-
     useEffect(() => {
-        // setselectedId(localStorage.getItem('SelectedProdId'))
         getProdById(productId)
-    }, [])
-
-
+    }, []);
 
     return (
         <div>
             <NotificationCenter ref={notificationRef} />
-
-
 
             <Header />
 
