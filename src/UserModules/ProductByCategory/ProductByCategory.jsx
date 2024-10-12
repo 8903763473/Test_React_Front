@@ -39,7 +39,6 @@ const ProductCategory = ({ setLoading }) => {
                         setLoad(false);
                     }, 3000);
                     console.log(response.data);
-                    localStorage.setItem('cartlength',response.data.items.length)
                     triggerNotification('success', 'Success', 'Successfully Added in cart', 'x', null)
                 }).catch(error => {
                     console.log(error.response.data.message);

@@ -133,11 +133,7 @@ export const Header = () => {
             .then(response => {
                 console.log("Categories:", response.data);
                 setmyCart(response.data.items)
-                const storedCart = JSON.parse(localStorage.getItem('cartlength')) || [];
-        console.log(storedCart);
-        // setmyCart(storedCart);
-        setCartLength(storedCart);
-                setcartlength(response.data.items.length)
+               
             })
             .catch(error => {
                 console.error("Error fetching categories:", error);

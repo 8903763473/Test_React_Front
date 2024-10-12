@@ -94,18 +94,21 @@ const Cartpage = ({ setLoading }) => {
     };
 
     const RemoveCart = (productId) => {
-        let post = {
-            "userId": localStorage.getItem("userId"),
-            "productId": productId
-        }
+        console.log(productId);
+        const post = {
+          userId: localStorage.getItem("userId"),
+          productId: productId,
+        };
+      
         api.removecart(post)
-            .then(res => {
-                console.log(res);
-                getcartdata();
-            }).catch(err => {
-                console.log(err);
-            });
-    };
+          .then(res => {
+            console.log("Remove Response:", res);
+      
+            setmyCart(prevCart => prevCart.filter(item => item.productId._id !== productId));
+          })
+          .catch(err => console.error("Remove Error:", err));
+      };
+      
 
     const clearcart = () => {
         let post = {
@@ -155,7 +158,7 @@ const Cartpage = ({ setLoading }) => {
                                     console.log(cart),
                                     <div className="single-cart-area-list main item-parent" key={cart._id}>
                                         <div className="product-main-cart">
-                                            <div className="close section-activation" onClick={() => RemoveCart(cart._id)}>
+                                            <div className="close section-activation"onClick={() => RemoveCart(cart.productId._id)}>
                                                 <i className="fa-regular fa-x"></i>
                                             </div>
                                             <div className="thumbnail">
