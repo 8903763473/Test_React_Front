@@ -169,7 +169,7 @@ const Checkout = ({ setLoading }) => {
             triggerNotification('success', 'Success', 'Thanks for you order', 'x', null);
             setLoading(false)
             setcheckoutId(response.data.checkout._id)
-            // navigate('/invoice?orderId=' + response.data.checkout._id);
+            navigate('/invoice?orderId=' + response.data.checkout._id);
 
         } catch (error) {
             console.error('Error while checkout:', error);

@@ -13,7 +13,9 @@ export const Header = () => {
     const [isLogged, setisLogged] = useState('');
     const [FilterData, setFilterData] = useState([]);
     const [menuOpen, setMenuOpen] = useState(false);
-
+    // const [cartLength, setCartLength] = useState(0);
+    // const [cartData1, setCartData] = useState([]);
+    const [cartLength, setCartLength] = useState(0);
     // Function to toggle the sidebar
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
@@ -131,6 +133,10 @@ export const Header = () => {
             .then(response => {
                 console.log("Categories:", response.data);
                 setmyCart(response.data.items)
+                const storedCart = JSON.parse(localStorage.getItem('cartlength')) || [];
+        console.log(storedCart);
+        // setmyCart(storedCart);
+        setCartLength(storedCart);
                 setcartlength(response.data.items.length)
             })
             .catch(error => {
@@ -139,6 +145,8 @@ export const Header = () => {
     };
 
     useEffect(() => {
+        
+
         Filter()
         const loggedStatus = localStorage.getItem('login');
         setisLogged(loggedStatus);
@@ -303,7 +311,7 @@ export const Header = () => {
                                         <div className="btn-border-only cart category-hover-header">
                                             <i className="fa-sharp fa-regular fa-cart-shopping"></i>
                                             <span className="text">Cart</span>
-                                            <span className="number">{cartDataLength}</span>
+                                            <span className="number">{cartDataLength|cartLength}</span>
                                             <div className="category-sub-menu card-number-show">
                                                 <h5 className="shopping-cart-number">Shopping Cart ({cartDataLength} {cartDataLength > 1 ? 'items' : 'item'})</h5>
                                                 {cartData.map((cart) => (

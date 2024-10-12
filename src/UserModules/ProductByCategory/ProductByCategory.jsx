@@ -39,6 +39,7 @@ const ProductCategory = ({ setLoading }) => {
                         setLoad(false);
                     }, 3000);
                     console.log(response.data);
+                    localStorage.setItem('cartlength',response.data.items.length)
                     triggerNotification('success', 'Success', 'Successfully Added in cart', 'x', null)
                 }).catch(error => {
                     console.log(error.response.data.message);
@@ -106,8 +107,8 @@ const ProductCategory = ({ setLoading }) => {
 
             <div class="shop-grid-sidebar-area rts-section-gap">
                 <div class="container">
-                    <div class="row g-0">
-                        <div class="col-xl-3 col-lg-12 pr--70 pr_lg--10 pr_sm--10 pr_md--5 rts-sticky-column-item">
+                    <div class="row g-0" style={{justifyContent: 'center'}}>
+                        {/* <div class="col-xl-3 col-lg-12 pr--70 pr_lg--10 pr_sm--10 pr_md--5 rts-sticky-column-item">
                             <div class="sidebar-filter-main theiaStickySidebar">
                                 <div class="single-filter-box">
                                     <h5 class="title">Widget Price Filter</h5>
@@ -236,8 +237,8 @@ const ProductCategory = ({ setLoading }) => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-9 col-lg-12">
+                        </div> */}
+                        <div class="col-xl-9 col-lg-12" style={{width: '95%'}}>
                             <div class="filter-select-area">
                                 <div class="top-filter">
                                     <span>Showing 1–20 of 57 results</span>
