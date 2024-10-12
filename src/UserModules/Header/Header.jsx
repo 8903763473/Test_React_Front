@@ -16,7 +16,6 @@ export const Header = () => {
     // const [cartLength, setCartLength] = useState(0);
     // const [cartData1, setCartData] = useState([]);
     const [cartLength, setCartLength] = useState(0);
-    // Function to toggle the sidebar
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
@@ -30,7 +29,6 @@ export const Header = () => {
     const Filter = () => {
         api.getAllProducts()
             .then(res => {
-                console.log(res.data);
                 setFilterData(res.data)
             })
     }
@@ -42,8 +40,11 @@ export const Header = () => {
         };
         api.GetwishList(post)
             .then((res) => {
-                console.log(res.data);
-                setWishlistItems(res.data.items);
+                if (res.data.items) {
+                    setWishlistItems(res.data.items);
+                } else {
+                    setWishlistItems([]);
+                }
             })
             .catch((error) => {
                 console.error('Error fetching wishlist:', error);
@@ -56,10 +57,9 @@ export const Header = () => {
     const toggleCategory = (category) => {
         setOpenCategories((prevState) => ({
             ...prevState,
-            [category]: !prevState[category], // Toggle the state for the clicked category
+            [category]: !prevState[category],
         }));
     };
-
 
     const handleClick = () => {
         setLoading(true);
@@ -70,14 +70,13 @@ export const Header = () => {
 
     const Route = (data) => {
         navigate('/' + data);
-    }
-
+    };
 
     const routeCart = (data) => {
         if (data == 1) {
             navigate('/cart');
         }
-        else if (data == 2 && cartData.length > 0) {
+        else if (data == 2 && cartData?.length > 0) {
             navigate('/checkout');
         }
         else if (data == 'account') {
@@ -89,14 +88,11 @@ export const Header = () => {
         else {
             triggerNotification('warning', 'Warning', 'No Cart data !', null, 'Add cart')
         }
-    }
-
+    };
 
     const getSearchproduct = (data) => {
-        console.log(data);
         navigate('/Search?query=' + data)
-    }
-
+    };
 
     const handleInputChange = (event) => {
         setSearchTerm(event.target.value);
@@ -107,7 +103,6 @@ export const Header = () => {
         getSearchproduct(searchTerm);
     };
 
-
     const RemoveCart = (productId) => {
         let post = {
             "userId": localStorage.getItem("userId"),
@@ -115,7 +110,6 @@ export const Header = () => {
         }
         api.removecart(post)
             .then(res => {
-                console.log(res);
                 setmyCart([])
                 getcartdata();
 
@@ -131,7 +125,12 @@ export const Header = () => {
 
         api.getcart(post)
             .then(response => {
-                console.log("Categories:", response.data);
+                console.log(response);
+                if (response.data.items) {
+                    setcartlength(response.data.items?.length)
+                } else {
+                    setcartlength(0)
+                }
                 setmyCart(response.data.items)
                
             })
@@ -160,7 +159,6 @@ export const Header = () => {
         }
     }, [isLogged]);
 
-
     const notificationRef = useRef();
 
     const triggerNotification = (type, title, subtitle, button, path) => {
@@ -174,10 +172,9 @@ export const Header = () => {
     const productByCategory = (data) => {
         const formattedCategory = encodeURIComponent(data.productCategory.trim())
         navigate('/ProductCategory?category=' + formattedCategory);
-    }
+    };
 
     const ProductDetail = (data) => {
-        console.log(data);
         navigate('/productDetail?productId=' + data);
     };
 
@@ -198,7 +195,6 @@ export const Header = () => {
                 </div>
             )}
 
-
             <div className="rts-header-one-area-one">
                 <div className="search-header-area-main">
                     <div className="container">
@@ -213,7 +209,7 @@ export const Header = () => {
                                             <img className="parent" src="images/icons/bar-1.svg" alt="icons" />
                                             <span>Categories</span>
                                             <ul className="category-sub-menu" id="category-active-four">
-                                                {FilterData.reduce((acc, curr) => {
+                                                {FilterData?.reduce((acc, curr) => {
                                                     const categoryExists = acc.find(item => item.productCategory === curr.productCategory);
 
                                                     if (!categoryExists) {
@@ -299,7 +295,7 @@ export const Header = () => {
                                         <a className="btn-border-only wishlist" onClick={() => routeCart('wishlist')}>
                                             <i className="fa-regular fa-heart"></i>
                                             <span className="text">Wishlist</span>
-                                            <span className="number">{wishlistItems.length}</span>
+                                            <span className="number">{wishlistItems?.length}</span>
                                         </a>
 
 
@@ -310,14 +306,15 @@ export const Header = () => {
                                             <span className="number">{cartDataLength|cartLength}</span>
                                             <div className="category-sub-menu card-number-show">
                                                 <h5 className="shopping-cart-number">Shopping Cart ({cartDataLength} {cartDataLength > 1 ? 'items' : 'item'})</h5>
-                                                {cartData.map((cart) => (
+
+                                                {cartData && cartData.map((cart) => (
                                                     <div className="cart-item-1 border-top" key={cart.productId.productName}>
                                                         <div className="img-name">
                                                             <div className="thumbanil">
                                                                 <img src={cart.productId.productImage} alt="" />
                                                             </div>
                                                             <div className="details">
-                                                                <a >
+                                                                <a>
                                                                     <h5 className="title">{cart.productId.productName}</h5>
                                                                 </a>
                                                                 <div className="number">
@@ -331,12 +328,13 @@ export const Header = () => {
                                                         </div>
                                                     </div>
                                                 ))}
+
                                                 <div className="sub-total-cart-balance">
                                                     <div className="bottom-content-deals mt--10">
                                                         <div className="top">
                                                             <span>Sub Total:</span>
                                                             {/* Subtotal Calculation */}
-                                                            <span className="number-c">₹{cartData.reduce((total, cart) => total + (cart.productId.productCurrentRate * cart.quantity), 0)}</span>
+                                                            <span className="number-c">₹{cartData?.reduce((total, cart) => total + (cart.productId.productCurrentRate * cart.quantity), 0)}</span>
                                                         </div>
                                                         <div className="single-progress-area-incard">
                                                             <div className="progress">
@@ -596,7 +594,7 @@ export const Header = () => {
                                                 <span className="text">Cart</span>
                                                 <div className="category-sub-menu card-number-show">
                                                     <h5 className="shopping-cart-number">Shopping Cart ({cartDataLength} {cartDataLength > 1 ? 'items' : 'item'})</h5>
-                                                    {cartData.map((cart) => (
+                                                    {cartData && cartData.map((cart) => (
                                                         <div className="cart-item-1 border-top" key={cart.productId.productName}>
                                                             <div className="img-name">
                                                                 <div className="thumbanil">
@@ -621,7 +619,7 @@ export const Header = () => {
                                                         <div className="bottom-content-deals mt--10">
                                                             <div className="top">
                                                                 <span>Sub Total:</span>
-                                                                <span className="number-c">₹{cartData.reduce((total, cart) => total + (cart.productId.productCurrentRate * cart.quantity), 0)}</span>
+                                                                <span className="number-c">₹{cartData?.reduce((total, cart) => total + (cart.productId.productCurrentRate * cart.quantity), 0)}</span>
                                                             </div>
                                                             <div className="single-progress-area-incard">
                                                                 <div className="progress">
@@ -796,7 +794,7 @@ export const Header = () => {
                         <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabIndex="0">
                             <div className="category-btn category-hover-header menu-category">
                                 <ul className="category-sub-menu" id="category-active-four">
-                                    {FilterData.reduce((acc, curr) => {
+                                    {FilterData?.reduce((acc, curr) => {
                                         const categoryExists = acc.find(item => item.productCategory === curr.productCategory);
 
                                         if (!categoryExists) {
