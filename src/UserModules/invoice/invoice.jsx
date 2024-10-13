@@ -41,6 +41,7 @@ const InVoice = ({ setLoading }) => {
     };
 
     useEffect(() => {
+        setLoading(false);
         if (id) {
             getInvoiceData(id);
         }

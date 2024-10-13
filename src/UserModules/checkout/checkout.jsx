@@ -50,7 +50,7 @@ const Checkout = ({ setLoading }) => {
     }
 
     useEffect(() => {
-        const totalAmount = myCart.reduce((total, item) => {
+        const totalAmount = myCart?.reduce((total, item) => {
             return total + (item.productId.productCurrentRate * item.quantity);
         }, 0);
         setTotal(totalAmount);
@@ -69,7 +69,9 @@ const Checkout = ({ setLoading }) => {
         }
     };
 
+
     const openGateway = async (e) => {
+        setLoading(true);
         e.preventDefault();
         if (!formData.firstName || !formData.email || !formData.phone || !formData.street || !formData.city || !formData.state || !formData.zipCode) {
             console.error('Form is incomplete. Please fill all required fields.');
@@ -92,7 +94,7 @@ const Checkout = ({ setLoading }) => {
             const order = await api.createOrder(post);
 
             console.log(order);
-
+            setLoading(false);
             const options = {
                 key: 'rzp_test_8Hsb2JqvzddDdG',
                 amount: order.data.amount,
@@ -162,13 +164,15 @@ const Checkout = ({ setLoading }) => {
         };
 
         console.log(post);
+        setLoading(true);
         try {
             const response = await api.checkoutProducts(post);
             console.log('Payment verification successful', response.data);
+            setLoading(true);
             setShowPopup(true);
             triggerNotification('success', 'Success', 'Thanks for you order', 'x', null);
-            setLoading(false)
             setcheckoutId(response.data.checkout._id)
+           
             navigate('/invoice?orderId=' + response.data.checkout._id);
 
         } catch (error) {
@@ -216,6 +220,7 @@ const Checkout = ({ setLoading }) => {
     const selectRating = (rating) => {
         setSelectedRating(rating);
     };
+
 
     return (
         <div>
@@ -272,41 +277,76 @@ const Checkout = ({ setLoading }) => {
                                         <div className="half-input-wrapper">
                                             <div className="single-input">
                                                 <label htmlFor="firstName">First Name*</label>
-                                                <input id="firstName" type="text" value={formData.firstName} onChange={handleInputChange} required />
+                                                <input id="firstName" type="text" value={formData.firstName}  onInput={(e) => {
+            e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, '');
+            handleInputChange(e);
+        }}
+ onChange={handleInputChange} required />
                                             </div>
                                             <div className="single-input">
                                                 <label htmlFor="email">Email Address*</label>
-                                                <input id="email" type="text" value={formData.email} onChange={handleInputChange} required />
+                                                <input id="email" type="text" value={formData.email} onChange={handleInputChange} required
+                                                 onInput={(e) => {
+                                                    // Simple regex to allow typical email characters
+                                                    e.target.value = e.target.value.replace(/[^a-zA-Z0-9@._-]/g, '');
+                                                }} />
                                             </div>
                                         </div>
                                         <div className="half-input-wrapper">
                                             <div className="single-input">
                                                 <label htmlFor="phone">Phone*</label>
-                                                <input id="phone" type="text" value={formData.phone} onChange={handleInputChange} required />
+                                                <input id="phone" type="text" value={formData.phone} onChange={handleInputChange} maxLength={6} required 
+                                                 onInput={(e) => {
+                                                    // Allow only digits, spaces, dashes, and parentheses
+                                                    e.target.value = e.target.value.replace(/[^0-9\s-()]/g, '');
+                                                    handleInputChange(e); 
+                                                }}/>
                                             </div>
                                             <div className="single-input">
                                                 <label htmlFor="street">Street Address*</label>
-                                                <input id="street" type="text" value={formData.street} onChange={handleInputChange} required />
+                                                <input id="street" type="text" value={formData.street} onChange={handleInputChange} required 
+                                                   onInput={(e) => {
+                                                    // Allow letters, numbers, spaces, and common address symbols (e.g., comma, hyphen)
+                                                    e.target.value = e.target.value.replace(/[^a-zA-Z0-9\s,.-]/g, '');
+                                                    handleInputChange(e);
+                                                }}/>
                                             </div>
                                         </div>
                                         <div className="half-input-wrapper">
                                             <div className="single-input">
                                                 <label htmlFor="city">Town / City*</label>
-                                                <input id="city" type="text" value={formData.city} onChange={handleInputChange} required />
+                                                <input id="city" type="text" value={formData.city} onChange={handleInputChange} required 
+                                                 onInput={(e) => {
+                                                    e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, '');
+                                                    handleInputChange(e);
+                                                }}/>
                                             </div>
                                             <div className="single-input">
                                                 <label htmlFor="state">State*</label>
-                                                <input id="state" type="text" value={formData.state} onChange={handleInputChange} required />
+                                                <input id="state" type="text" value={formData.state} onChange={handleInputChange} required 
+                                                onInput={(e) => {
+                                                    e.target.value.replace(/[^a-zA-Z\s]/g, '');
+                                                    handleInputChange(e);
+                                                }}/>
                                             </div>
                                         </div>
                                         <div className="half-input-wrapper">
                                             <div className="single-input">
                                                 <label htmlFor="country">Country / Region*</label>
-                                                <input id="country" type="text" value={formData.country} onChange={handleInputChange} required />
+                                                <input id="country" type="text" value={formData.country} onChange={handleInputChange} required
+                                                 onInput={(e) => {
+                                                    e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, '');
+                                                    handleInputChange(e);
+                                                }} />
                                             </div>
                                             <div className="single-input">
                                                 <label htmlFor="zipCode">Zip Code*</label>
-                                                <input id="zipCode" type="text" value={formData.zipCode} onChange={handleInputChange} required />
+                                                <input id="zipCode" type="text" value={formData.zipCode} onChange={handleInputChange} required 
+                                                 onInput={(e) => {
+                                                    e.target.value = e.target.value.replace(/[^0-9]/g, ''); // Allow only numbers
+                                                    handleInputChange(e); // Handle the input change
+                                                  }}
+                                                  maxLength={6}/>
                                             </div>
                                         </div>
 
@@ -326,7 +366,7 @@ const Checkout = ({ setLoading }) => {
                                         <div className="product">Products</div>
                                         <div className="price">Price</div>
                                     </div>
-                                    {myCart.length > 0 ? (
+                                    {myCart?.length > 0 ? (
                                         myCart.map(res => (
                                             <div className="single-shop-list" key={res._id}> {/* Ensure unique key for each item */}
                                                 <div className="left-area">

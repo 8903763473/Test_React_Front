@@ -45,8 +45,9 @@
   align-items: center;
   justify-content: center;
   position: fixed;
-  top: 0;    
-  background: #000000;
+  top: 0;
+  background: white;
+  z-index: 11111;
 }
 
 .loader {
