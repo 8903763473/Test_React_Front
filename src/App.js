@@ -55,7 +55,7 @@ function App() {
           <Route path="/invoice" element={<InVoice setLoading={setLoading} />} />
           <Route path="/TrackMyOrder" element={<TrackMyOrder setLoading={setLoading} />} />
           <Route path="/Admindashboard" element={<Admindashboard setLoading={setLoading} />} />
-          <Route path="/ViewOrder" element={<ViewOrder setLoading={setLoading} />} />
+          {/* <Route path="/ViewOrder" element={<ViewOrder setLoading={setLoading} />} /> */}
 
           
         </Routes>

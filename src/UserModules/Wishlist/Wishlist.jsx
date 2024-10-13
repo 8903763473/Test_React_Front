@@ -131,7 +131,7 @@ export const Wishlist = ({ setLoading }) => {
                                     </div>
                                 </div>
 
-                                {wishlistItems.length > 0 ? (
+                                {wishlistItems?.length > 0 ? (
                                     wishlistItems.map((Wishlist, index) => (
                                         <div className="single-cart-area-list main item-parent" key={Wishlist._id}>
                                             <div className="product-main-cart">
