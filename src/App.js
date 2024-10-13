@@ -35,7 +35,6 @@ function App() {
         <Routes>
           <Route path="*" element={<HomePage />} />
           <Route path="/" element={<HomePage />} />
-          <Route path="/home" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<HomePage setLoading={setLoading} />} />
@@ -46,17 +45,13 @@ function App() {
           <Route path="/productDetail" element={<ProductDetail setLoading={setLoading} />} />
           <Route path="/Dashboard" element={<UserDashboard setLoading={setLoading} />} />
           <Route path="/ProductCategory" element={<ProductCategory setLoading={setLoading} />} />
-          {/* <Route path="/Wishlist" element={<Wishlist setLoading={setLoading} />} /> */}
           <Route path="/Wishlist" element={<Wishlist setLoading={setLoading} />} />
           <Route path="/Search" element={<SearchProduct setLoading={setLoading} />} />
           <Route path="/trackOrder" element={<TrackMyOrder setLoading={setLoading} />} />
-
-          {/* <Route path="/dashboard" element={<Dashboard setLoading={setLoading} />} /> */}
           <Route path="/invoice" element={<InVoice setLoading={setLoading} />} />
           <Route path="/TrackMyOrder" element={<TrackMyOrder setLoading={setLoading} />} />
           <Route path="/Admindashboard" element={<Admindashboard setLoading={setLoading} />} />
           {/* <Route path="/ViewOrder" element={<ViewOrder setLoading={setLoading} />} /> */}
-
           
         </Routes>
       </div>
