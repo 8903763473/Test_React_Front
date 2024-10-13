@@ -201,7 +201,7 @@ export const Header = () => {
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="logo-search-category-wrapper">
-                                    <a href="" className="logo-area">
+                                    <a href="home" className="logo-area">
                                         <img src="images/logo/logo-01.svg" alt="logo-main" className="logo" style={{ width: '260px', borderRadius: '10px' }} />
                                     </a>
                                     <div className="category-search-wrapper">

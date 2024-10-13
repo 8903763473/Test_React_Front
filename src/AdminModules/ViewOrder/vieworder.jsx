@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './vieworder.scss';
 import api from '../../ApiService/apiService';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 const ViewOrder = ({ setLoading }) => {
     const [singleOrdersData, setOrderid] = useState([]);
-   
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const OrderId = searchParams.get('orderId');
     const { id } = useParams();
     const GetOrderId = () => {
-      api.getOrderId(id)
+      api.getOrderId(OrderId)
         .then(response => {
           console.log("Order Details:", response.data);
           setOrderid(response.data);
@@ -23,46 +25,53 @@ useEffect(() => {
 }, []);
 
     return (
-<div className="fullpageview">
-<div className="full">
-<div class="order-container">
-    <div class="order-summary animate-fadeIn">
-      <h2>Order Summary</h2>
-      <p><strong>Order Date:</strong> 2024-10-08</p>
-      <p><strong>Status:</strong> <span class="status completed">Completed</span></p>
-      <p><strong>Total Amount:</strong> ₹5,600</p>
-    </div>
-
-    <div class="product-list">
-      <h3>Products</h3>
-
-
-<div className="grid">
-<div class="product-item animate-slideIn">
-        <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=80&q=80" alt="Product Image" />
-        <div class="product-details">
-          <p><strong>Ocean Chair</strong></p>
-          <p>Quantity: 2</p>
-          <p>Price: ₹2,800 each</p>
-        </div>
+      <div className="fullpageview">
+      {/* Hero Section */}
+      <div className="hero-section">
+        <h1>Order #{singleOrdersData._id} Details</h1>
+        <button className="back-button">← Back to Orders</button>
       </div>
 
-      <div class="product-item animate-slideIn delay-1">
-        <img src="https://images.unsplash.com/photo-1511376777868-611b54f68947?auto=format&fit=crop&w=80&q=80" alt="Product Image" />
-        <div class="product-details">
-          <p><strong>Wooden Lamp</strong></p>
-          <p>Quantity: 1</p>
-          <p>Price: ₹2,000</p>
+      {/* Order Container */}
+      <div className="order-container">
+        {/* Order Summary */}
+        <div className="order-summary animate-fadeIn">
+          <h2>Order Summary</h2>
+          <p><strong>Order Date:</strong> {new Date(singleOrdersData.createdAt).toLocaleDateString()}</p>
+          <p>
+            <strong>Status:</strong> 
+            <span className={`status ${singleOrdersData.status ? singleOrdersData.status.toLowerCase() : 'pending'}`}>
+              {singleOrdersData.status || 'Pending'}
+            </span>
+          </p>
+          <p><strong>Total Amount:</strong> ₹{singleOrdersData.products.reduce((acc, item) => acc + item.price * item.quantity, 0)}</p>
         </div>
-      </div>
-</div>
-     
-    </div>
 
-    {/* <button class="confirm-button">Confirm Order</button> */}
-  </div>
-</div>
-</div>
+        {/* Product List */}
+        <div className="product-list">
+          <h3>Products</h3>
+          {singleOrdersData.products.map((product, index) => (
+            <div className={`product-item animate-slideIn delay-${index}`} key={product._id}>
+              <img 
+                src="https://via.placeholder.com/80" 
+                alt={product.productId.productName} 
+              />
+              <div className="product-details">
+                <p><strong>{product.productId.productName}</strong></p>
+                <p>Category: {product.productId.productCategory}</p>
+                <p>Quantity: {product.quantity} {product.productId.productUnit}</p>
+                <p>Price: ₹{product.price}</p>
+                <p>Original Rate: ₹{product.productId.productOriginalRate}</p>
+                <p>Discount: {product.productId.productDiscount}%</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Confirm Order Button */}
+        <button className="confirm-button">Confirm Order</button>
+      </div>
+    </div>
 
     );
 };
