@@ -3,8 +3,18 @@ import { useNavigate } from 'react-router-dom'
 import api from '../../ApiService/apiService';
 import NotificationCenter from '../../CommonModule/Notification/Notification';
 import './header.scss';
+import io from 'socket.io-client';
+
+
+// const socket = io('http://localhost:8001/');
+
+const socket = io('http://localhost:8000/', {
+    transports: ['websocket']
+});
+
 
 export const Header = () => {
+
     const [searchTerm, setSearchTerm] = useState('');
     const [wishlistItems, setWishlistItems] = useState([]);
     const [cartData, setmyCart] = useState([]);
@@ -132,7 +142,7 @@ export const Header = () => {
                     setcartlength(0)
                 }
                 setmyCart(response.data.items)
-               
+
             })
             .catch(error => {
                 console.error("Error fetching categories:", error);
@@ -140,8 +150,6 @@ export const Header = () => {
     };
 
     useEffect(() => {
-        
-
         Filter()
         const loggedStatus = localStorage.getItem('login');
         setisLogged(loggedStatus);
@@ -149,6 +157,25 @@ export const Header = () => {
             getcartdata();
             handleClick();
         }
+
+        // socket.on('connect', () => {
+        //     console.log('Connected to WebSocket server');
+        // });
+
+        // const userId = localStorage.getItem('userId');
+        // if (userId) {
+        //     socket.emit('joinRoom', userId);
+        // }
+
+        // socket.on('cartData', (updatedCart) => {
+        //     console.log('Cart updated:', updatedCart);
+        // });
+
+        // return () => {
+        //     socket.off('cartData');
+        //     socket.disconnect();
+        // };
+
     }, []);
 
     useEffect(() => {
@@ -201,7 +228,7 @@ export const Header = () => {
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="logo-search-category-wrapper">
-                                    <a href="" className="logo-area">
+                                    <a href="" className="logo-area" onClick={() => Route('home')}>
                                         <img src="images/logo/logo-01.svg" alt="logo-main" className="logo" style={{ width: '260px', borderRadius: '10px' }} />
                                     </a>
                                     <div className="category-search-wrapper">
@@ -303,7 +330,7 @@ export const Header = () => {
                                         <div className="btn-border-only cart category-hover-header">
                                             <i className="fa-sharp fa-regular fa-cart-shopping"></i>
                                             <span className="text">Cart</span>
-                                            <span className="number">{cartDataLength|cartLength}</span>
+                                            <span className="number">{cartDataLength | cartLength}</span>
                                             <div className="category-sub-menu card-number-show">
                                                 <h5 className="shopping-cart-number">Shopping Cart ({cartDataLength} {cartDataLength > 1 ? 'items' : 'item'})</h5>
 
@@ -490,7 +517,7 @@ export const Header = () => {
                             </div>
                             <div className="col-lg-12 " >
                                 <div className="logo-search-category-wrapper after-md-device-header">
-                                    <a className="logo-area">
+                                    <a className="logo-area" onClick={() => Route('home')}>
                                         <img src="images/logo/logo-01.svg" alt="logo-main" className="logo" style={{ width: '260px', borderRadius: '10px' }} />
                                     </a>
                                     <div className="category-search-wrapper">

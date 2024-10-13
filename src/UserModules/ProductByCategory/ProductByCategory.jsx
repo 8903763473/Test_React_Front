@@ -106,7 +106,7 @@ const ProductCategory = ({ setLoading }) => {
 
             <div class="shop-grid-sidebar-area rts-section-gap">
                 <div class="container">
-                    <div class="row g-0" style={{justifyContent: 'center'}}>
+                    <div class="row g-0" style={{ justifyContent: 'center' }}>
                         {/* <div class="col-xl-3 col-lg-12 pr--70 pr_lg--10 pr_sm--10 pr_md--5 rts-sticky-column-item">
                             <div class="sidebar-filter-main theiaStickySidebar">
                                 <div class="single-filter-box">
@@ -237,7 +237,7 @@ const ProductCategory = ({ setLoading }) => {
                                 </div>
                             </div>
                         </div> */}
-                        <div class="col-xl-9 col-lg-12" style={{width: '95%'}}>
+                        <div class="col-xl-9 col-lg-12" style={{ width: '95%' }}>
                             <div class="filter-select-area">
                                 <div class="top-filter">
                                     <span>Showing 1–20 of 57 results</span>
@@ -320,7 +320,7 @@ const ProductCategory = ({ setLoading }) => {
                                 <div class="product-area-wrapper-shopgrid-list mt--20 tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
                                     <div class="row g-4">
                                         {ProductCategories.map((category) => (
-                                            <div class="col-lg48 col-lg-4 col-md-6 col-sm-6 col-12">
+                                            <div class="col-lg48 col-lg-4 col-md-6 col-sm-6 col-12" style={{ maxWidth: '270px' }}>
                                                 <div class="single-shopping-card-one" style={{ height: 'auto' }}>
                                                     <div class="image-and-action-area-wrapper" style={{ minHeight: '140px', maxHeight: '140px' }}>
                                                         <a href="shop-details.html" class="thumbnail-preview">
