@@ -74,10 +74,6 @@ const api = {
     TrackOrder: (data) => {
         return apiInstance.get("/checkout/TrackOrder/" + data);
     },
-    // trackOrder: (data) => {
-    //     return apiInstance.post("/checkout/trackOrder", data);
-    // },
-
     Feedback: (data) => {
         return apiInstance.post("/feedback/send", data);
     },
@@ -99,15 +95,19 @@ const api = {
 
     SearchProduct: (product) => {
         return apiInstance.get(`product/search?query=${product}`);
-
     },
 
-    getAllOrders:()=>{
+    getAllOrders: () => {
         return apiInstance.get(`/checkout/getOverAllOrders`);
     },
     getOrderId: (id) => {
-        return apiInstance.get("checkout/TrackOrder/"+id);
-      }
+        return apiInstance.get("checkout/TrackOrder/" + id);
+    },
+
+
+    autoComplete: (product) => {
+        return apiInstance.get(`product/autoComplete?query=${product}`);
+    },
 
 }
 

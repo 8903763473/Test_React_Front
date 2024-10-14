@@ -8,7 +8,7 @@ import io from 'socket.io-client';
 
 // const socket = io('http://localhost:8001/');
 
-const socket = io('http://localhost:8000/', {
+const socket = io('http://localhost:8001/', {
     transports: ['websocket']
 });
 
@@ -104,10 +104,6 @@ export const Header = () => {
         navigate('/Search?query=' + data)
     };
 
-    const handleInputChange = (event) => {
-        setSearchTerm(event.target.value);
-    };
-
     const handleSubmit = (event) => {
         event.preventDefault();
         getSearchproduct(searchTerm);
@@ -142,7 +138,6 @@ export const Header = () => {
                     setcartlength(0)
                 }
                 setmyCart(response.data.items)
-
             })
             .catch(error => {
                 console.error("Error fetching categories:", error);
@@ -158,18 +153,34 @@ export const Header = () => {
             handleClick();
         }
 
-        // socket.on('connect', () => {
-        //     console.log('Connected to WebSocket server');
-        // });
+        socket.on('connect', () => {
+            console.log('Connected to WebSocket server');
+        });
 
-        // const userId = localStorage.getItem('userId');
-        // if (userId) {
-        //     socket.emit('joinRoom', userId);
-        // }
+        const userId = localStorage.getItem('userId');
+        if (userId) {
+            socket.emit('joinRoom', userId);
+        }
 
-        // socket.on('cartData', (updatedCart) => {
-        //     console.log('Cart updated:', updatedCart);
-        // });
+        // Cart Socket
+
+        socket.on('cartData', (updatedCart) => {
+            console.log('Cart updated:', updatedCart);
+            if (loggedStatus) {
+                setCartLength([])
+                getcartdata();
+            }
+        });
+
+        // Wish Socket
+
+        socket.on('wishData', (updatedWish) => {
+            console.log('wishData updated:', updatedWish);
+            if (loggedStatus) {
+                setWishlistItems([])
+                getwishlist()
+            }
+        });
 
         // return () => {
         //     socket.off('cartData');
@@ -203,6 +214,34 @@ export const Header = () => {
 
     const ProductDetail = (data) => {
         navigate('/productDetail?productId=' + data);
+    };
+
+    const handleSearchInputChange = (event) => {
+        const value = event.target.value;
+        setSearchTerm(value);
+        fetchSuggestions(value);
+    };
+
+    const [suggestions, setSuggestions] = useState([]);
+
+    const fetchSuggestions = async (term) => {
+        if (term.length === 0) {
+            setSuggestions([]);
+            return;
+        }
+
+        try {
+            const response = await api.autoComplete(term);
+            setSuggestions(response.data);
+        } catch (error) {
+            console.error('Error fetching product suggestions:', error);
+        }
+    };
+
+    const handleSuggestionClick = (suggestion) => {
+        // setSearchTerm(suggestion);
+        setSuggestions([]);
+        navigate('/Search?query=' + suggestion)
     };
 
     return (
@@ -272,17 +311,37 @@ export const Header = () => {
                                                 ))}
                                             </ul>
 
-
-
                                         </div>
+
+
+                                        {/* Search Bar new */}
+
                                         <form className="search-header" onSubmit={handleSubmit}>
                                             <input
                                                 type="text"
                                                 value={searchTerm}
-                                                onChange={handleInputChange}
+                                                onChange={handleSearchInputChange}
                                                 placeholder="Search for products"
                                                 required
                                             />
+
+                                            {/* Suggessions */}
+
+                                            {suggestions.length > 0 && (
+                                                <ul className="autocomplete-list">
+                                                    {suggestions.map((suggestion, index) => (
+                                                        <li
+                                                            key={index}
+                                                            onClick={() => handleSuggestionClick(suggestion.productName)}
+                                                            className="autocomplete-item"
+                                                        >
+                                                            {suggestion.productName}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            )}
+
+
                                             <button type="submit" className="rts-btn btn-primary radious-sm with-icon">
                                                 <div className="btn-text">
                                                     Search
@@ -319,7 +378,7 @@ export const Header = () => {
                                             <i className="fa-light fa-user"></i>
                                             <span>Account</span>
                                         </a>
-                                        <a className="btn-border-only wishlist" onClick={() => routeCart('wishlist')}>
+                                        <a className="btn-border-only wishlist pointer" onClick={() => routeCart('wishlist')}>
                                             <i className="fa-regular fa-heart"></i>
                                             <span className="text">Wishlist</span>
                                             <span className="number">{wishlistItems?.length}</span>
@@ -327,7 +386,7 @@ export const Header = () => {
 
 
 
-                                        <div className="btn-border-only cart category-hover-header">
+                                        <div className="btn-border-only cart category-hover-header pointer">
                                             <i className="fa-sharp fa-regular fa-cart-shopping"></i>
                                             <span className="text">Cart</span>
                                             <span className="number">{cartDataLength | cartLength}</span>
@@ -378,7 +437,7 @@ export const Header = () => {
                                             </div>
                                         </div>
 
-                                        <a className="btn-border-only wishlist" style={{ cursor: 'pointer' }} onClick={() => triggerNotification('warning', 'Warning', 'Sure to Logout', 'Sure', 'logout')}>
+                                        <a className="btn-border-only wishlist pointer" style={{ cursor: 'pointer' }} onClick={() => triggerNotification('warning', 'Warning', 'Sure to Logout', 'Sure', 'logout')}>
                                             <i className="fa fa-sign-in" aria-hidden="true"></i>
                                             <span className="text">
                                                 {isLogged === 'success' ? 'Logout' : 'Login'}
@@ -612,7 +671,7 @@ export const Header = () => {
                                                 <i className="fa-light fa-user"></i>
                                                 Account
                                             </a>
-                                            <a className="btn-border-only wishlist">
+                                            <a className="btn-border-only wishlist pointer">
                                                 <i className="fa-regular fa-heart"></i>
                                                 Wishlist
                                             </a>
@@ -696,7 +755,7 @@ export const Header = () => {
                         <div className="input-div">
                             <input id="searchInput1" className="search-input" type="text" placeholder="Search"
                                 value={searchTerm}
-                                onChange={handleInputChange} />
+                                onChange={handleSearchInputChange} />
                             <button onClick={() => getSearchproduct(searchTerm)}><i className="far fa-search"></i></button>
                         </div>
                     </div>

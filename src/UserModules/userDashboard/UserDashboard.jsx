@@ -58,14 +58,13 @@ const UserDashboard = ({ setLoading }) => {
         e.preventDefault()
         console.log(copiedOrderId);
         navigate('/TrackMyOrder?orderId=' + copiedOrderId)
-    }
-
+    };
 
     useEffect(() => {
         const loggedStatus = localStorage.getItem('login');
         setisLogged(loggedStatus);
         getAccountDetails();
-    }, [isLogged])
+    }, [isLogged]);
 
     const getAccountDetails = () => {
         setLoading(true)
@@ -79,7 +78,7 @@ const UserDashboard = ({ setLoading }) => {
                 console.log(err);
                 setLoading(false)
             })
-    }
+    };
 
     const notificationRef = useRef();
 
@@ -92,8 +91,8 @@ const UserDashboard = ({ setLoading }) => {
     };
 
     const ViewOrderDetails = (data) => {
-        setviewOrderId(data._id);
-        api.TrackOrder(data._id)
+        setviewOrderId(data.orderId);
+        api.TrackOrder(data.orderId)
             .then(res => {
                 console.log(res);
                 const products = res.data.products;
@@ -117,7 +116,7 @@ const UserDashboard = ({ setLoading }) => {
 
     const TrackOrder = (OrderId) => {
         navigate('/TrackMyOrder?orderId=' + OrderId)
-    }
+    };
 
 
     return (
@@ -187,10 +186,10 @@ const UserDashboard = ({ setLoading }) => {
                                                         myOrdersList.map(data => (
                                                             <tr key={data._id}>
                                                                 <td>
-                                                                    {data._id.slice(0, 10)}
+                                                                    {data.orderId}
                                                                     <i
-                                                                        className={copiedOrderId === data._id && isCopied === true ? "bi bi-clipboard-check-fill copyIcon pointer" : "bi bi-clipboard copyIcon pointer"}
-                                                                        onClick={() => copyOrderId(data._id)}
+                                                                        className={copiedOrderId === data.orderId && isCopied === true ? "bi bi-clipboard-check-fill copyIcon pointer" : "bi bi-clipboard copyIcon pointer"}
+                                                                        onClick={() => copyOrderId(data.orderId)}
                                                                     ></i>
                                                                 </td>
                                                                 <td>{new Date(data.createdAt).toLocaleDateString('en-GB')}</td>
@@ -244,7 +243,7 @@ const UserDashboard = ({ setLoading }) => {
                                             </p>
                                             <a className='start d-flex width-100'>Edit</a>
                                         </div>
-                                        <div className="half">
+                                        {/* <div className="half">
                                             <h2 className="title">Shipping Address</h2>
                                             <p className="address start">
                                                 3522 Interstate <br />
@@ -254,7 +253,7 @@ const UserDashboard = ({ setLoading }) => {
                                                 New York
                                             </p>
                                             <a className='start d-flex width-100'>Edit</a>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
 
